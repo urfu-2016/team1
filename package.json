@@ -6,7 +6,7 @@
     "scripts": {
         "lint": "stylelint *.css **/*.css && eslint .",
         "test": "npm run lint",
-        "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+        "start": "node ./bin/www",
         "start:dev": "webpack-dev-server --progress --inline --content-base . --history-api-fallback --config webpack.devconf.js",
         "start:prod": "webpack --progress --config webpack.prodconf.js && static-server public/"
     },
