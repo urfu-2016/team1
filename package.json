@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "lint": "stylelint *.css **/*.css && eslint ."
+        "lint": "stylelint *.css **/*.css && eslint .",
+        "test": "npm run lint"
     },
     "dependencies": {
         "mocha": "3.1.0",
