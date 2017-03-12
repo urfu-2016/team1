@@ -3,12 +3,16 @@
     "version": "0.0.1",
     "private": true,
     "main": "index.js",
+    "engines": {
+        "node": "6.10.0"
+    },
     "scripts": {
         "lint": "stylelint *.css **/*.css && eslint .",
         "test": "npm run lint",
-        "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+        "prestart": "npm i ; npm run start:prod",
+        "start": "node ./bin/www",
         "start:dev": "webpack-dev-server --progress --inline --content-base . --history-api-fallback --config webpack.devconf.js",
-        "start:prod": "webpack --progress --config webpack.prodconf.js && static-server public/"
+        "start:prod": "webpack --progress --config webpack.prodconf.js"
     },
     "repository": {
         "type": "git",
