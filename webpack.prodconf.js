@@ -69,11 +69,11 @@ module.exports = {
                 drop_console: true,
                 drop_debugger: true,
                 warnings: false,
-            },
+            }
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin("[name].css"),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin()
-    ],
+    ]
 };
