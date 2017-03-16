@@ -1,4 +1,4 @@
-{
+module.exports = {
   "parserOptions": {
     "ecmaVersion": 8,
     "ecmaFeatures": {
@@ -26,6 +26,8 @@
     "react/no-unknown-property": "error",
     "react/no-unused-prop-types": "error",
     "react/prop-types": "error",
-    "react/react-in-jsx-scope": "error"
+    "react/jsx-indent": 0,
+    "react/self-closing-comp": "off",
+    "react/jsx-space-before-closing": "off"
   }
-}
+};

@@ -9,7 +9,7 @@ function pathResolve(yourPath) {
 }
 
 module.exports = {
-    context: path.resolve(__dirname, 'views', 'components'),
+    context: path.resolve(__dirname, 'views'),
 
     entry: {
         index: './index'
@@ -50,7 +50,7 @@ module.exports = {
                 exclude: /\/node_modules\//,
                 loader: 'babel',
                 query: {
-                    presets: ['es2015'],
+                    presets: ['es2015', 'react'],
                     plugins: ['transform-runtime']
                 }
             },
@@ -68,7 +68,12 @@ module.exports = {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin("[name].css"),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            ReactDOM:   'react-dom',
+            React:      'react',
+            PropTypes:  'react/lib/ReactPropTypes',
+        })
     ],
 
     devServer: {
