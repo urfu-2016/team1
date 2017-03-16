@@ -10,7 +10,7 @@ function pathResolve(yourPath) {
 }
 
 module.exports = {
-    context: path.resolve(__dirname, 'views', 'components'),
+    context: path.resolve(__dirname, 'views'),
 
     entry: {
         index: './index'
