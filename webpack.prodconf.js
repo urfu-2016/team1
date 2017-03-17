@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-
 function pathResolve(yourPath) {
     return path.resolve(__dirname, yourPath);
 }
@@ -42,7 +41,7 @@ module.exports = {
                 exclude: /\/node_modules\//,
                 loader: 'babel',
                 query: {
-                    presets: ['es2015'],
+                    presets: ['es2015', 'react'],
                     plugins: ['transform-runtime']
                 }
             },
@@ -73,7 +72,11 @@ module.exports = {
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin("[name].css"),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            ReactDOM:   'react-dom',
+            React:      'react',
+            PropTypes:  'react/lib/ReactPropTypes',
+        }),
         new webpack.optimize.OccurrenceOrderPlugin()
     ]
 };
