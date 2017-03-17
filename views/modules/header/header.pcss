@@ -1,11 +1,47 @@
-.header {
-    padding: 20px 30px;
-    background-color: $graydark;
-}
+@import "registration/registration.pcss";
 
-a {
-    color: #F900DA;
-    &:hover {
-        color: #FFD520;
+.header {
+    overflow: hidden;
+    padding: 10px 30px;
+    background-color: $graydark;
+
+    &__logo {
+        float: left;
+
+        & a {
+            display: block;
+            height: 68px;
+            transition: color .3s ease-in;
+            font-size: 36px;
+            text-decoration: none;
+            font-family: 'Righteous';
+            color: $blueviolet;
+
+            &:hover {
+                color: $yellow;
+            }
+
+            & span {
+                display: inline-block;
+                transform: translateY(6px);
+                transition: color .3s ease-in;
+                line-height: 0.8;
+                font-size: 60px;
+                color: $yellow;
+
+            }
+
+            &:hover {
+
+                & span {
+                    color: $blueviolet;
+                }
+            }
+        }
+    }
+
+    &__registration {
+        float: right;
     }
 }
+

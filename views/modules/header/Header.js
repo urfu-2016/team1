@@ -8,9 +8,10 @@ export default class Header extends React.Component {
                 <div className='header__logo' role='banner'>
                     <IndexLink to='/'>que<span>st</span>ory</IndexLink>
                 </div>
-                <div className='header__registration'>
-                    <span><Link to='signin'>Sign in</Link></span> |
-                    <span><Link to='signup'>Sign up</Link></span>
+
+                <div className='header__registration registration'>
+                    <Link to='signin' className='registration__item registration__item_signin'>Sign in</Link> |
+                    <Link to='signup' className='registration__item registration__item_signup'>Sign up</Link>
                 </div>
             </header>
         );

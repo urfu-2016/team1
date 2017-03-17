@@ -1,4 +1,5 @@
 @import '../node_modules/normalize.css/normalize.css';
 @import 'modules/_util/_variables.pcss';
+@import 'https://fonts.googleapis.com/css?family=Righteous';
 @import 'modules/header/header.pcss';
 @import 'modules/css.css.pcss';
