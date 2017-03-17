@@ -1,1 +1,1 @@
-web: node ./bin/www
+npm run start:prod && web: node ./bin/www
