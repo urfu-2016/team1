@@ -19,7 +19,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+let publicDir = process.env.NODE_ENV === 'local'
+    ? path.join(__dirname, 'public')
+    : "//team1.surge.sh";
+
+app.use(express.static(publicDir));
 
 app.use('/', index);
 app.use('/users', users);
