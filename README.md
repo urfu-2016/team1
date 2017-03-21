@@ -18,4 +18,9 @@
 * React
 * Webpack
 * Travis CI
-* MySQL
+* Postgres
+
+Настройка базы данных
+* [https://www.postgresql.org/download/](Скачать)
+* Настроить пользователя с login: postgres, pass: qwer
+* Готово!
