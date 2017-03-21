@@ -21,6 +21,6 @@
 * Postgres
 
 Настройка базы данных
-* [https://www.postgresql.org/download/](Скачать)
+* [Скачать](https://www.postgresql.org/download/)
 * Настроить пользователя с login: postgres, pass: qwer
 * Готово!
