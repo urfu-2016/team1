@@ -1,9 +1,9 @@
 'use strict';
-var Sequelize = require('sequelize');
-var initializeDb = require('./init').init;
+const Sequelize = require('sequelize');
+const initializeDb = require('./init').init;
 
 initializeDb(function (sequelize) {
-    var quest = sequelize.define('quest', {
+    const quest = sequelize.define('quest', {
         id: {
             type: Sequelize.INTEGER.UNSIGNED,
             allowNull: false,

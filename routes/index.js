@@ -1,7 +1,8 @@
 'use strict';
-var express = require('express');
+const express = require('express');
+const path = require('path');
 
-var router = express.Router(); // eslint-disable-line
+const router = express.Router(); // eslint-disable-line
 
 router.get('/', function (req, res) {
     res.render('index', { title: 'Express' });
