@@ -1,0 +1,29 @@
+{
+  "name": "team1",
+  "description": "",
+  "scripts": {
+  },
+  "env": {
+    "CONNECTION_STRING": {
+      "required": true
+    },
+    "SURGE_LOGIN": {
+      "required": true
+    },
+    "SURGE_TOKEN": {
+      "required": true
+    },
+    "NODE_ENV": "local",
+    "NPM_CONFIG_PRODUCTION": "false"
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
