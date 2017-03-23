@@ -9,19 +9,19 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
     "dev:webpack": "webpack-dev-server --progress --inline --content-base . --history-api-fallback --config webpack.devconf.js",
-    "dev:start": "node ./bin/www",
+    "dev:start": "nodemon ./bin/www",
 
     "lint": "npm-run-all lint:*",
     "lint:style": "stylelint *.css **/*.css",
     "lint:js": "eslint .",
 
     "test": "npm run lint",
-
+      
     "prestart": "npm i && npm run start:prod",
-    "build": "if-env NODE_ENV=production  && npm run start:prod || npm run start:dev",
+    "build": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start": "node ./bin/www",
     "start:prod": "webpack --config webpack.prodconf.js && npm run deploy:surge && node ./bin/www",
-    
+
     "deploy:surge": "surge -p ./public -d team1.surge.sh"
   },
   "repository": {
@@ -76,6 +76,7 @@
     "autoprefixer-loader": "^3.2.0",
     "compression": "^1.6.2",
     "if-env": "^1.0.0",
+    "nodemon": "1.11.0",
     "stylelint-config-hrundel": "1.0.3",
     "webpack-dev-server": "^2.3.0"
   }
