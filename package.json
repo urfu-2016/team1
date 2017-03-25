@@ -18,6 +18,10 @@
     "test": "npm-run-all lint test:run",
     "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\"",
 
+    "selenium:install": "./node_modules/.bin/selenium-standalone install",
+    "selenium:start": "./node_modules/.bin/selenium-standalone start",
+    "selenium:test": "./node_modules/.bin/wdio wdio.conf.js",
+
     "prestart": "npm i && npm run start:prod",
     "build": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start": "node ./bin/www",
@@ -85,6 +89,7 @@
     "compression": "^1.6.2",
     "if-env": "^1.0.0",
     "nodemon": "1.11.0",
+    "selenium-standalone": "6.1.0",
     "stylelint-config-hrundel": "1.0.3",
     "webpack-dev-server": "^2.3.0"
   }
