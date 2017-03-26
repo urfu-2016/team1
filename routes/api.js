@@ -11,4 +11,20 @@ router.get('/quests', function (req, res) {
         });
 });
 
+router.get('/quests/id/:id', function (req, res) {
+    const id = req.params.id;
+    database.Quest.findById(id)
+        .then(function(quest) {
+            res.send(JSON.stringify(quest));
+        });
+});
+
+router.get('/quests/name/:name', function (req, res) {
+    const name = req.params.name;
+    database.Quest.findOne({ where: {title: name} })
+        .then(function (quest) {
+            res.send(JSON.stringify(quest));
+        });
+});
+
 module.exports = router;
