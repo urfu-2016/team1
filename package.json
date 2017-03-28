@@ -22,10 +22,9 @@
     "selenium:start": "./node_modules/.bin/selenium-standalone start",
     "selenium:test": "./node_modules/.bin/wdio wdio.conf.js",
 
-    "prestart": "npm i && npm run start:prod",
+    "prestart": "npm i",
     "build": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start": "node ./bin/www",
-    "start:prod": "webpack --config webpack.prodconf.js && npm run deploy:surge && node ./bin/www",
+    "start": "webpack --config webpack.prodconf.js && node ./bin/www",
 
     "deploy:surge": "surge -p ./public -d team1.surge.sh"
   },
