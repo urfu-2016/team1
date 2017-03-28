@@ -1,5 +1,13 @@
+/*Fonts*/
+@import 'https://fonts.googleapis.com/css?family=Righteous';
+@import 'https://fonts.googleapis.com/css?family=Poiret+One';
+
+/*utils stules*/
 @import '../node_modules/normalize.css/normalize.css';
 @import 'modules/_util/_variables.pcss';
-@import 'https://fonts.googleapis.com/css?family=Righteous';
+
+/*modules*/
 @import 'modules/header/header.pcss';
-@import 'modules/css.css.pcss';
+
+/*pages*/
+@import 'modules/pages/questlist/questlist.pcss';

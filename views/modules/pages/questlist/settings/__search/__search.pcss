@@ -1,0 +1,42 @@
+.questlist-settings {
+
+    &__search {
+        position: relative;
+        float: right;
+        width: 200px;
+        height: 40px;
+        padding: 6px;
+        box-sizing: border-box;
+        overflow: hidden;
+        background-color: $yellow;
+
+        & input {
+            width: 100%;
+            height: 30px;
+            text-indent: 20px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: $blueviolet;
+        }
+
+        & button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            cursor: pointer;
+            fill: $blueviolet;
+
+            & span {
+                display: block;
+                margin-bottom: -4px;
+            }
+        }
+
+    }
+}

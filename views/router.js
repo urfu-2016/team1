@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './App';
 import Repos from './modules/Signup';
 import About from './modules/Signin';
-import Questlist from './modules/pages/Questlist/Questlist';
+import Questlist from './modules/pages/questlist/Questlist';
 
 export default (
     <div>
