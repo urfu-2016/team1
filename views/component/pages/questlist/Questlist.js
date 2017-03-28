@@ -1,5 +1,6 @@
 import Banner from './banner/Banner';
 import Settings from './settings/Settings';
+import QuestItem from './questItem/QuestItem';
 
 export default class Questlist extends React.Component {
     render() {
@@ -7,6 +8,7 @@ export default class Questlist extends React.Component {
             <main>
                 <Banner />
                 <Settings />
+                <QuestItem />
             </main>
         )
     }

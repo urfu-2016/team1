@@ -1,9 +1,10 @@
 import { Route, IndexRoute } from 'react-router';
 
 import App from './App';
-import Repos from './modules/Signup';
-import About from './modules/Signin';
-import Questlist from './modules/pages/questlist/Questlist';
+import Repos from './component/Signup';
+import About from './component/Signin';
+import Questlist from './component/pages/questlist/Questlist';
+import Question from './component/pages/question/Question'
 
 export default (
     <div>
@@ -12,6 +13,7 @@ export default (
 
             <Route path='/signin' component={About}/>
             <Route path='/signup' component={Repos}/>
+            <Route path='/question' components={Question}/>
         </Route>
     </div>
 );

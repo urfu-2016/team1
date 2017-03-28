@@ -4,10 +4,16 @@
 
 /*utils stules*/
 @import '../node_modules/normalize.css/normalize.css';
-@import 'modules/_util/_variables.pcss';
+@import 'source/_util/_variables.pcss';
 
 /*modules*/
-@import 'modules/header/header.pcss';
+@import 'component/header/header.pcss';
 
 /*pages*/
-@import 'modules/pages/questlist/questlist.pcss';
+@import 'component/pages/questlist/questlist.pcss';
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
