@@ -27,4 +27,15 @@ router.get('/quests/name/:name', function (req, res) {
         });
 });
 
+router.get('/quests/:name', function (req, res) {
+    const name = req.params.name;
+    database.Quest.findAll()
+        .then(function (quests) {
+            res.send(JSON.stringify(quests.filter(function (quest) {
+                return quest.title.startsWith(name);
+            })));
+        });
+
+});
+
 module.exports = router;
