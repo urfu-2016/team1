@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Header from './modules/header/Header';
 
 export default class App extends React.Component {
@@ -15,4 +17,3 @@ export default class App extends React.Component {
 App.propTypes = {
     children: React.PropTypes.element
 };
-
