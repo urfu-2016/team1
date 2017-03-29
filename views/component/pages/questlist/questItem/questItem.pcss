@@ -43,6 +43,24 @@
                 margin-left: -55px;
                 transform: skew(-20deg);
             }
+
+            &-info {
+                & h2 {
+                    width: 86%;
+                    height: 100px;
+                    margin-top: 30px;
+                    overflow: hidden;
+                    font-size: 28px;
+                    text-transform: uppercase;
+                    color: $yellow;
+                }
+
+                & p {
+                    width: 86%;
+                    color: $yellow;
+                    font-size: 18px;
+                }
+            }
         }
 
         &:nth-of-type(2n) {
@@ -66,22 +84,6 @@
             width: 80%;
             height: 100%;
             margin-left: 60px;
-
-            & h2 {
-                width: 86%;
-                height: 100px;
-                margin-top: 30px;
-                overflow: hidden;
-                font-size: 28px;
-                text-transform: uppercase;
-                color: $yellow;
-            }
-
-            & p {
-                width: 86%;
-                color: $yellow;
-                font-size: 18px;
-            }
         }
     }
 }
