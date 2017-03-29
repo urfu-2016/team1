@@ -70,6 +70,7 @@
     "react-addons-test-utils": "15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
+    "remote-static": "1.1.0",
     "selenium-webdriver": "3.3.0",
     "sequelize": "3.30.2",
     "serve-favicon": "~2.3.2",
