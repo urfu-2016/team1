@@ -7,9 +7,9 @@
     "node": "6.10.0"
   },
   "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:webpack": "webpack --progress --config webpack.devconf.js",
-    "dev:start": "set NODE_ENV=local && nodemon ./bin/www",
+    "dev": "npm-run-all dev:*",
+    "dev:build": "webpack --progress --config webpack.devconf.js",
+    "dev:run": "nodemon ./bin/www",
 
     "lint": "npm-run-all lint:*",
     "lint:style": "stylelint views/**/*.css",
@@ -23,8 +23,10 @@
     "selenium:test": "./node_modules/.bin/wdio wdio.conf.js",
 
     "prestart": "npm i",
-    "start": "webpack --config webpack.prodconf.js && npm run deploy:surge && node ./bin/www",
-    "deploy:surge": "surge -p ./public -d team1.surge.sh"
+    "start": "npm-run-all prod:*",
+    "prod:build": "webpack --config webpack.prodconf.js",
+    "prod:deploy": "surge -p ./public -d team1.surge.sh",
+    "prod:run": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -70,6 +72,7 @@
     "react-addons-test-utils": "15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
+    "remote-static": "1.1.0",
     "selenium-webdriver": "3.3.0",
     "sequelize": "3.30.2",
     "serve-favicon": "~2.3.2",

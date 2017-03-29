@@ -4,6 +4,7 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const remoteStatic = require('remote-static');
 
 const api = require('./routes/api');
 
@@ -14,12 +15,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-let publicDir = process.env.NODE_ENV === 'production'
-    ?'//team1.surge.sh'
-    : path.join(__dirname, 'public');
-
-app.use('/', express.static(publicDir));
 app.use('/api', api);
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.use('/', process.env.NODE_ENV === 'production'
+    ? remoteStatic('//team1.surge.sh')
+    : express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
     const err = new Error('Not Found');

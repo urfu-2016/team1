@@ -24,4 +24,4 @@ exports.config = {
     mochaOpts: {
         ui: 'bdd'
     },
-}
+};
