@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use('/api', api);
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 app.use('/', process.env.NODE_ENV === 'production'
-    ? remoteStatic('//team1.surge.sh')
+    ? remoteStatic('https://team1.surge.sh')
     : express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
