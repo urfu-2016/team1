@@ -10,8 +10,8 @@ function getSequelize(connectionString) {
 
 module.exports.init = function (callback) {
     const dbName = 'quest';
-    const username = 'petr';
-    const password = '12345678';
+    const username = 'postgres';
+    const password = 'qwer';
     const host = 'localhost';
 
     const connectionString = process.env.CONNECTION_STRING;

@@ -8,7 +8,7 @@ export default class Questlist extends React.Component {
     render() {
         return (
             <main>
-                <Banner />
+                <Banner/>
                 <Settings />
                 <QuestItem />
             </main>
