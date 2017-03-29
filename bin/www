@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 const app = require('../app');
 const debug = require('debug')('team1:server');
 const http = require('http');

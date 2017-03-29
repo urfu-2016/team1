@@ -10,6 +10,3 @@ export default class Repos extends React.Component {
     }
 }
 
-Repos.propTypes = {
-    children: React.PropTypes.element
-};

@@ -1,5 +1,20 @@
-@import '../node_modules/normalize.css/normalize.css';
-@import 'modules/_util/_variables.pcss';
+/*Fonts*/
 @import 'https://fonts.googleapis.com/css?family=Righteous';
-@import 'modules/header/header.pcss';
-@import 'modules/css.css.pcss';
+@import 'https://fonts.googleapis.com/css?family=Poiret+One';
+
+/*utils stules*/
+@import '../node_modules/normalize.css/normalize.css';
+
+@import 'source/_util/_variables.pcss';
+
+/*modules*/
+@import 'component/header/header.pcss';
+
+/*pages*/
+@import 'component/pages/questlist/questlist.pcss';
+
+h1, h2, h3, h4, h5, h6, p, span, a, li, ul {
+    margin: 0;
+    padding: 0;
+}
+
