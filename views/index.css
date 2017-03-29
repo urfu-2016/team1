@@ -4,6 +4,7 @@
 
 /*utils stules*/
 @import '../node_modules/normalize.css/normalize.css';
+
 @import 'source/_util/_variables.pcss';
 
 /*modules*/
@@ -13,7 +14,8 @@
 @import 'component/pages/questlist/questlist.pcss';
 
 
-* {
+h1, h2, h3, h4, h5, h6, p, span, a, li, ul {
     margin: 0;
     padding: 0;
 }
+
