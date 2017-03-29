@@ -1,3 +1,5 @@
+import React from 'react';
+
 import search from '../../../../source/img/search.svg';
 
 export default class Settings extends React.Component {

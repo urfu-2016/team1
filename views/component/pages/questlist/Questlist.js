@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Banner from './banner/Banner';
 import Settings from './settings/Settings';
 import QuestItem from './questItem/QuestItem';

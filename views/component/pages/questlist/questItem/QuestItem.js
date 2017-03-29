@@ -1,4 +1,6 @@
+import React from 'react';
 import { Link } from 'react-router';
+
 import plug from '../../../../source/img/plug.jpg';
 
 export default class QuestItem extends React.Component {

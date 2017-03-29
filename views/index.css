@@ -13,7 +13,6 @@
 /*pages*/
 @import 'component/pages/questlist/questlist.pcss';
 
-
 h1, h2, h3, h4, h5, h6, p, span, a, li, ul {
     margin: 0;
     padding: 0;
