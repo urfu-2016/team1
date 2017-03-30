@@ -7,7 +7,7 @@
     "node": "6.10.0"
   },
   "scripts": {
-    "dev": "npm-run-all dev:*",
+    "dev": "npm-run-all --parallel dev:*",
     "dev:build": "webpack --progress --config webpack.devconf.js",
     "dev:run": "nodemon ./bin/www",
 
@@ -88,7 +88,6 @@
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "compression": "^1.6.2",
-    "if-env": "^1.0.0",
     "nodemon": "1.11.0",
     "selenium-standalone": "6.1.0",
     "stylelint-config-hrundel": "1.0.3",
