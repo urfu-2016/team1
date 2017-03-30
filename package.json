@@ -101,6 +101,7 @@
     "compression": "^1.6.2",
     "nodemon": "1.11.0",
     "selenium-standalone": "6.1.0",
+    "wdio-mocha-framework": "0.5.9",
     "webpack-dev-server": "^2.3.0"
   }
 }
