@@ -13,7 +13,6 @@ export default class Settings extends React.Component {
                 </ul>
                 <form className='questlist-settings__search' onSubmit={(event) => {
                     event.preventDefault();
-                    console.log('press');
                 }}>
                     <div>
                         <input className='questionlist-search__input' type='text'/>

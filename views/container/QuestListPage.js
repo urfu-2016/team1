@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import * as pageActions from '../redux/action/index';
 import Questlist from '../component/pages/questlist/Questlist';
-import { bindActionCreators } from 'redux';
 
 const mapStateToProps = (state) => {
     return {

@@ -2,7 +2,6 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './App';
 import QuestListPage from './container/QuestListPage';
-import Questlist from './component/pages/questlist/Questlist';
 import Question from './component/pages/question/Question';
 import Signin from './component/Signin';
 import Signup from './component/Signup';

@@ -35,25 +35,25 @@ initializeDb(function (sequelize) {
         })
         .then(function () {
             quest.create({
-                title: 'SecondQuest',
+                title: 'ThirdQuest',
                 description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
             });
         })
         .then(function () {
             quest.create({
-                title: 'SecondQuest',
+                title: 'FourthQuest',
                 description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
             });
         })
         .then(function () {
             quest.create({
-                title: 'SecondQuest',
+                title: 'FifthQuest',
                 description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
             });
         })
         .then(function () {
             quest.create({
-                title: 'SecondQuest',
+                title: 'SixthQuest',
                 description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
             });
         })
