@@ -3,12 +3,10 @@
     overflow: hidden;
 
     &__row {
-        display: flex;
-        justify-content: space-between;
         width: 100%;
         max-width: 1000px;
         height: 300px;
-        margin: 0 auto 40px auto;
+        margin: 0 auto 40px;
     }
 }
 
@@ -17,6 +15,7 @@
     display: inline-block;
     width: 42%;
     height: 100%;
+    margin-top: 40px;
     box-sizing: border-box;
     overflow: hidden;
     border: 4px solid $yellow;
@@ -34,100 +33,98 @@
         }
     }
 
-    &:nth-of-type(2n-1) {
+    &:nth-of-type(4n-3) {
+        float: left;
+        transform: skew(20deg);
+        border-radius: 8px 20px;
+        box-shadow: 10px 6px 36px rgba(0, 0, 0, .7);
 
-        .questitem__row:nth-of-type(odd) & {
-            transform: skew(20deg);
-            border-radius: 8px 20px;
-            box-shadow: 10px 6px 36px rgba(0,0,0,.7);
-
-            & > div {
-                margin-left: -56px;
-                transform: skew(-20deg);
-                background-position: top left;
-            }
-
-            & .quest__info {
-
-                &_title {
-                    margin-left: 86px;
-                }
-
-                &_description {
-                    margin-left: 110px;
-                }
-            }
+        & > div {
+            margin-left: -56px;
+            transform: skew(-20deg);
+            background-position: top left;
         }
 
-        .questitem__row:nth-of-type(even) & {
-            border-radius: 20px 8px;
-            transform: skew(-20deg);
-            box-shadow: 10px -6px 36px rgba(0,0,0,.7);
+        & .quest__info {
 
-            & > div {
-                margin-left: -55px;
-                transform: skew(20deg);
-                background-position: top left;
+            &_title {
+                margin-left: 86px;
             }
 
-            & .quest__info {
-
-                &_title {
-                    margin-left: 66px;
-                }
-
-                &_description {
-                    margin-left: 36px;
-                }
+            &_description {
+                margin-left: 110px;
             }
         }
     }
 
-    &:nth-of-type(2n) {
+    &:nth-of-type(4n-2) {
+        float: right;
+        border-radius: 20px 8px;
+        transform: skew(-20deg);
+        box-shadow: 10px -6px 36px rgba(0, 0, 0, .7);
 
-        .questitem__row:nth-of-type(odd) & {
-            transform: skew(-20deg);
-            border-radius: 20px 8px;
-            box-shadow: -10px 6px 36px rgba(0,0,0,.7);
-
-            & > div {
-                margin-left: -55px;
-                transform: skew(20deg);
-                background-position: top right;
-            }
-
-            & .quest__info {
-
-                &_title {
-                    margin-left: 66px;
-                }
-
-                &_description {
-                    margin-left: 36px;
-                }
-            }
+        & > div {
+            margin-left: -55px;
+            transform: skew(20deg);
+            background-position: top left;
         }
 
-        .questitem__row:nth-of-type(even) & {
-            transform: skew(20deg);
-            border-radius: 8px 20px;
-            box-shadow: -10px -6px 36px rgba(0,0,0,.7);
+        & .quest__info {
 
-            & > div {
-                margin-left: -56px;
-                transform: skew(-20deg);
-                background-position: top right;
+            &_title {
+                margin-left: 66px;
             }
 
-            & .quest__info {
+            &_description {
+                margin-left: 36px;
+            }
+        }
+    }
 
-                &_title {
-                    margin-left: 86px;
-                }
+    &:nth-of-type(4n-1) {
+        float: left;
+        transform: skew(-20deg);
+        border-radius: 20px 8px;
+        box-shadow: -10px 6px 36px rgba(0, 0, 0, .7);
 
-                &_description {
-                    margin-left: 110px;
-                }
+        & > div {
+            margin-left: -55px;
+            transform: skew(20deg);
+            background-position: top right;
+        }
+
+        & .quest__info {
+
+            &_title {
+                margin-left: 66px;
+            }
+
+            &_description {
+                margin-left: 36px;
+            }
+        }
+    }
+
+    &:nth-of-type(4n) {
+        float: right;
+        transform: skew(20deg);
+        border-radius: 8px 20px;
+        box-shadow: -10px -6px 36px rgba(0, 0, 0, .7);
+
+        & > div {
+            margin-left: -56px;
+            transform: skew(-20deg);
+            background-position: top right;
+        }
+
+        & .quest__info {
+
+            &_title {
+                margin-left: 86px;
+            }
+
+            &_description {
+                margin-left: 110px;
             }
         }
     }
@@ -139,7 +136,7 @@
         width: 100%;
         height: 160px;
         overflow: hidden;
-        background: rgba(20,198,184, .7);
+        background: rgba(20, 198, 184, .7);
 
         &_title {
             width: 66%;
@@ -159,7 +156,5 @@
             color: $yellow;
             font-size: 18px;
         }
-
-
     }
 }

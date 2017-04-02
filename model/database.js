@@ -27,6 +27,36 @@ initializeDb(function (sequelize) {
                 description: 'no description'
             });
         })
+        .then(function () {
+            quest.create({
+                title: 'SecondQuest',
+                description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
+            });
+        })
+        .then(function () {
+            quest.create({
+                title: 'SecondQuest',
+                description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
+            });
+        })
+        .then(function () {
+            quest.create({
+                title: 'SecondQuest',
+                description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
+            });
+        })
+        .then(function () {
+            quest.create({
+                title: 'SecondQuest',
+                description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
+            });
+        })
+        .then(function () {
+            quest.create({
+                title: 'SecondQuest',
+                description: 'Lets play to this facking quest hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha hahaha ................................ bla bla bla bla'
+            });
+        })
         .catch(function (err) {
             throw err;
         });

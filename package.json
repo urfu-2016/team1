@@ -12,12 +12,11 @@
     "dev:run": "nodemon ./bin/www",
 
     "lint": "npm-run-all lint:*",
-    "lint:style": "stylelint views/**/*.css",
+    "lint:style": "stylelint views/**/*.pcss",
     "lint:js": "eslint --ignore-path .gitignore .",
 
     "test": "npm-run-all lint test:run",
     "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\"",
-
     "selenium:install": "./node_modules/.bin/selenium-standalone install",
     "selenium:start": "./node_modules/.bin/selenium-standalone start",
     "selenium:test": "./node_modules/.bin/wdio wdio.conf.js",
@@ -80,6 +79,7 @@
     "start-webpack-dev-server-hot": "^0.1.0",
     "style-loader": "^0.13.1",
     "stylelint": "7.3.1",
+    "stylelint-config-standard": "16.0.0",
     "surge": "0.19.0",
     "webdriverio": "4.6.2",
     "webpack": "2.3.2",
