@@ -46,7 +46,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.pcss$/,
                 loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?importLoaders=1!postcss-loader' })
             },
             {

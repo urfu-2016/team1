@@ -10,14 +10,17 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:build": "webpack --progress --config webpack.devconf.js",
     "dev:run": "nodemon ./bin/www",
+
     "lint": "npm-run-all lint:*",
     "lint:style": "stylelint views/**/*.pcss",
     "lint:js": "eslint --ignore-path .gitignore .",
+
     "test": "npm-run-all lint test:run",
     "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\"",
     "selenium:install": "./node_modules/.bin/selenium-standalone install",
     "selenium:start": "./node_modules/.bin/selenium-standalone start",
     "selenium:test": "./node_modules/.bin/wdio wdio.conf.js",
+
     "prestart": "npm i",
     "start": "npm-run-all prod:*",
     "prod:build": "webpack --config webpack.prodconf.js",
