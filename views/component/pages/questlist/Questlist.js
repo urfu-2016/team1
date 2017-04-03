@@ -6,12 +6,19 @@ import QuestItem from './questItem/QuestItem';
 
 export default class Questlist extends React.Component {
     render() {
+        const { quests } = this.props.allQuests;
+        const { GetAllQuests } = this.props.pageActions;
         return (
             <main>
-                <Banner/>
+                <Banner />
                 <Settings />
-                <QuestItem />
+                <QuestItem GetAllQuests={GetAllQuests} quests={quests} />
             </main>
         )
     }
 }
+
+Questlist.propTypes = {
+    pageActions: React.PropTypes.object.isRequired,
+    allQuests: React.PropTypes.object.isRequired
+};
