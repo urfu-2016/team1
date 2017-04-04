@@ -2,9 +2,12 @@
 .idea
 
 *.log
+npm-debug.log*
 
 node_modules
 .tmp
+
+errorShots
 
 public/*
 
@@ -12,4 +15,3 @@ build/
 
 bin/
 !bin/www.js
-npm-debug.log*
