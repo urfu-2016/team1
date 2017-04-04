@@ -3,7 +3,20 @@ import React from 'react';
 import search from '../../../../source/img/search.svg';
 
 export default class Settings extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+    }
+
     render() {
+        let inputData;
+        const { GetQuestsByFirstLetters, GetAllQuests } = this.props;
+
         return (
             <div className='questlist-settings'>
                 <ul className='questlist-settings__filter'>
@@ -11,11 +24,22 @@ export default class Settings extends React.Component {
                     <li>value 2</li>
                     <li>value 3</li>
                 </ul>
-                <form className='questlist-settings__search' onSubmit={(event) => {
-                    event.preventDefault();
-                }}>
+                <form className='questlist-settings__search' onSubmit={this.handleSubmit}>
                     <div>
-                        <input className='questionlist-search__input' type='text'/>
+                        <input
+                          ref={(input) => {
+                              inputData = input;
+                          }}
+                          onChange={() => {
+                              if (inputData.value) {
+                                  GetQuestsByFirstLetters([], inputData.value);
+                              } else {
+                                  GetAllQuests([]);
+                              }
+                          }}
+                          className='questionlist-search__input'
+                          type='text'
+                        />
                         <button className='questionlist-search__button' type='submit'>
                             <span>
                                 <img src={search} alt='search'/>
@@ -27,3 +51,8 @@ export default class Settings extends React.Component {
         );
     }
 }
+
+Settings.propTypes = {
+    GetQuestsByFirstLetters: React.PropTypes.func.isRequired,
+    GetAllQuests: React.PropTypes.func.isRequired
+};

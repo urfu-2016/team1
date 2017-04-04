@@ -19,7 +19,7 @@ router.get('/quests/name/:name', function (req, res) {
     const name = req.params.name;
     database.Quest.findAll()
         .then(quests => {
-            res.json(quests.filter(quest => quest.title.startsWith(name)));
+            res.json(quests.filter(quest => quest.title.toLowerCase().startsWith(name.toLowerCase())));
         });
 });
 

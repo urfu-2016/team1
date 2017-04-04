@@ -6,7 +6,7 @@ import Questlist from '../component/pages/questlist/Questlist';
 
 const mapStateToProps = (state) => {
     return {
-        allQuests: state.GetAllQuests
+        quests: state.GetQuests
     }
 };
 

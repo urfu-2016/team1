@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
-import GetAllQuests from './allquests';
+import GetQuests from './allquests';
 
 export default combineReducers({
-    GetAllQuests,
-    
+    GetQuests,
 });

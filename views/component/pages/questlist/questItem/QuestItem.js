@@ -9,7 +9,7 @@ export default class QuestItem extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('update');
+        console.info('update');
     }
 
     render() {
@@ -39,6 +39,6 @@ export default class QuestItem extends React.Component {
 }
 
 QuestItem.propTypes = {
+    quests: React.PropTypes.array,
     GetAllQuests: React.PropTypes.func.isRequired,
-    quests: React.PropTypes.array
 };
