@@ -1,7 +1,7 @@
 'use strict';
 var express = require('express');
 var router = express.Router(); // eslint-disable-line
-var database = require('../model/database');
+var database = require('./database');
 
 router.get('/', function (req, res) {
     database.Quest.findAll()
