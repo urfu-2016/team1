@@ -1,13 +1,21 @@
-import Header from './modules/header/Header';
+import React from 'react';
+import { Provider } from 'react-redux';
+
+import configureStore from './redux/store/configureStore';
+import Header from './component/header/Header';
+
+const store = configureStore();
 
 export default class App extends React.Component {
     render() {
         return (
+        <Provider store={store}>
             <div>
                 <Header/>
 
                 {this.props.children}
             </div>
+        </Provider>
         );
     }
 }
@@ -15,4 +23,3 @@ export default class App extends React.Component {
 App.propTypes = {
     children: React.PropTypes.element
 };
-

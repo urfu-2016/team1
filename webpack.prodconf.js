@@ -38,7 +38,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: /\/node_modules\//,
+                exclude: /node_modules/,
                 loader: 'babel',
                 query: {
                     presets: ['es2015', 'react'],
@@ -46,7 +46,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.pcss$/,
                 loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?importLoaders=1!postcss-loader' })
             },
             {

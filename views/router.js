@@ -1,16 +1,19 @@
 import { Route, IndexRoute } from 'react-router';
-import App from './App';
-import Repos from './modules/Signup';
-import About from './modules/Signin';
-import Questlist from './modules/pages/Questlist/Questlist';
 
-module.exports = (
+import App from './App';
+import QuestListPage from './container/QuestListPage';
+import Question from './component/pages/question/Question';
+import Signin from './component/Signin';
+import Signup from './component/Signup';
+
+export default (
     <div>
         <Route path='/' component={App} >
-            <IndexRoute component={Questlist}/>
+            <IndexRoute component={QuestListPage}/>
 
-            <Route path='/signin' component={About}/>
-            <Route path='/signup' component={Repos}/>
+            <Route path='/signin' component={Signin}/>
+            <Route path='/signup' component={Signup}/>
+            <Route path='/question' components={Question}/>
         </Route>
     </div>
 );

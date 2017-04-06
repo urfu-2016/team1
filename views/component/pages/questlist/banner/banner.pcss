@@ -1,0 +1,26 @@
+.banner {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    & img {
+        position: relative;
+        top: -100px;
+        width: 100%;
+        z-index: -1;
+    }
+
+    & span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 700px;
+        margin-left: -250px;
+        font-size: 70px;
+        font-family: 'Poiret One';
+        font-weight: 700;
+        color: $yellow;
+        text-align: right;
+    }
+}

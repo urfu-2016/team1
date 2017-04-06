@@ -47,7 +47,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /\/node_modules\//,
+                exclude: /node_modules/,
                 loader: 'babel',
                 query: {
                     presets: ['es2015', 'react'],
@@ -55,8 +55,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?importLoaders=1!postcss-loader' })
+                test: /\.pcss$/,
+                loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?importLoaders=1!postcss' })
             },
             {
                 test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
@@ -68,26 +68,12 @@ module.exports = {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin("[name].css"),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
             React:      'react',
-            PropTypes:  'react/lib/ReactPropTypes',
+            PropTypes:  'react/lib/ReactPropTypes'
         })
     ],
-
-    devServer: {
-        host: 'localhost',
-        port: 3001,
-        contentBase: pathResolve('public'),
-        publicPath: '/',
-        hot: true,
-        inline: true,
-        watchOptions: {
-            aggregateTimeout: 100,
-            ignored: /node_modules/
-        }
-    },
 
     watch: true,
 

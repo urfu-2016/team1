@@ -4,3 +4,8 @@
 *.log
 
 node_modules
+.tmp
+
+public/*
+!public/index.html
+npm-debug.log*
