@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Like.belongsTo(models.Comment);
+                Like.belongsTo(models.User);
             }
         }
     });

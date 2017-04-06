@@ -26,12 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                /*Task.belongsTo(models.User, {
-                 onDelete: "CASCADE",
-                 foreignKey: {
-                 allowNull: false
-                 }
-                 });*/
+                Place.hasMany(models.Comment);
             }
         }
     });

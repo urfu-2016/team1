@@ -12,18 +12,14 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: false
         },
         foundPlace: {
-            type: DataTypes.ARRAY(DataTypes.UUID),
+            type: DataTypes.ARRAY(DataTypes.UUIDV1),
             defaultValue: null
         }
     }, {
         classMethods: {
             associate: function(models) {
-                /*Task.belongsTo(models.User, {
-                 onDelete: "CASCADE",
-                 foreignKey: {
-                 allowNull: false
-                 }
-                 });*/
+                models.Quest.belongsToMany(models.User, {through: 'QuestsUsers'});
+                models.User.belongsToMany(models.Quest, {through: 'QuestsUsers'});
             }
         }
     });

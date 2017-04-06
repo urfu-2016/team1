@@ -10,12 +10,8 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                /*Task.belongsTo(models.User, {
-                 onDelete: "CASCADE",
-                 foreignKey: {
-                 allowNull: false
-                 }
-                 });*/
+                models.Quest.belongsToMany(models.Place, {through: 'QuestPlace'});
+                models.Place.belongsToMany(models.Quest, {through: 'QuestPlace'});
             }
         }
     });

@@ -19,17 +19,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         }
-    }, {
-        classMethods: {
-            associate: function(models) {
-                /*Task.belongsTo(models.User, {
-                    onDelete: "CASCADE",
-                    foreignKey: {
-                        allowNull: false
-                    }
-                });*/
-            }
-        }
     });
 
     return User;

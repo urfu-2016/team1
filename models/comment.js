@@ -14,8 +14,8 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Comment.belongsTo(models.Quest);
                 Comment.hasMany(models.Like);
+                Comment.belongsTo(models.User);
             }
         }
     });
