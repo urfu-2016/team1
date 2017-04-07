@@ -4,7 +4,7 @@ import App from './App';
 import QuestListPage from './container/QuestListPage';
 import Question from './component/pages/question/Question';
 import Signin from './component/Signin';
-import Signup from './component/Signup';
+import SignupPage from './container/SignupPage';
 
 export default (
     <div>
@@ -12,7 +12,7 @@ export default (
             <IndexRoute component={QuestListPage}/>
 
             <Route path='/signin' component={Signin}/>
-            <Route path='/signup' component={Signup}/>
+            <Route path='/signup' component={SignupPage}/>
             <Route path='/question' components={Question}/>
         </Route>
     </div>

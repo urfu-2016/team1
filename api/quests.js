@@ -4,18 +4,18 @@ const database = require('../model/database');
 
 const router = express.Router();
 
-router.get('/quests', function (req, res) {
+router.get('/', function (req, res) {
     database.Quest.findAll()
-        .then(quests => res.json(quests));
+        .then(res.json);
 });
 
-router.get('/quests/id/:id', function (req, res) {
+router.get('/id/:id', function (req, res) {
     const id = req.params.id;
     database.Quest.findById(id)
-        .then(quest => res.json(quest));
+        .then(res.json);
 });
 
-router.get('/quests/name/:name', function (req, res) {
+router.get('/name/:name', function (req, res) {
     const name = req.params.name;
     database.Quest.findAll()
         .then(quests => {

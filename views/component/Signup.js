@@ -11,6 +11,8 @@ export default class Signup extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const { PostUser } = this.props.pageActions;
+        PostUser(this._loginInput.value, this._passInput.value);
         console.log(`Отправлено значение: ${this._loginInput.value}, ${this._passInput.value}`);
     }
 
@@ -27,3 +29,7 @@ export default class Signup extends React.Component {
         ) ;
     }
 }
+
+Signup.propTypes = {
+    pageActions: React.PropTypes.object.isRequired
+};
