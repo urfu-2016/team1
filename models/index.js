@@ -1,16 +1,13 @@
 "use strict";
 
-var fs = require("fs");
-var path = require("path");
-var Sequelize = require("sequelize");
-var env = process.env.NODE_ENV || "development";
-var config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
+const fs = require("fs");
+const path = require("path");
+const Sequelize = require("sequelize");
+const env = process.env.NODE_ENV || "development";
+const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
+const connectionString = process.env.CONNECTION_STRING || config.database.connectionString;
 
-if (process.env.DATABASE_URL) {
-    var sequelize = new Sequelize(process.env.DATABASE_URL,config);
-} else {
-    var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+var sequelize = new Sequelize(connectionString, config.database.options);
 
 var db = {};
 

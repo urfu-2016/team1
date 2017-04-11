@@ -1,0 +1,10 @@
+{
+    "development": {
+        "database" : {
+            "connectionString": "postgres://postgres:qwer@localhost/quest",
+            "options": {
+                "charset": "utf8"
+            }
+        }
+    }
+}
