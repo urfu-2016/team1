@@ -1,6 +1,7 @@
 import { ALL_QUESTS_REQUEST, ALL_QUESTS_SUCCESS, ALL_QUESTS_ERROR } from '../constants/allquests';
 import { SOME_QUESTS_REQUEST, SOME_QUESTS_SUCCESS, SOME_QUESTS_ERROR} from '../constants/somequests';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_ERROR } from '../constants/users';
+import { SET_SPINNER, REMOVE_SPINNER } from '../constants/spinner';
 
 export function GetAllQuests(quests) {
     return (dispatch) => {
@@ -27,6 +28,11 @@ export function GetQuestsByFirstLetters(quests, searchQuery) {
         dispatch({
             type: SOME_QUESTS_REQUEST,
             quests: quests
+        });
+
+        dispatch({
+            type: SET_SPINNER,
+            spinner: true
         });
 
         fetch(`api/quests/name/${searchQuery}`)
