@@ -18,7 +18,7 @@ export function GetAllQuests(quests) {
                     type: ALL_QUESTS_SUCCESS,
                     quests: user
                 });
-            })
+            });
     }
 }
 
@@ -38,7 +38,7 @@ export function GetQuestsByFirstLetters(quests, searchQuery) {
                     type: SOME_QUESTS_SUCCESS,
                     quests: user
                 })
-            })
+            });
     }
 }
 
@@ -54,11 +54,13 @@ export function PostUser(user, password) {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({user, password})
-        }).then(response => {
-            dispatch({
-                type: REGISTER_USER_SUCCESS,
-                token: response.json()
-            })
-        });
+        })
+            .then(response => response.json())
+            .then(data => {
+                dispatch({
+                    type: REGISTER_USER_SUCCESS,
+                    token: data.token
+                })
+            });
     }
 }

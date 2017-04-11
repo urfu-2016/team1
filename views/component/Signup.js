@@ -1,14 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { autobind } from 'core-decorators'
 
+import * as pageActions from '../redux/action/index';
+
+const mapStateToProps = state => ({quests: state.GetQuests});
+const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Signup extends React.Component {
+    static propTypes = {
+        pageActions: React.PropTypes.object.isRequired
+    };
+
     constructor() {
         super(...arguments);
         this.loginInput = ref => {this._loginInput = ref;};
         this.passInput = ref => {this._passInput = ref;};
-
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    @autobind
     handleSubmit(event) {
         event.preventDefault();
         const { PostUser } = this.props.pageActions;
@@ -26,10 +38,6 @@ export default class Signup extends React.Component {
                     <input type='submit'/>
                 </form>
             </div>
-        ) ;
+        );
     }
 }
-
-Signup.propTypes = {
-    pageActions: React.PropTypes.object.isRequired
-};

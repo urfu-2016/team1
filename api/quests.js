@@ -6,13 +6,13 @@ const router = express.Router();
 
 router.get('/', function (req, res) {
     database.Quest.findAll()
-        .then(res.json);
+        .then(quests => res.json(quests));
 });
 
 router.get('/id/:id', function (req, res) {
     const id = req.params.id;
     database.Quest.findById(id)
-        .then(res.json);
+        .then(quest => res.json(quest));
 });
 
 router.get('/name/:name', function (req, res) {
