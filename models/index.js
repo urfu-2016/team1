@@ -5,7 +5,8 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const env = process.env.NODE_ENV || "development";
 const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
-const connectionString = process.env.CONNECTION_STRING || config.database.connectionString;
+const localConnectionString = `postgres://${config.database.username}:${config.database.password}@${config.database.host}/${config.database.dbName}`;
+const connectionString = process.env.CONNECTION_STRING || localConnectionString;
 
 var sequelize = new Sequelize(connectionString, config.database.options);
 

@@ -1,7 +1,10 @@
 {
     "development": {
         "database" : {
-            "connectionString": "postgres://postgres:qwer@localhost/quest",
+            "dbName": "quest",
+            "username": "postgres",
+            "password": "qwer",
+            "host": "localhost",
             "options": {
                 "charset": "utf8"
             }
