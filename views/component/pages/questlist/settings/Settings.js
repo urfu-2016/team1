@@ -1,14 +1,10 @@
 import React from 'react';
+import { autobind } from 'core-decorators';
 
 import search from '../../../../source/img/search.svg';
 
 export default class Settings extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
+    @autobind
     handleSubmit(event) {
         event.preventDefault();
     }

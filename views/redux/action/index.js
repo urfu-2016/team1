@@ -1,5 +1,6 @@
 import { ALL_QUESTS_REQUEST, ALL_QUESTS_SUCCESS, ALL_QUESTS_ERROR } from '../constants/allquests';
 import { SOME_QUESTS_REQUEST, SOME_QUESTS_SUCCESS, SOME_QUESTS_ERROR} from '../constants/somequests';
+import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_ERROR } from '../constants/users';
 
 export function GetAllQuests(quests) {
     return (dispatch) => {
@@ -17,7 +18,7 @@ export function GetAllQuests(quests) {
                     type: ALL_QUESTS_SUCCESS,
                     quests: user
                 });
-            })
+            });
     }
 }
 
@@ -37,6 +38,29 @@ export function GetQuestsByFirstLetters(quests, searchQuery) {
                     type: SOME_QUESTS_SUCCESS,
                     quests: user
                 })
-            })
+            });
+    }
+}
+
+export function PostUser(user, password) {
+    return dispatch => {
+        dispatch({
+            type: REGISTER_USER_REQUEST,
+            user: user
+        });
+
+        console.log(JSON.stringify({user, password}));
+        fetch('api/users/register', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({user, password})
+        })
+            .then(response => response.json())
+            .then(data => {
+                dispatch({
+                    type: REGISTER_USER_SUCCESS,
+                    token: data.token
+                })
+            });
     }
 }

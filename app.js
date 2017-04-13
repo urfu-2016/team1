@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const remoteStatic = require('remote-static');
 
-const api = require('./routes/api');
+const api = require('./api');
 
 const app = express();
 
