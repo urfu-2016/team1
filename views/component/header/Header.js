@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, IndexLink } from 'react-router';
 import { connect } from 'react-redux';
 
+import Logo from '../logo/Logo';
+
 @connect(state => ({user: state.RegisterUser}))
 export default class Header extends React.Component {
     static propTypes = {
@@ -22,12 +24,11 @@ export default class Header extends React.Component {
 
         return (
             <header className='header'>
-                <div className='header__logo' role='banner'>
-                    <IndexLink to='/'>que<span>st</span>ory</IndexLink>
+                <div className='header__logo'>
+                    <Logo />
                 </div>
 
                 {this.props.user.token ? registeredBlock : registrationBlock}
-
             </header>
         );
     }

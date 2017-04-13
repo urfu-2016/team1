@@ -21,11 +21,12 @@ export default class Questlist extends React.Component {
         const { quests, isFetching, error } = this.props.quests;
         const { GetAllQuests, GetQuestsByFirstLetters } = this.props.pageActions;
         return (
-            <main>
+            <div className='questlist'>
                 <Banner />
                 <Settings GetQuestsByFirstLetters={GetQuestsByFirstLetters} GetAllQuests={GetAllQuests}/>
                 <QuestItem GetAllQuests={GetAllQuests} quests={quests} isFetching={isFetching} error={error}/>
-            </main>
+            </div>
         )
     }
 }
+

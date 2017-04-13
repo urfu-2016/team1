@@ -75,7 +75,7 @@ module.exports = {
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
             React:      'react',
-            PropTypes:  'react/lib/ReactPropTypes',
+            PropTypes:  'prop-types'
         }),
         new webpack.optimize.OccurrenceOrderPlugin()
     ]

@@ -1,13 +1,8 @@
 import { ALL_QUESTS_REQUEST, ALL_QUESTS_SUCCESS, ALL_QUESTS_ERROR } from '../constants/allquests';
 import { SOME_QUESTS_REQUEST, SOME_QUESTS_SUCCESS, SOME_QUESTS_ERROR} from '../constants/somequests';
+import { initialState } from './initialState';
 import { SET_SPINNER, REMOVE_SPINNER } from '../constants/spinner';
 
-const initialState = {
-    isFetching: false,
-    quests: [],
-    success: false,
-    error: false
-};
 
 export default function GetQuests(state = initialState, action) {
     switch (action.type) {

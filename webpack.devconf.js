@@ -9,10 +9,10 @@ function pathResolve(yourPath) {
 }
 
 module.exports = {
-    context: path.resolve(__dirname, 'views'),
+    context: __dirname,
 
     entry: {
-        index: './index'
+        index: './views/index'
     },
 
     output: {
@@ -60,7 +60,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
-                loader: 'file?name=[path][name].[ext]'
+                loader: 'file?name=img/[name].[ext]'
             }
         ]
     },
@@ -71,7 +71,7 @@ module.exports = {
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
             React:      'react',
-            PropTypes:  'react/lib/ReactPropTypes'
+            PropTypes:  'prop-types'
         })
     ],
 

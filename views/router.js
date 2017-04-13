@@ -7,7 +7,6 @@ import Signin from './component/Signin';
 import Signup from './component/Signup';
 
 export default (
-    <div>
         <Route path='/' component={App} >
             <IndexRoute component={Questlist}/>
 
@@ -15,5 +14,4 @@ export default (
             <Route path='/signup' component={Signup}/>
             <Route path='/question/:id' components={Question}/>
         </Route>
-    </div>
 );

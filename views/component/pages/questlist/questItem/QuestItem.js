@@ -35,7 +35,7 @@ export default class QuestItem extends React.Component {
 
         return (
             <div className='questitem'>
-                <div className='questitem__row'>
+                <div className='questitem__wrap'>
                     {isFetching ? <Spinner/> : null}
                     {error ? <Error/> : null}
                     {mappedQuestItem}
@@ -46,8 +46,8 @@ export default class QuestItem extends React.Component {
 }
 
 QuestItem.propTypes = {
-    quests: React.PropTypes.array,
-    GetAllQuests: React.PropTypes.func.isRequired,
+    quests: PropTypes.array,
+    GetAllQuests: PropTypes.func.isRequired,
     isFetching: React.PropTypes.bool.isRequired,
     error: React.PropTypes.bool.isRequired
 };
