@@ -1,11 +1,14 @@
 import React from 'react';
+import QuestionBanner from './questionBanner/questionBanner';
+import QuestionDescription from './description/description';
 
 export default class Question extends React.Component {
     render() {
         return (
-            <div>
-                <h1>Question</h1>
-            </div>
+            <main>
+                <QuestionBanner />
+                <QuestionDescription />
+            </main>
         );
     }
 }
