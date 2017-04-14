@@ -1,7 +1,6 @@
 .questionBanner {
     position: relative;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.4);
 
     & img {
         position: relative;
@@ -21,5 +20,19 @@
         font-weight: 700;
         color: $yellow;
         text-align: center;
+    }
+
+    & input[type=submit] {
+        padding: 5px 15px;
+        background: $graydark;
+        position: absolute;
+        top: 62%;
+        left: 77%;
+        border: 3px solid $yellow;
+        border-radius: 5px;
+        color: $yellow;
+        font-size: 17px;
+        font-family: 'Poiret One';
+        font-weight: 400;
     }
 }
