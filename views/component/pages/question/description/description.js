@@ -9,7 +9,9 @@ export default class QuestionDescription extends React.Component {
         return (
             <div className='questionDescription'>
                 <h2 className='questionDescription_title'>Title</h2>
-                <span>{this.props.description}</span>
+                <div className='questionDescription_text'>
+                    <span>{this.props.description}</span>
+                </div>
             </div>
         );
     }
