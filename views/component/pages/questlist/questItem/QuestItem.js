@@ -2,17 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import plug from '../../../../source/img/plug.jpg';
+import spinner from '../../../../source/img/rolling.svg';
 
-const SetSpinner = () => {
-    return (
-        <div className='spinner-container'>
-            <img
-              src='../../../../source/img/rolling.svg'
-              alt='loader spiner'
-              className='spinner-container_spinner' />
-        </div>
-    )
-};
+const Spinner = () => (
+    <div className='spinner-container'>
+        <img src={spinner} alt='loader spinner' className='spinner-container_spinner' />
+    </div>
+);
 
 export default class QuestItem extends React.Component {
     componentDidMount() {
@@ -26,8 +22,7 @@ export default class QuestItem extends React.Component {
     render() {
         const { quests, isFetching } = this.props;
 
-        let mapedQuestItem = quests.map((item, index) => {
-            return (
+        let mappedQuestItem = quests.map(item => (
                 <Link to='/question' key={item.id} className='questitem__item quest'>
                     <div style={{backgroundImage: 'url('+plug+')'}}>
                         <div className='quest__info'>
@@ -37,15 +32,13 @@ export default class QuestItem extends React.Component {
                     </div>
                 </Link>
             )
-        });
+        );
 
         return (
             <div className='questitem'>
                 <div className='questitem__row'>
-                    {
-                        isFetching ? <SetSpinner/> : null
-                    }
-                    {mapedQuestItem}
+                    {isFetching ? <Spinner/> : null}
+                    {mappedQuestItem}
                 </div>
             </div>
         );
