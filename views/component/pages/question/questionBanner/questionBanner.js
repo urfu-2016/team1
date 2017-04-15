@@ -10,9 +10,6 @@ export default class QuestionBanner extends React.Component {
     render() {
         return (
             <div className='questionBanner'>
-                <img src={questionBanner} alt='questionBanner'/>
-                <span>{this.props.title}</span>
-                <input type='submit' className='takeThisTask' value='Участвовать'/>
             </div>
         );
     }
