@@ -26,17 +26,24 @@ export default function GetQuests(state = initialState, action) {
         case SOME_QUESTS_REQUEST:
             return Object.assign({}, state, {
                 quests: action.quests,
-                success: false
+                success: false,
+                error: false
             });
         case SOME_QUESTS_SUCCESS:
             return Object.assign({}, state, {
                 quests: action.quests,
                 success: true,
+                isFetching: false,
+                error: false
+            });
+        case SOME_QUESTS_ERROR:
+            return Object.assign({}, state, {
+                error: true,
                 isFetching: false
             });
         case SET_SPINNER:
             return Object.assign({}, state, {
-                isFetching: !state.success && action.spinner
+                isFetching: !state.success && action.spinner && !state.error
             });
         default:
             return state;

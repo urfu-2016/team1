@@ -37,12 +37,22 @@ export function GetQuestsByFirstLetters(quests, searchQuery) {
 
         fetch(`api/quests/name/${searchQuery}`)
             .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+
                 return response.json();
             })
-            .then((user) => {
+            .catch(err => {
+                dispatch({
+                    type: SOME_QUESTS_ERROR,
+                    error: true
+                })
+            })
+            .then(quests => {
                 dispatch({
                     type: SOME_QUESTS_SUCCESS,
-                    quests: user
+                    quests: quests
                 })
             });
     }
