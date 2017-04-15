@@ -18,6 +18,8 @@ export default class QuestItem extends React.Component {
     static propTypes = {
         quests: PropTypes.array,
         GetAllQuests: PropTypes.func.isRequired,
+        isFetching: PropTypes.bool.isRequired,
+        error: PropTypes.bool.isRequired
     };
 
     componentDidMount() {
@@ -26,7 +28,7 @@ export default class QuestItem extends React.Component {
 
     render() {
         const { quests, isFetching, error } = this.props;
-        
+
         let mappedQuestItem = quests.map(item => (
             <Link to={'/question/' + item.id} key={item.id} className='questitem__item quest'>
                 <div style={{backgroundImage: 'url('+plug+')'}}>
@@ -49,4 +51,3 @@ export default class QuestItem extends React.Component {
         );
     }
 }
-

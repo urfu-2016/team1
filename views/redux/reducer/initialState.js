@@ -1,3 +1,6 @@
 export const initialState = {
-    quests: []
+    isFetching: false,
+    quests: [],
+    success: false,
+    error: false
 };
