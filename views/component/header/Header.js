@@ -13,8 +13,8 @@ export default class Header extends React.Component {
     render() {
         const registrationBlock = (
             <div className='header__registration registration'>
-                <Link to='signin' className='registration__item registration__item_signin'>Sign in</Link> |
-                <Link to='signup' className='registration__item registration__item_signup'>Sign up</Link>
+                <Link to='/signin' className='registration__item registration__item_signin'>Sign in</Link> |
+                <Link to='/signup' className='registration__item registration__item_signup'>Sign up</Link>
             </div>
         );
 

@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
 function pathResolve(yourPath) {
     return path.resolve(__dirname, yourPath);
 }
@@ -68,6 +70,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             __dirname: JSON.stringify(__dirname),
+            NODE_ENV: JSON.stringify(NODE_ENV)
         }),
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
@@ -76,7 +79,7 @@ module.exports = {
         })
     ],
 
-    watch: true,
+    watch: NODE_ENV !== 'production',
 
     watchOptions: {
         aggregateTimeout: 100,

@@ -3,6 +3,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 function pathResolve(yourPath) {
     return path.resolve(__dirname, yourPath);
@@ -68,6 +69,9 @@ module.exports = {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin("[name].css"),
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
             React:      'react',

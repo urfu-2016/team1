@@ -8,6 +8,8 @@ node_modules
 
 public/*
 
+build/
+
 bin/
 !bin/www.js
 npm-debug.log*

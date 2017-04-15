@@ -63,7 +63,7 @@ function renderFullPage(html, preloadedState) {
               content="width=device-width">
         <title>we are effective team</title>
         <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="/index.css">
       </head>
       <body>
         <div id="root">${html}</div>
@@ -72,7 +72,7 @@ function renderFullPage(html, preloadedState) {
           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
-        <script src="index.js"></script>
+        <script src="/index.js"></script>
       </body>
     </html>
     `
