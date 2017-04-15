@@ -10,6 +10,11 @@
         overflow: hidden;
         background-color: $yellow;
 
+        @media (--mobile-sm) {
+            float: none;
+            width: auto;
+        }
+
         & input {
             width: 100%;
             height: 30px;
@@ -30,11 +35,15 @@
             outline: none;
             background-color: transparent;
             cursor: pointer;
-            fill: $blueviolet;
 
             & span {
                 display: block;
                 margin-bottom: -4px;
+
+                & img {
+                    margin: 6px;
+                    fill: $blueviolet;
+                }
             }
         }
     }

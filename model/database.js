@@ -1,8 +1,7 @@
-'use strict';
-const Sequelize = require('sequelize');
-const initializeDb = require('./init').init;
+import Sequelize from 'sequelize';
+import { init } from './init';
 
-initializeDb(function (sequelize) {
+init(function (sequelize) {
     const quest = sequelize.define('quest', {
         id: {
             type: Sequelize.INTEGER.UNSIGNED,

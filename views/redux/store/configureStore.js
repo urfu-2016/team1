@@ -7,7 +7,13 @@ import rootReducer from '../reducer/index';
 export default function configureStore(initialState) {
     const logger = createLogger();
 
-    const store = createStore(
+    const store = NODE_ENV === 'production' ?
+        createStore(
+            rootReducer,
+            initialState,
+            applyMiddleware(thunk)
+        ) :
+        createStore(
             rootReducer,
             initialState,
             applyMiddleware(thunk, logger)

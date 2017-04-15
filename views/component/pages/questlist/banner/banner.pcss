@@ -3,6 +3,15 @@
     height: 600px;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.4);
+    transition: height .2s ease-in-out;
+
+    @media (--tablet) {
+        height: 300px;
+    }
+
+    @media (--mobile-mobile-sm) {
+        display: none;
+    }
 
     & img {
         position: relative;
@@ -18,9 +27,15 @@
         width: 700px;
         margin-left: -250px;
         font-size: 70px;
-        font-family: 'Poiret One';
+        font-family: 'Poiret One', sans-serif;
         font-weight: 700;
         color: $yellow;
         text-align: right;
+
+        @media (--tablet) {
+            right: 40px;
+            left: auto;
+            margin-top: -82px;
+        }
     }
 }

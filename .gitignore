@@ -7,5 +7,9 @@ node_modules
 .tmp
 
 public/*
-!public/index.html
+
+build/
+
+bin/
+!bin/www.js
 npm-debug.log*

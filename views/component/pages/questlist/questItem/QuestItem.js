@@ -15,13 +15,20 @@ const Error = () => (
 );
 
 export default class QuestItem extends React.Component {
+    static propTypes = {
+        quests: PropTypes.array,
+        GetAllQuests: PropTypes.func.isRequired,
+        isFetching: PropTypes.bool.isRequired,
+        error: PropTypes.bool.isRequired
+    };
+
     componentDidMount() {
         this.props.GetAllQuests([]);
     }
 
     render() {
         const { quests, isFetching, error } = this.props;
-        
+
         let mappedQuestItem = quests.map(item => (
             <Link to={'/question/' + item.id} key={item.id} className='questitem__item quest'>
                 <div style={{backgroundImage: 'url('+plug+')'}}>
@@ -35,7 +42,7 @@ export default class QuestItem extends React.Component {
 
         return (
             <div className='questitem'>
-                <div className='questitem__row'>
+                <div className='questitem__wrap'>
                     {isFetching ? <Spinner/> : null}
                     {error ? <Error/> : null}
                     {mappedQuestItem}
@@ -44,10 +51,3 @@ export default class QuestItem extends React.Component {
         );
     }
 }
-
-QuestItem.propTypes = {
-    quests: React.PropTypes.array,
-    GetAllQuests: React.PropTypes.func.isRequired,
-    isFetching: React.PropTypes.bool.isRequired,
-    error: React.PropTypes.bool.isRequired
-};

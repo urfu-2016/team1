@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, IndexLink } from 'react-router';
 import { connect } from 'react-redux';
 
+import Logo from '../logo/Logo';
+
 @connect(state => ({user: state.RegisterUser}))
 export default class Header extends React.Component {
     static propTypes = {
@@ -11,8 +13,8 @@ export default class Header extends React.Component {
     render() {
         const registrationBlock = (
             <div className='header__registration registration'>
-                <Link to='signin' className='registration__item registration__item_signin'>Sign in</Link> |
-                <Link to='signup' className='registration__item registration__item_signup'>Sign up</Link>
+                <Link to='/signin' className='registration__item registration__item_signin'>Sign in</Link> |
+                <Link to='/signup' className='registration__item registration__item_signup'>Sign up</Link>
             </div>
         );
 
@@ -22,12 +24,13 @@ export default class Header extends React.Component {
 
         return (
             <header className='header'>
-                <div className='header__logo' role='banner'>
-                    <IndexLink to='/'>que<span>st</span>ory</IndexLink>
+                <div className='header__wrap'>
+                    <div className='header__logo'>
+                        <Logo />
+                    </div>
+
+                    {this.props.user.token ? registeredBlock : registrationBlock}
                 </div>
-
-                {this.props.user.token ? registeredBlock : registrationBlock}
-
             </header>
         );
     }

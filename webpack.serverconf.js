@@ -2,7 +2,8 @@
 
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const fs = require('fs');
+
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 function pathResolve(yourPath) {
@@ -13,20 +14,33 @@ module.exports = {
     context: __dirname,
 
     entry: {
-        index: './views/index'
+        server: './bin/www'
     },
 
     output: {
-        path: pathResolve('public'),
+        path: pathResolve('bin'),
         publicPath: '/',
         filename: '[name].js',
-        chunkFilename: '[id].js',
-        library: '[name]'
+        libraryTarget: "commonjs2"
+    },
+
+    target: 'node',
+
+    externals: fs.readdirSync(path.resolve(__dirname, 'node_modules')).concat([
+        'react-dom/server'
+    ]).reduce(function (ext, mod) {
+        ext[mod] = 'commonjs ' + mod;
+        return ext;
+    }, {}),
+
+    node: {
+        __filename: false,
+        __dirname: false
     },
 
     resolve: {
         modules: ['node_modules'],
-        extensions: ['.js', '.css']
+        extensions: ['.js']
     },
 
     resolveLoader: {
@@ -47,10 +61,6 @@ module.exports = {
                 }
             },
             {
-                test: /\.pcss$/,
-                loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?importLoaders=1!postcss' })
-            },
-            {
                 test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
                 loader: 'file?name=img/[name].[ext]'
             }
@@ -58,29 +68,23 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                properties: true,
-                conditionals: true,
-                loops: true,
-                unused: true,
-                collapse_vars: true,
-                dead_code: true,
-                drop_console: true,
-                drop_debugger: true,
-                warnings: false,
-            }
-        }),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new ExtractTextPlugin("[name].css"),
         new webpack.DefinePlugin({
+            __dirname: JSON.stringify(__dirname),
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
             React:      'react',
             PropTypes:  'prop-types'
-        }),
-        new webpack.optimize.OccurrenceOrderPlugin()
-    ]
+        })
+    ],
+
+    watch: NODE_ENV !== 'production',
+
+    watchOptions: {
+        aggregateTimeout: 100,
+        ignored: /node_modules/
+    }
 };
+
+

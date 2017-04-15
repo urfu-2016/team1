@@ -1,6 +1,5 @@
-'use strict';
-const express = require('express');
-const jwt = require('jsonwebtoken');
+import express from 'express';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -15,4 +14,4 @@ router.post('/register', function (req, res) {
     res.status(201).send({token});
 });
 
-module.exports = router;
+export default router;

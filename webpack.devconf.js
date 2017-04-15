@@ -3,16 +3,17 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 function pathResolve(yourPath) {
     return path.resolve(__dirname, yourPath);
 }
 
 module.exports = {
-    context: path.resolve(__dirname, 'views'),
+    context: __dirname,
 
     entry: {
-        index: './index'
+        index: './views/index'
     },
 
     output: {
@@ -60,7 +61,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
-                loader: 'file?name=[path][name].[ext]'
+                loader: 'file?name=img/[name].[ext]'
             }
         ]
     },
@@ -68,10 +69,13 @@ module.exports = {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin("[name].css"),
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
             React:      'react',
-            PropTypes:  'react/lib/ReactPropTypes'
+            PropTypes:  'prop-types'
         })
     ],
 

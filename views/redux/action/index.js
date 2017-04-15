@@ -84,7 +84,6 @@ export function PostUser(user, password) {
             user: user
         });
 
-        console.log(JSON.stringify({user, password}));
         fetch('/api/users/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},

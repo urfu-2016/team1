@@ -1,0 +1,33 @@
+.logo {
+
+    & a {
+        display: block;
+        height: 68px;
+        transition: color 0.3s ease-in;
+        font-size: 36px;
+        text-decoration: none;
+        font-family: 'Righteous';
+        color: $blueviolet;
+        text-shadow: 0 0 10px rgba(0, 0, 0, .9);
+
+        &:hover {
+            color: $yellow;
+        }
+
+        & span {
+            display: inline-block;
+            transform: translateY(6px);
+            transition: color 0.3s ease-in;
+            line-height: 0.8;
+            font-size: 60px;
+            color: $yellow;
+        }
+
+        &:hover {
+
+            & span {
+                color: $blueviolet;
+            }
+        }
+    }
+}

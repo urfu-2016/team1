@@ -1,6 +1,5 @@
-'use strict';
-const express = require('express');
-const database = require('../model/database');
+import express from 'express';
+import database from '../model/database';
 
 const router = express.Router();
 
@@ -23,4 +22,4 @@ router.get('/name/:name', function (req, res) {
         });
 });
 
-module.exports = router;
+export default router;
