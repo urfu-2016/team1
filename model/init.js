@@ -1,6 +1,5 @@
-'use strict';
-const Sequelize = require('sequelize');
-const pg = require('pg');
+import Sequelize from 'sequelize';
+import pg from 'pg';
 
 function getSequelize(connectionString) {
     return new Sequelize(connectionString, {
@@ -8,7 +7,7 @@ function getSequelize(connectionString) {
     });
 }
 
-module.exports.init = function (callback) {
+export function init(callback) {
     const dbName = 'quest';
     const username = 'postgres';
     const password = 'qwer';
@@ -33,4 +32,4 @@ module.exports.init = function (callback) {
             client.end();
         });
     });
-};
+}

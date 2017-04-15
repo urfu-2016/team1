@@ -1,15 +1,13 @@
-'use strict';
+import express from 'express';
+import path from 'path';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import remoteStatic from 'remote-static';
 
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const remoteStatic = require('remote-static');
+import api from './api';
 
-const api = require('./api');
-
-//server-rendering
+// server-rendering
 import React from 'react'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -94,4 +92,4 @@ app.use(function (err, req, res) {
     res.render('error');
 });
 
-module.exports = app;
+export default app;

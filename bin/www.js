@@ -1,8 +1,6 @@
-'use strict';
-
-const app = require('../app');
-const debug = require('debug')('team1:server');
-const http = require('http');
+import app from '../app';
+import debug from 'debug';
+import http from 'http';
 
 let port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
@@ -58,5 +56,5 @@ function onListening() {
     const bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+    debug('team1:server')('Listening on ' + bind);
 }

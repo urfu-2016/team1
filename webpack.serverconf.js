@@ -24,12 +24,11 @@ module.exports = {
 
     target: 'node',
 
-    // keep node_module paths out of the bundle
     externals: fs.readdirSync(path.resolve(__dirname, 'node_modules')).concat([
         'react-dom/server'
     ]).reduce(function (ext, mod) {
-        ext[mod] = 'commonjs ' + mod
-        return ext
+        ext[mod] = 'commonjs ' + mod;
+        return ext;
     }, {}),
 
     node: {
@@ -83,30 +82,6 @@ module.exports = {
         aggregateTimeout: 100,
         ignored: /node_modules/
     }
-
-    // plugins: [
-    //     new webpack.optimize.UglifyJsPlugin({
-    //         compress: {
-    //             properties: true,
-    //             conditionals: true,
-    //             loops: true,
-    //             unused: true,
-    //             collapse_vars: true,
-    //             dead_code: true,
-    //             drop_console: true,
-    //             drop_debugger: true,
-    //             warnings: false,
-    //         }
-    //     }),
-    //     new webpack.NoEmitOnErrorsPlugin(),
-    //     new ExtractTextPlugin("[name].css"),
-    //     new webpack.ProvidePlugin({
-    //         ReactDOM:   'react-dom',
-    //         React:      'react',
-    //         PropTypes:  'react/lib/ReactPropTypes',
-    //     }),
-    //     new webpack.optimize.OccurrenceOrderPlugin()
-    // ]
 };
 
 
