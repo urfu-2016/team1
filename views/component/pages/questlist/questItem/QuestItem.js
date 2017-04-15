@@ -15,6 +15,11 @@ const Error = () => (
 );
 
 export default class QuestItem extends React.Component {
+    static propTypes = {
+        quests: PropTypes.array,
+        GetAllQuests: PropTypes.func.isRequired,
+    };
+
     componentDidMount() {
         this.props.GetAllQuests([]);
     }
@@ -45,9 +50,3 @@ export default class QuestItem extends React.Component {
     }
 }
 
-QuestItem.propTypes = {
-    quests: PropTypes.array,
-    GetAllQuests: PropTypes.func.isRequired,
-    isFetching: React.PropTypes.bool.isRequired,
-    error: React.PropTypes.bool.isRequired
-};

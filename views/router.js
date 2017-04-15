@@ -7,11 +7,11 @@ import Signin from './component/Signin';
 import Signup from './component/Signup';
 
 export default (
-        <Route path='/' component={App} >
-            <IndexRoute component={Questlist}/>
+    <Route path='/' component={App} >
+        <IndexRoute component={Questlist}/>
 
-            <Route path='/signin' component={Signin}/>
-            <Route path='/signup' component={Signup}/>
-            <Route path='/question/:id' components={Question}/>
-        </Route>
+        <Route path='/signin' component={Signin}/>
+        <Route path='/signup' component={Signup}/>
+        <Route path='/question/:id' components={Question}/>
+    </Route>
 );

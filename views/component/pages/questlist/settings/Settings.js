@@ -4,6 +4,11 @@ import { autobind } from 'core-decorators';
 import search from '../../../../source/img/search.svg';
 
 export default class Settings extends React.Component {
+    static propTypes = {
+        GetQuestsByFirstLetters: PropTypes.func.isRequired,
+        GetAllQuests: PropTypes.func.isRequired
+    };
+
     @autobind
     handleSubmit(event) {
         event.preventDefault();
@@ -19,9 +24,7 @@ export default class Settings extends React.Component {
                     <form className='questlist-settings__search' onSubmit={this.handleSubmit}>
                         <div>
                             <input
-                              ref={(input) => {
-                                  inputData = input;
-                              }}
+                              ref={(input) => {inputData = input;}}
                               onChange={() => {
                                   if (inputData.value) {
                                       GetQuestsByFirstLetters([], inputData.value);
@@ -49,8 +52,3 @@ export default class Settings extends React.Component {
         );
     }
 }
-
-Settings.propTypes = {
-    GetQuestsByFirstLetters: PropTypes.func.isRequired,
-    GetAllQuests: PropTypes.func.isRequired
-};

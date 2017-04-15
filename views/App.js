@@ -8,6 +8,10 @@ import Footer from './component/footer/Footer';
 const store = configureStore();
 
 export default class App extends React.Component {
+    static propTypes = {
+        children: PropTypes.element
+    };
+
     render() {
         return (
             <div>
@@ -22,7 +26,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-App.propTypes = {
-    children: PropTypes.element
-};
