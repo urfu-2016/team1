@@ -4,13 +4,13 @@ import { Link } from 'react-router';
 import plug from '../../../../source/img/plug.jpg';
 import spinner from '../../../../source/img/rolling.svg';
 
-const SetSpinner = () => (
+const Spinner = () => (
     <div className='spinner-container'>
         <img src={spinner} alt='loader spinner' className='spinner-container_spinner' />
     </div>
 );
 
-const SetError = () => (
+const Error = () => (
     <div className='error'>Не удалось получить данные с сервера.</div>
 );
 
@@ -21,8 +21,8 @@ export default class QuestItem extends React.Component {
 
     render() {
         const { quests, isFetching, error } = this.props;
-
-        let mapedQuestItem = quests.map(item => (
+        
+        let mappedQuestItem = quests.map(item => (
             <Link to='/question' key={item.id} className='questitem__item quest'>
                 <div style={{backgroundImage: 'url('+plug+')'}}>
                     <div className='quest__info'>
@@ -36,9 +36,9 @@ export default class QuestItem extends React.Component {
         return (
             <div className='questitem'>
                 <div className='questitem__row'>
-                    { isFetching ? <SetSpinner/> : null }
-                    { error ? <SetError/> : null }
-                    {mapedQuestItem}
+                    {isFetching ? <Spinner/> : null}
+                    {error ? <Error/> : null}
+                    {mappedQuestItem}
                 </div>
             </div>
         );
