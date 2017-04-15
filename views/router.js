@@ -13,7 +13,7 @@ export default (
 
             <Route path='/signin' component={Signin}/>
             <Route path='/signup' component={Signup}/>
-            <Route path='/question' components={Question}/>
+            <Route path='/question/:id' components={Question}/>
         </Route>
     </div>
 );
