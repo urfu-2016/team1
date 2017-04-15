@@ -24,11 +24,13 @@ export default class Header extends React.Component {
 
         return (
             <header className='header'>
-                <div className='header__logo'>
-                    <Logo />
-                </div>
+                <div className='header__wrap'>
+                    <div className='header__logo'>
+                        <Logo />
+                    </div>
 
-                {this.props.user.token ? registeredBlock : registrationBlock}
+                    {this.props.user.token ? registeredBlock : registrationBlock}
+                </div>
             </header>
         );
     }
