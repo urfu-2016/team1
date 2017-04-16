@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
 const config = {
     resolve: {
         modules: [path.resolve('./'), 'node_modules'],
@@ -16,15 +18,13 @@ const config = {
     module: {
         loaders: [
             {
-                test: /\.jsx?$/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                presets: [
-                        require.resolve('babel-preset-es2015'),
-                        require.resolve('babel-preset-react')
-                    ],
-                },
+                    presets: ['es2015', 'react', 'stage-0'],
+                    plugins: ['transform-runtime', 'transform-decorators-legacy']
+                }
             },
             {
                 test: /\.(c|pc)ss$/,
@@ -37,6 +37,19 @@ const config = {
             }
         ]
     },
+
+    plugins: [
+        new webpack.DefinePlugin({
+            __dirname: JSON.stringify(__dirname),
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
+        new webpack.ProvidePlugin({
+            ReactDOM:   'react-dom',
+            React:      'react',
+            PropTypes:  'prop-types'
+        })
+    ],
+
     externals: [nodeExternals()],
     target: 'node',
     devtool: '#inline-cheap-module-source-map'

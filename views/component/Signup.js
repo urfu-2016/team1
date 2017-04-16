@@ -33,9 +33,9 @@ export default class Signup extends React.Component {
             <div>
                 <h2>Signup</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <input ref={this.loginInput} placeholder='login'/>
-                    <input ref={this.passInput} placeholder='password'/>
-                    <input type='submit'/>
+                    <input ref={this.loginInput} placeholder='login' data-tid='signup-login-input'/>
+                    <input ref={this.passInput} placeholder='password' data-tid='signup-password-input'/>
+                    <input type='submit' data-tid='signup-login-button'/>
                 </form>
             </div>
         );

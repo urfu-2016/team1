@@ -1,5 +1,6 @@
 import express from 'express';
 import models from '../models';
+import { getQuestsByName } from './utils';
 
 const router = express.Router();
 
@@ -14,12 +15,10 @@ router.get('/id/:id', function (req, res) {
         .then(quest => res.json(quest));
 });
 
+
 router.get('/name/:name', function (req, res) {
-    const name = req.params.name;
     models.Quest.findAll()
-        .then(quests => {
-            res.json(quests.filter(quest => quest.title.toLowerCase().startsWith(name.toLowerCase())));
-        });
+        .then(quests => res.json(getQuestsByName(quests, req.params.name)));
 });
 
 export default router;
