@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
     var Quest = sequelize.define('Quest', {
-        name: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },

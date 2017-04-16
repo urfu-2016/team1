@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-    var QuestsPlaces = sequelize.define('QuestPlace', {
+    var QuestPlace = sequelize.define('QuestPlace', {
     }, {
         classMethods: {
             associate: function(models) {
@@ -11,5 +11,5 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    return QuestsPlaces;
+    return QuestPlace;
 };

@@ -12,15 +12,15 @@ data.users = [{
 }];
 
 data.quests = [{
-    name: 'Elmash',
+    title: 'Elmash',
     description: 'description quest1'
 },
 {
-    name: 'VIZ',
+    title: 'VIZ',
     description: 'description quest2'
 },
 {
-    name: 'CENTER',
+    title: 'CENTER',
     description: 'description quest3'
 }];
 

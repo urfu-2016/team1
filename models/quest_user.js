@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-    var QuestsUsers = sequelize.define('QuestsUsers', {
+    var QuestUser = sequelize.define('QuestUser', {
         owner: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
@@ -9,12 +9,12 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                models.Quest.belongsToMany(models.User, {through: 'QuestsUsers'});
-                models.User.belongsToMany(models.Quest, {through: 'QuestsUsers'});
+                models.Quest.belongsToMany(models.User, {through: 'QuestUser'});
+                models.User.belongsToMany(models.Quest, {through: 'QuestUser'});
             }
         }
     });
 
-    return QuestsUsers;
+    return QuestUser;
 };
 
