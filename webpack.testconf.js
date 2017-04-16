@@ -5,6 +5,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const CONNECTION_STRING = process.env.CONNECTION_STRING || 'sqlite://db.sqlite/';
 
 const config = {
     resolve: {
@@ -41,7 +42,8 @@ const config = {
     plugins: [
         new webpack.DefinePlugin({
             __dirname: JSON.stringify(__dirname),
-            NODE_ENV: JSON.stringify(NODE_ENV)
+            NODE_ENV: JSON.stringify(NODE_ENV),
+            CONNECTION_STRING: JSON.stringify(CONNECTION_STRING)
         }),
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
