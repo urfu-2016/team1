@@ -2,11 +2,6 @@
 
 module.exports = function(sequelize, DataTypes) {
     var Place = sequelize.define('Place',{
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV1,
-            primaryKey: true
-        },
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -16,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         },
         coordinates: {
-            type: DataTypes.GEOGRAPHY,
+            type: DataTypes.STRING,
             allowNull: false
         },
         photo: {

@@ -1,9 +1,9 @@
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
-const Sequelize = require("sequelize");
-const env = process.env.NODE_ENV || "development";
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const env = process.env.NODE_ENV || 'development';
 const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
 const localConnectionString = `postgres://${config.database.username}:${config.database.password}@${config.database.host}/${config.database.dbName}`;
 const connectionString = process.env.CONNECTION_STRING || localConnectionString;

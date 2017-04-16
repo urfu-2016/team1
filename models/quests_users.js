@@ -2,17 +2,12 @@
 
 module.exports = function(sequelize, DataTypes) {
     var QuestsUsers = sequelize.define('QuestsUsers', {
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV1,
-            primaryKey: true
-        },
         owner: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
         foundPlace: {
-            type: DataTypes.ARRAY(DataTypes.UUIDV1),
+            type: DataTypes.STRING,
             defaultValue: null
         }
     }, {
@@ -24,6 +19,6 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    return QuestsPlaces;
+    return QuestsUsers;
 };
 
