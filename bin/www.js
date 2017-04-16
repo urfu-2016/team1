@@ -1,14 +1,17 @@
 import app from '../app';
 import debug from 'debug';
 import http from 'http';
+import models from '../models';
 
 let port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const server = http.createServer(app);
 
-server.listen(port, function() {
-    console.log('Server started on ' +  port);
+models.sequelize.sync().then(function () {
+    server.listen(port, function() {
+        console.log('Server started on ' +  port);
+    });
 });
 
 server.on('error', onError);

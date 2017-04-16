@@ -1,0 +1,14 @@
+{
+    "development": {
+        "database" : {
+            "dbName": "quest",
+            "username": "postgres",
+            "password": "qwer",
+            "options": {
+                "charset": "utf8",
+                "dialect": "postgres",
+                "host": "localhost"
+            }
+        }
+    }
+}

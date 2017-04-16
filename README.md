@@ -23,4 +23,5 @@
 Настройка базы данных
 * [Скачать](https://www.postgresql.org/download/)
 * Настроить пользователя с login: postgres, pass: qwer
+* pgAdmin один из инструментов для управления БД: [Скачать](https://www.postgresql.org/ftp/pgadmin3/release/v1.22.2/)
 * Готово!
