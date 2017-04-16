@@ -61,7 +61,7 @@ module.exports = {
                 loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?importLoaders=1!postcss' })
             },
             {
-                test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+                test: /\.(png|jpg|svg|ttf|eot|woff|woff2|ico)$/,
                 loader: 'file?name=img/[name].[ext]'
             }
         ]

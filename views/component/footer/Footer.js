@@ -10,7 +10,7 @@ export default class Footer extends React.Component {
                     <Logo />
                 </div>
                 <div className='footer__copyright'>
-                    <span>© team1 - because we are so affective team))</span>
+                    <span>© team1 - because we are so effective team))</span>
                 </div>
             </div>
         );
