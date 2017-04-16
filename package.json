@@ -15,7 +15,7 @@
     "lint": "npm-run-all lint:*",
     "lint:style": "stylelint views/**/*.pcss",
     "lint:js": "eslint --ignore-path .gitignore .",
-    "test": "npm-run-all lint test:run",
+    "test": "npm-run-all lint test:run selenium:test",
     "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\"",
 
     "selenium:install": "./node_modules/.bin/selenium-standalone install",
