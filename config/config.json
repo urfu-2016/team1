@@ -4,9 +4,10 @@
             "dbName": "quest",
             "username": "postgres",
             "password": "qwer",
-            "host": "localhost",
             "options": {
-                "charset": "utf8"
+                "charset": "utf8",
+                "dialect": "postgres",
+                "host": "localhost"
             }
         }
     }

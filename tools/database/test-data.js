@@ -43,6 +43,16 @@ data.places = [{
     photo:  'url for load photo'
 }];
 
+data.photos = [{
+        url: "some url for photo 1"
+    },
+    {
+        url: "some url for photo 2"
+    },
+    {
+        url: "some url for photo 3"
+    }];
+
 data.comments = [{
     text: "some comment 1"
 },

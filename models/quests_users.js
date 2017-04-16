@@ -5,10 +5,6 @@ module.exports = function(sequelize, DataTypes) {
         owner: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
-        },
-        foundPlace: {
-            type: DataTypes.STRING,
-            defaultValue: null
         }
     }, {
         classMethods: {
