@@ -3,7 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 
 import app from '../../app';
-import database from '../../model/database';
+import models from '../../models';
 
 let should = chai.should();
 chai.use(chaiHttp);
@@ -11,19 +11,9 @@ chai.use(chaiHttp);
 describe('Api.Users', function () {
     let server = null;
 
-    function waitUntil(condition, done) {
-        (function wait() {
-            if (condition()) {
-                done();
-            } else {
-                setTimeout(wait, 500);
-            }
-        })();
-    }
-
     before(function (done) {
         server = http.createServer(app);
-        waitUntil(() => database.Quest, done);
+        models.sequelize.sync().then(() => done());
     });
 
     after(function () {
