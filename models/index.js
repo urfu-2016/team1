@@ -1,29 +1,25 @@
-"use strict";
-
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config.json')[env];
-const dbConfig = config.database;
 
-var sequelize = (env === 'development') ?
-    new Sequelize(dbConfig.dbName, dbConfig.username, dbConfig.password, dbConfig.options) :
-    new Sequelize(process.env.CONNECTION_STRING);
+const sequelize = new Sequelize(CONNECTION_STRING || process.env.CONNECTION_STRING);
 
-var models = {};
+const models = {
+    Comment: require('./comment'),
+    Like: require('./like'),
+    Photo: require('./photo'),
+    Place: require('./place'),
+    Quest: require('./quest'),
+    QuestPlace: require('./quest_place'),
+    QuestUser: require('./quest_user'),
+    User: require('./user')
+};
 
-models.Comment = require('./comment');
-models.Like = require('./like');
-models.Photo = require('./photo');
-models.Place = require('./place');
-models.Quest = require('./quest');
-models.QuestPlace = require('./quest_place');
-models.QuestUser = require('./quest_user');
-models.User = require('./user');
 
-var db = {};
+
+const db = {};
 
 Object.keys(models).forEach(function(modelName) {
-    var model = models[modelName](sequelize, Sequelize.DataTypes);
+    const model = models[modelName](sequelize, Sequelize.DataTypes);
     db[model.name] = model;
 });
 

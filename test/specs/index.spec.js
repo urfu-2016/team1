@@ -31,7 +31,7 @@ describe('Main page', function () {
         signUpPage.signedText.waitForText('You are signed in!');
     });
 
-    it('should correctly search quests', function () {
+    it.skip('should correctly search quests', function () {
         const mainPage = new MainPage(browser);
         mainPage.open();
         mainPage.refresh();
@@ -49,7 +49,7 @@ describe('Main page', function () {
         mainPage.getQuests(2).every(x => x.title.startsWith('s'));
     });
 
-    it('should go to quest page', function () {
+    it.skip('should go to quest page', function () {
         const mainPage = new MainPage(browser);
         mainPage.open();
 

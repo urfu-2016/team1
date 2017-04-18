@@ -6,13 +6,11 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
   - npm run selenium:install
-  - java -version
   - npm run selenium:start &
   - npm i
   - npm run dev &
   - sleep 10
 addons:
-  firefox: "52.0"
   apt:
     packages:
       - oracle-java8-installer

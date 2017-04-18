@@ -10,6 +10,8 @@ exports.config = {
         maxInstances: 5,
         browserName: 'firefox'
     }],
+    host: 'localhost',
+    port: 4444,
     sync: true,
     logLevel: 'silent',
     coloredLogs: true,
