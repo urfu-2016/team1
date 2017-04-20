@@ -8,7 +8,7 @@ exports.config = {
     maxInstances: 10,
     capabilities: [{
         maxInstances: 5,
-        browserName: 'firefox'
+        browserName: 'chrome'
     }],
     host: 'localhost',
     port: 4444,
