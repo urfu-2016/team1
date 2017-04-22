@@ -4,8 +4,10 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import remoteStatic from 'remote-static';
-
+import passport from 'passport';
 import api from './api';
+import session from 'express-session';
+import flash from 'connect-flash';
 
 // server-rendering
 import React from 'react'
@@ -19,6 +21,10 @@ import { initialState } from './views/redux/reducer/initialState';
 
 const app = express();
 
+const sessionOptions = {
+    "secret": 'secretword'
+};
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +33,11 @@ app.use(cookieParser());
 app.use('/', process.env.NODE_ENV === 'production'
     ? remoteStatic('https://team1.surge.sh')
     : express.static(path.join(__dirname, 'public')));
+
+app.use(session(sessionOptions));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 app.use('/api', api);
 

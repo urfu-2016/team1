@@ -3,6 +3,7 @@ import { SOME_QUESTS_REQUEST, SOME_QUESTS_SUCCESS, SOME_QUESTS_ERROR} from '../c
 import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR} from '../constants/questinfo';
 import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_ERROR } from '../constants/users';
 import { SET_SPINNER, REMOVE_SPINNER } from '../constants/spinner';
+import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
 
 export function GetAllQuests(quests) {
     return (dispatch) => {
@@ -96,5 +97,25 @@ export function PostUser(user, password) {
                     token: data.token
                 })
             });
+    }
+}
+
+export function getUserInfo() {
+    return dispatch => {
+        dispatch({
+            type: USER_INFO_REQUEST,
+            user: []
+        });
+
+        fetch('/api/auth/user', {
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(user => {
+                dispatch({
+                    type: USER_INFO_SUCCESS,
+                    user: user
+                });
+            })
     }
 }

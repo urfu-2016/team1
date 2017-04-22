@@ -1,25 +1,39 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as pageActions from '../../redux/action/index';
 
 import Logo from '../logo/Logo';
 
-@connect(state => ({user: state.RegisterUser}))
+const mapStateToProps = state => ({user: state.GetUserInfo});
+const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Header extends React.Component {
     static propTypes = {
-        user: React.PropTypes.object
+        user: React.PropTypes.object.isRequired,
+        pageActions: React.PropTypes.object.isRequired
     };
 
+    componentDidMount() {
+        this.props.pageActions.getUserInfo();
+    }
+
     render() {
+        const user = this.props.user.user;
         const registrationBlock = (
             <div className='header__registration registration'>
-                <Link to='/signin' className='registration__item registration__item_signin' data-tid='header-signin-link'>Sign in</Link> |
-                <Link to='/signup' className='registration__item registration__item_signup' data-tid='header-signup-link'>Sign up</Link>
+                <Link to='/signin' className='registration__item registration__item_signin'>Sign in</Link> |
+                <Link to='/signup' className='registration__item registration__item_signup'>Sign up</Link>
             </div>
         );
 
         const registeredBlock = (
-            <div className='header__registration registration' data-tid='header-signedin'>You are signed in!</div>
+            <div className='header__registration registration'>
+                Hello! {user.username}
+                <a href='api/auth/log-out'>Выйти</a>
+            </div>
         );
 
         return (
@@ -29,7 +43,7 @@ export default class Header extends React.Component {
                         <Logo />
                     </div>
 
-                    {this.props.user.token ? registeredBlock : registrationBlock}
+                    {user.username ? registeredBlock : registrationBlock}
                 </div>
             </header>
         );
