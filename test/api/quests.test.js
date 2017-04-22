@@ -1,31 +1,24 @@
-import http from 'http';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import { bdd, runTest } from 'mocha-classes';
 
-import app from '../../app';
-import models from '../../models';
+import ApiTestBase from './ApiTestBase';
 
-let should = chai.should();
 chai.use(chaiHttp);
+const should = chai.should();
+const { describe, it } = bdd;
 
-describe('Api.Quests', function () {
-    let server = null;
-
-    before(function (done) {
-        server = http.createServer(app);
-        models.sequelize.sync().then(() => done());
-    });
-
-    after(function () {
-        server.close();
-    });
-
-    it('should return all quests', done => {
-        chai.request(server)
+@describe('Api.Quests')
+class ApiQuestsTest extends ApiTestBase {
+    @it('should return all quests')
+    returnAllQuests(done) {
+        chai.request(this.server)
             .get('/api/quests')
             .end((err, res) => {
                 res.should.have.status(200);
                 done();
             });
-    });
-});
+    }
+}
+
+runTest(new ApiQuestsTest());
