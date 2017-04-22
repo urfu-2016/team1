@@ -2,8 +2,21 @@ import { expect } from 'chai';
 
 import MainPage from './pages/MainPage';
 import SignupPage from './pages/SignupPage'
+import models from '../../models';
 
 describe('Main page', function () {
+    before(function () {
+        let quests = [
+            {title: 'FirstQuest', description: 'no description'},
+            {title: 'SecondQuest', description: 'second description'},
+            {title: 'ThirdQuest', description: 'really long long long long long long long long long long long long long long long long long long long long long long long long long description'},
+            {title: 'FourthQuest', description: 'no description'},
+            {title: 'FifthQuest', description: 'no description'},
+            {title: 'SixthQuest', description: 'no description'},
+        ];
+        models.Quest.truncate().then(() => models.Quest.bulkCreate(quests));
+    });
+
     it('should have banner', function () {
         const mainPage = new MainPage(browser);
         mainPage.open();
@@ -31,7 +44,7 @@ describe('Main page', function () {
         signUpPage.signedText.waitForText('You are signed in!');
     });
 
-    it.skip('should correctly search quests', function () {
+    it('should correctly search quests', function () {
         const mainPage = new MainPage(browser);
         mainPage.open();
         mainPage.refresh();
@@ -49,7 +62,7 @@ describe('Main page', function () {
         mainPage.getQuests(2).every(x => x.title.startsWith('s'));
     });
 
-    it.skip('should go to quest page', function () {
+    it('should go to quest page', function () {
         const mainPage = new MainPage(browser);
         mainPage.open();
 

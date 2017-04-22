@@ -2,6 +2,8 @@ require("babel-core/register")({
     presets: ['es2015']
 });
 
+global.CONNECTION_STRING = 'sqlite://db.sqlite/';
+
 exports.config = {
     specs: ['./test/specs/**/*.spec.js'],
     exclude: [],
