@@ -1,17 +1,13 @@
 .git
 .idea
+.tmp
+node_modules
+errorShots
 
+db.sqlite
 *.log
 npm-debug.log*
 
-node_modules
-.tmp
-
-errorShots
-
-public/*
-
-build/
-
+public
 bin/
 !bin/www.js
