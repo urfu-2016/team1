@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const CONNECTION_STRING = process.env.CONNECTION_STRING || 'sqlite://db.sqlite/';
 
 function pathResolve(yourPath) {
     return path.resolve(__dirname, yourPath);
@@ -70,7 +71,8 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin("[name].css"),
         new webpack.DefinePlugin({
-            NODE_ENV: JSON.stringify(NODE_ENV)
+            NODE_ENV: JSON.stringify(NODE_ENV),
+            CONNECTION_STRING: JSON.stringify(CONNECTION_STRING)
         }),
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',

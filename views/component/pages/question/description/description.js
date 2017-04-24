@@ -18,10 +18,10 @@ export default class QuestionDescription extends React.Component {
                     <button>Принять участие</button>
                 </div>
                 <div className='question-info'>
-                    <h2 className='question-info_title'>Квест {this.props.title}</h2>
+                    <h2 className='question-info_title' data-tid='quest-title'>Квест {this.props.title}</h2>
                     <div className='question-info_text'>
-                        <span>Описание: {this.props.description}</span>
-                        <span>Автор: имя автора</span>
+                        <span data-tid='quest-description'>Описание: {this.props.description}</span>
+                        <span data-tid='quest-author'>Автор: имя автора</span>
                     </div>
                 </div>
             </div>

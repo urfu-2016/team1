@@ -8,9 +8,7 @@ function createToken(user) {
 }
 
 router.post('/register', function (req, res) {
-    console.log(req.body.user, req.body.password);
     let token = createToken(req.body.user);
-    console.log(token);
     res.status(201).send({token});
 });
 

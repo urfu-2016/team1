@@ -1,7 +1,15 @@
 import { expect } from 'chai';
 
+import { getQuestsByName } from '../../api/utils';
+
 describe('Autocomplete', function () {
     it('should work', function () {
-        expect(2).to.equal(2);
+        const withTitle = x => ({title: x});
+        expect(getQuestsByName([
+            'abc',
+            'def',
+            'qwer',
+            'abd'
+        ].map(withTitle), 'ab')).to.deep.equal(['abc', 'abd'].map(withTitle));
     })
 });

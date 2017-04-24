@@ -1,3 +1,22 @@
+dist: trusty
 language: node_js
 node_js:
 - '6'
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install chromium-chromedriver
+before_script:
+  - "export PATH=$PATH:/usr/lib/chromium-browser/"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+  - npm run selenium:install
+  - npm run selenium:start &
+  - npm i
+  - npm run dev &
+  - sleep 10
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+      - oracle-java8-set-default

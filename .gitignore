@@ -1,15 +1,13 @@
 .git
 .idea
-
-*.log
-
-node_modules
 .tmp
+node_modules
+errorShots
 
-public/*
+db.sqlite
+*.log
+npm-debug.log*
 
-build/
-
+public
 bin/
 !bin/www.js
-npm-debug.log*
