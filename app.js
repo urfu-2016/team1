@@ -59,10 +59,9 @@ function renderFullPage(html, preloadedState) {
     <html>
       <head>
         <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width">
+        <meta name="viewport" content="width=device-width">
         <title>we are effective team</title>
-        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="/index.css">
       </head>
       <body>
