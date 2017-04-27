@@ -1,35 +1,26 @@
 const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'development';
 
 const sequelize = new Sequelize(CONNECTION_STRING || process.env.CONNECTION_STRING);
 
 const models = {
-    Comment: require('./comment'),
-    Like: require('./like'),
-    Photo: require('./photo'),
-    Place: require('./place'),
-    Quest: require('./quest'),
-    QuestPlace: require('./quest_place'),
-    QuestUser: require('./quest_user'),
-    User: require('./user')
+    Comment: require('./comment')(sequelize, Sequelize.DataTypes),
+    Like: require('./like')(sequelize, Sequelize.DataTypes),
+    Photo: require('./photo')(sequelize, Sequelize.DataTypes),
+    Place: require('./place')(sequelize, Sequelize.DataTypes),
+    Quest: require('./quest')(sequelize, Sequelize.DataTypes),
+    QuestPlace: require('./quest_place')(sequelize, Sequelize.DataTypes),
+    QuestUser: require('./quest_user')(sequelize, Sequelize.DataTypes),
+    User: require('./user')(sequelize, Sequelize.DataTypes),
+    EntityComment: require('./entity_comment')(sequelize, Sequelize.DataTypes)
 };
 
-
-
-const db = {};
-
 Object.keys(models).forEach(function(modelName) {
-    const model = models[modelName](sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-});
-
-Object.keys(db).forEach(function(modelName) {
-    if ("associate" in db[modelName]) {
-        db[modelName].associate(db);
+    if ('associate' in models[modelName]) {
+        models[modelName].associate(models);
     }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+models.sequelize = sequelize;
+models.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = models;

@@ -21,7 +21,9 @@ class ApiQuestsTest extends ApiTestBase {
             {title: 'FifthQuest', description: 'no description'},
             {title: 'sixthQuest', description: 'no description'}
         ];
-        models.Quest.truncate().then(() => models.Quest.bulkCreate(this.quests).then(() => done()));
+        models.Quest.truncate()
+            .then(() => models.Quest.bulkCreate(this.quests))
+            .then(() => done());
     }
 
     @it('should return all quests')

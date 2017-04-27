@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as pageActions from '../../../redux/action/index';
-import QuestionBanner from './questionBanner/questionBanner';
+import QuestionBanner from './banner/banner';
 import QuestionDescription from './description/description';
-import QuestionTask from './questionTask/questionTask';
+import QuestionTask from './task/task';
+import QuestionComments from './comments/comments';
 
 const mapStateToProps = state => ({questInfo: state.GetQuestInfo});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
@@ -29,6 +30,7 @@ export default class Question extends React.Component {
                 <QuestionBanner />
                 <QuestionDescription description={questInfo.description} title={questInfo.title}/>
                 <QuestionTask />
+                <QuestionComments />
             </main>
         );
     }
