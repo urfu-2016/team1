@@ -2,15 +2,14 @@ import http from 'http';
 import { bdd } from 'mocha-classes';
 
 import app from '../../app';
-import models from '../../models';
+import DatabaseTestBase from './DatabaseTestBase';
 
 const { before, after } = bdd;
 
-export default class ApiTestBase {
+export default class ApiTestBase extends DatabaseTestBase {
     @before
-    setUp(done) {
+    setUpServer() {
         this.server = http.createServer(app);
-        models.sequelize.sync().then(() => done());
     }
 
     @after

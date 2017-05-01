@@ -1,14 +1,14 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-    var Photo = sequelize.define('Photo',{
+    const Photo = sequelize.define('Photo', {
         url: {
             type: DataTypes.STRING,
             allowNull: false
         }
     }, {
         classMethods: {
-            associate: function(models) {
+            associate: function (models) {
                 Photo.belongsTo(models.User);
                 Photo.belongsTo(models.Quest);
                 Photo.belongsTo(models.Place);

@@ -2,7 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { bdd, runTest } from 'mocha-classes';
 
-import ApiTestBase from './ApiTestBase';
+import ApiTestBase from '../bases/ApiTestBase';
 
 chai.use(chaiHttp);
 const should = chai.should();

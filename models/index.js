@@ -11,7 +11,6 @@ const models = {
     QuestPlace: require('./quest_place')(sequelize, Sequelize.DataTypes),
     QuestUser: require('./quest_user')(sequelize, Sequelize.DataTypes),
     User: require('./user')(sequelize, Sequelize.DataTypes),
-    EntityComment: require('./entity_comment')(sequelize, Sequelize.DataTypes)
 };
 
 Object.keys(models).forEach(function(modelName) {
