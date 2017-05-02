@@ -22,6 +22,7 @@ export default class Header extends React.Component {
 
     render() {
         const user = this.props.user.user;
+        console.info(user);
         const registrationBlock = (
             <div className='header__registration registration'>
                 <Link to='/signin' className='registration__item registration__item_signin'>Sign in</Link> |
@@ -42,7 +43,6 @@ export default class Header extends React.Component {
                     <div className='header__logo'>
                         <Logo />
                     </div>
-
                     {user.username ? registeredBlock : registrationBlock}
                 </div>
             </header>

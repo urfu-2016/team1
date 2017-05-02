@@ -6,9 +6,7 @@ const router = express.Router();
 router.get('/vk',
     passport.authenticate('vk', {
         scope: ['email']
-    }),
-    function (req, res) {
-    });
+    }));
 
 router.get('/vk/callback',
     passport.authenticate('vk', {
@@ -16,6 +14,19 @@ router.get('/vk/callback',
     }),
     function (req, res) {
         console.info(res.email);
+        res.redirect('/');
+    });
+
+router.get('/fb',
+    passport.authenticate('fb', {
+        scope: ['email']
+    }));
+
+router.get('/fb/callback',
+    passport.authenticate('fb', {
+        failureRedirect: '/'
+    }),
+    function (req, res) {
         res.redirect('/');
     });
 
