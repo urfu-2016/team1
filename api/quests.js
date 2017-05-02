@@ -13,7 +13,17 @@ router.get('/', function (req, res) {
 router.get('/id/:id', function (req, res) {
     const id = req.params.id;
     models.Quest.findById(id)
-        .then(quest => res.json(quest));
+        .then(quest => {
+            res.json(quest);
+        });
+});
+
+router.get('/place/id/:id', function (req, res) {
+    const id = req.params.id;
+    models.Quest.findById(id)
+        .then(places => {
+            return places.getPlaces();
+        }).then(place => {res.json(place)});
 });
 
 

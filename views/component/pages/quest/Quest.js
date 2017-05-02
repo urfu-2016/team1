@@ -28,7 +28,7 @@ export default class Question extends React.Component {
         return (
             <main>
                 <QuestionBanner />
-                <QuestionDescription description={questInfo.description} title={questInfo.title}/>
+                <QuestionDescription id={questInfo.id} description={questInfo.description} title={questInfo.title}/>
                 <QuestionTask />
                 <QuestionComments questId={this.props.params.id}/>
             </main>

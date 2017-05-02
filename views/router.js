@@ -2,10 +2,12 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './App';
 import Questlist from './component/pages/questlist/Questlist';
-import Question from './component/pages/question/Question';
+import Quest from './component/pages/quest/Quest';
 import Signin from './component/Signin';
 import Signup from './component/Signup';
 import Profile from './component/pages/profile/Profile';
+import CreateQuest from './component/pages/createquest/CreateQuest';
+import PlayQuest from './component/pages/playquest/PlayQuest';
 
 export default (
     <Route path='/' component={App} >
@@ -13,7 +15,9 @@ export default (
 
         <Route path='/signin' component={Signin}/>
         <Route path='/signup' component={Signup}/>
-        <Route path='/question/:id' components={Question}/>
+        <Route path='/quest/:id' components={Quest}/>
+        <Route path='/quest/:id/letsstarttoplay' components={PlayQuest}/>
+        <Route path='/createquest' components={CreateQuest}/>
         <Route path='/profile/:id' component={Profile}/>
     </Route>
 );

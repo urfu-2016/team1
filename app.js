@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import remoteStatic from 'remote-static';
 import passport from 'passport';
+const fileUpload = require('express-fileupload');
+
 import api from './api';
 import session from 'express-session';
 import flash from 'connect-flash';
@@ -21,6 +23,7 @@ import { initialState } from './views/redux/reducer/initialState';
 
 const app = express();
 
+// app.use(fileUpload());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

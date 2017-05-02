@@ -1,5 +1,7 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import search from '../../../../source/img/search.svg';
 
