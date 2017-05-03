@@ -22,6 +22,7 @@ export default class DatabaseTestBase {
 
     createCommentsForQuest(comments, questId) {
         return models.Comment.truncate()
-            .then(() => comments.forEach(comment => models.Comment.create(comment).then(x => x.setQuest(questId))));
+            .then(() => Promise.all(comments.map(x => models.Comment.create(x))))
+            .then(commentModels => Promise.all(commentModels.map(x => x.setQuest(questId))));
     }
 }

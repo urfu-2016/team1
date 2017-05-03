@@ -4,6 +4,7 @@ import { autobind } from 'core-decorators';
 export default class QuestionComments extends React.Component {
     static propTypes = {
         comments: React.PropTypes.array,
+        pageActions: React.PropTypes.object
     };
 
     constructor() {
