@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import remoteStatic from 'remote-static';
 import passport from 'passport';
-const fileUpload = require('express-fileupload');
+import cloudinary from 'cloudinary';
 
 import api from './api';
 import session from 'express-session';
@@ -23,7 +23,12 @@ import { initialState } from './views/redux/reducer/initialState';
 
 const app = express();
 
-// app.use(fileUpload());
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

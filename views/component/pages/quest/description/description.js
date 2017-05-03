@@ -17,7 +17,7 @@ export default class QuestionDescription extends React.Component {
                     <div className='question-photo_wrapper'>
                         <img src={questionBanner} alt='Фото квеста' />
                     </div>
-                    <Link to={`/quest/${this.props.id}/letsstarttoplay`} className='button'>Принять участие</Link>
+                    <Link to={`/quest/${this.props.id}/start`} className='button'>Принять участие</Link>
                 </div>
                 <div className='question-info'>
                     <h2 className='question-info_title' data-tid='quest-title'>Квест {this.props.title}</h2>

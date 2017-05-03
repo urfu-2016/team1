@@ -21,6 +21,5 @@ Object.keys(models).forEach(function(modelName) {
 
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;
-console.log(sequelize.models.Quest.title);
 
 module.exports = models;

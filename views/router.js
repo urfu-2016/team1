@@ -16,7 +16,7 @@ export default (
         <Route path='/signin' component={Signin}/>
         <Route path='/signup' component={Signup}/>
         <Route path='/quest/:id' components={Quest}/>
-        <Route path='/quest/:id/letsstarttoplay' components={PlayQuest}/>
+        <Route path='/quest/:id/start' components={PlayQuest}/>
         <Route path='/createquest' components={CreateQuest}/>
         <Route path='/profile/:id' component={Profile}/>
     </Route>
