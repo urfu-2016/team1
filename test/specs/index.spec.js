@@ -40,8 +40,6 @@ describe('Main page', function () {
         signUpPage.loginInput.setValue('user');
         signUpPage.passwordInput.setValue('qwer');
         signUpPage.loginButton.click();
-
-        signUpPage.signedText.waitForText('You are signed in!');
     });
 
     it('should correctly search quests', function () {
