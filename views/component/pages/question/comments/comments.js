@@ -22,11 +22,11 @@ export default class QuestionComments extends React.Component {
 
     render() {
         console.log(this.props.comments);
-        let comments = this.props.comments.comments.map(comment => (
-            <div key={comment.id}>{comment.text}</div>
+        let comments = this.props.comments.comments.map((comment, i) => (
+            <div className='comment' data-tid={`comment-${i}-text`} key={comment.id}>{comment.text}</div>
         ));
         return (
-            <div className='questionBanner'>
+            <div className='comments'>
                 {comments}
                 <form onSubmit={this.handleSubmit}>
                     <input ref={this.commentInput} placeholder='comment' data-tid='comment-text-input'/>

@@ -21,4 +21,8 @@ export default class QuestPage extends PageBase {
     waitAuthor(author) {
         this.questAuthor.waitForText(author);
     }
+
+    getComment(index) {
+        return this.getElementByTestId(`comment-${index}-text`);
+    }
 }

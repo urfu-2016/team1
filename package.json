@@ -17,10 +17,12 @@
     "lint:js": "eslint --ignore-path .gitignore .",
     "test": "npm-run-all lint test:run selenium:test",
     "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\"",
+    "test:run:single": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\" -g",
 
     "selenium:install": "./node_modules/.bin/selenium-standalone install",
     "selenium:start": "./node_modules/.bin/selenium-standalone start",
     "selenium:test": "./node_modules/.bin/wdio wdio.conf.js",
+    "selenium:test:single": "./node_modules/.bin/wdio wdio.conf.js --mochaOpts.grep",
 
     "prestart": "npm i",
     "start": "NODE_ENV=production npm-run-all prod:*",
