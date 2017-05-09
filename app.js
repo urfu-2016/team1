@@ -21,10 +21,6 @@ import { initialState } from './views/redux/reducer/initialState';
 
 const app = express();
 
-const sessionOptions = {
-    "secret": 'secretword'
-};
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,7 +30,10 @@ app.use('/', process.env.NODE_ENV === 'production'
     ? remoteStatic('https://team1.surge.sh')
     : express.static(path.join(__dirname, 'public')));
 
-app.use(session(sessionOptions));
+app.use(session({
+    'secret': process.env.SESSION_SECRET
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

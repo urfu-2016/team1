@@ -1,9 +1,9 @@
 import React from 'react';
-import {Link, IndexLink} from 'react-router';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as pageActions from '../../redux/action/index';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import * as pageActions from '../../redux/action/index';
 import Logo from '../logo/Logo';
 
 const mapStateToProps = state => ({user: state.GetAuthorizationInfo});
@@ -22,7 +22,6 @@ export default class Header extends React.Component {
 
     render() {
         const user = this.props.user.user;
-        console.info(user);
 
         const registrationBlock = (
             <div className='header__registration registration'>
@@ -40,7 +39,7 @@ export default class Header extends React.Component {
                 </label>
                 <input type='checkbox' id='reg-id' className='options-id'/>
                 <div className='registered__options'>
-                    <a className='registered__options_option' href={'/profile/' + user.id}>Мой профиль</a>
+                    <a className='registered__options_option' href={`/profile/${user.id}`}>Мой профиль</a>
                     <a className='registered__options_option' href='/api/auth/log-out'>Выйти</a>
                 </div>
             </div>
