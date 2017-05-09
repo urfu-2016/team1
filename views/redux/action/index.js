@@ -1,9 +1,9 @@
 import { ALL_QUESTS_REQUEST, ALL_QUESTS_SUCCESS, ALL_QUESTS_ERROR } from '../constants/allquests';
 import { SOME_QUESTS_REQUEST, SOME_QUESTS_SUCCESS, SOME_QUESTS_ERROR} from '../constants/somequests';
 import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR} from '../constants/questinfo';
-import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_ERROR } from '../constants/users';
 import { SET_SPINNER, REMOVE_SPINNER } from '../constants/spinner';
 import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
+import { AUTH_INFO_REQUEST, AUTH_INFO_SUCCESS } from '../constants/auth';
 
 export function GetAllQuests(quests) {
     return (dispatch) => {
@@ -78,32 +78,10 @@ export function GetQuestInfo(id) {
     }
 }
 
-export function PostUser(user, password) {
+export function getAuthorizationInfo() {
     return dispatch => {
         dispatch({
-            type: REGISTER_USER_REQUEST,
-            user: user
-        });
-
-        fetch('/api/users/register', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({user, password})
-        })
-            .then(response => response.json())
-            .then(data => {
-                dispatch({
-                    type: REGISTER_USER_SUCCESS,
-                    token: data.token
-                })
-            });
-    }
-}
-
-export function getUserInfo() {
-    return dispatch => {
-        dispatch({
-            type: USER_INFO_REQUEST,
+            type: AUTH_INFO_REQUEST,
             user: []
         });
 
@@ -113,8 +91,26 @@ export function getUserInfo() {
             .then(response => response.json())
             .then(user => {
                 dispatch({
-                    type: USER_INFO_SUCCESS,
+                    type: AUTH_INFO_SUCCESS,
                     user: user
+                });
+            })
+    }
+}
+
+export function getUserInfo(id) {
+    return dispatch => {
+        dispatch({
+            type: USER_INFO_REQUEST,
+            profile: []
+        });
+
+        fetch(`/api/users/id/${id}`)
+            .then(response => response.json())
+            .then(profile => {
+                dispatch({
+                    type: USER_INFO_SUCCESS,
+                    profile: profile
                 });
             })
     }

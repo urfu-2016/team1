@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/vk',
     passport.authenticate('vk', {
-        scope: ['email']
+        scope: ['photos']
     }));
 
 router.get('/vk/callback',
@@ -13,7 +13,6 @@ router.get('/vk/callback',
         failureRedirect: '/'
     }),
     function (req, res) {
-        console.info(res.email);
         res.redirect('/');
     });
 

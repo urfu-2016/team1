@@ -18,19 +18,20 @@ passport.use('fb', new AuthFBStrategy({
         profileFields: [
             'id',
             'displayName',
-            'profileUrl',
-            'photos'
+            'photos',
+            'cover'
         ]
     },
 
     function (accessToken, refreshToken, profile, done) {
+        console.info(profile)
         models.User.findOrCreate({
             where: {fbId: profile.id.toString()},
             defaults: {username: profile.displayName, photo: profile.photos[0].value, isAdmin: false}
         })
-            .spread((user, created) => {
+            .spread(user => {
                 return done(null, {
-                        fbId: user.fbId,
+                        id: user.id,
                         username: user.username,
                         photo: user.photo
                     }
@@ -42,17 +43,19 @@ passport.use('fb', new AuthFBStrategy({
 passport.use('vk', new AuthVKStrategy({
         clientID: VK_ID,
         clientSecret: VK_SECRET,
-        callbackURL: '/api/auth/vk/callback'
+        callbackURL: '/api/auth/vk/callback',
+        profileFields: ['photo_max']
     },
 
     function (accessToken, refreshToken, profile, done) {
+        console.info(profile);
         models.User.findOrCreate({
             where: {vkId: profile.id.toString()},
             defaults: {username: profile.displayName, photo: profile.photos[0].value, isAdmin: false}
         })
-            .spread((user, created) => {
+            .spread(user => {
                 return done(null, {
-                        vkId: user.vkId,
+                        id: user.id,
                         username: user.username,
                         photo: user.photo
                     }

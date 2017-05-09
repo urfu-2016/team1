@@ -1,5 +1,4 @@
 import React from 'react'
-import vk from '../source/img/soc-auth/vk.png';
 
 export default class Signin extends React.Component {
     render() {

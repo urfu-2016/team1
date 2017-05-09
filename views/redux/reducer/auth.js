@@ -1,16 +1,16 @@
-import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
+import { AUTH_INFO_REQUEST, AUTH_INFO_SUCCESS } from '../constants/auth';
 
 const initialState = {
     user: []
 };
 
-export default function GetUserInfo(state = initialState, action) {
+export default function GetAuthorizationInfo(state = initialState, action) {
     switch (action.type) {
-        case USER_INFO_REQUEST:
+        case AUTH_INFO_REQUEST:
             return Object.assign({}, state, {
                 user: action.user
             });
-        case USER_INFO_SUCCESS:
+        case AUTH_INFO_SUCCESS:
             return Object.assign({}, state, {
                 user: action.user
             });
