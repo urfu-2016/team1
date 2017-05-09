@@ -8,6 +8,8 @@ export default class QuestPage extends PageBase {
         this.questTitle = this.getElementByTestId('quest-title');
         this.questDescription = this.getElementByTestId('quest-description');
         this.questAuthor = this.getElementByTestId('quest-author');
+        this.commentInput = this.getElementByTestId('comment-text-input');
+        this.commentSubmitButton = this.getElementByTestId('comment-submit-button');
     }
 
     waitTitle(title) {

@@ -4,7 +4,8 @@ import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR} from '../cons
 import { SET_SPINNER, REMOVE_SPINNER } from '../constants/spinner';
 import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
 import { AUTH_INFO_REQUEST, AUTH_INFO_SUCCESS } from '../constants/auth';
-import { GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_ERROR } from '../constants/comments';
+import { GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_ERROR,
+         POST_COMMENT_REQUEST, POST_COMMENT_SUCCESS, POST_COMMENT_ERROR } from '../constants/comments';
 
 export function GetAllQuests(quests) {
     return (dispatch) => {
@@ -145,13 +146,14 @@ export function PostComment(comment, questId) {
         fetch(`/api/comments/quest/${questId}`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({comment})
+            body: JSON.stringify({text: comment})
         })
             .then(response => response.json())
             .then(data => {
                 dispatch({
                     type: POST_COMMENT_SUCCESS,
-                    error: data.error
+                    error: data.error,
+                    comment: data
                 })
             });
     }

@@ -1,9 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { autobind } from 'core-decorators';
 
+import * as pageActions from '../../../../redux/action/index';
+
+const mapStateToProps = state => ({comments: state.GetComments});
+const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class QuestionComments extends React.Component {
     static propTypes = {
-        comments: React.PropTypes.array,
+        questId: React.PropTypes.string,
+        comments: React.PropTypes.object,
         pageActions: React.PropTypes.object
     };
 
@@ -12,12 +21,17 @@ export default class QuestionComments extends React.Component {
         this.commentInput = ref => {this._commentInput = ref;};
     }
 
+    componentDidMount() {
+        this.props.pageActions.GetComments(this.props.questId);
+    }
+
     @autobind
-    handleSubmit() {
+    handleSubmit(event) {
         event.preventDefault();
-        const { PostUser } = this.props.pageActions;
-        PostUser(this._loginInput.value, this._passInput.value);
-        console.log(`Отправлено значение: ${this._loginInput.value}, ${this._passInput.value}`);
+
+        const { PostComment } = this.props.pageActions;
+        PostComment(this._commentInput.value, this.props.questId);
+        this._commentInput.value = '';
     }
 
     render() {

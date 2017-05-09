@@ -21,13 +21,24 @@ class QuestPageTest extends DatabaseTestBase {
     }
 
     @it('should have comments')
-    testBanner() {
+    testComments() {
         const mainPage = new MainPage(browser);
         mainPage.open();
 
         const questPage = mainPage.goToQuest(0);
         questPage.getComment(0).waitForText('cool quest');
         questPage.getComment(1).waitForText('awesome quests');
+    }
+
+    @it('should post comment')
+    postComment() {
+        const mainPage = new MainPage(browser);
+        mainPage.open();
+
+        const questPage = mainPage.goToQuest(0);
+        questPage.commentInput.setValue('added comment');
+        questPage.commentSubmitButton.click();
+        questPage.getComment(2).waitForText('added comment');
     }
 }
 

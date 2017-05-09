@@ -8,9 +8,9 @@ global.CONNECTION_STRING = 'sqlite://db.sqlite/';
 exports.config = {
     specs: ['./test/specs/**/*.spec.js'],
     exclude: [],
-    maxInstances: 10,
+    maxInstances: 1,
     capabilities: [{
-        maxInstances: 5,
+        maxInstances: 1,
         browserName: 'chrome'
     }],
     host: 'localhost',

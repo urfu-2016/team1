@@ -1,6 +1,7 @@
 import express from 'express';
 
 import models from '../models';
+import { catchAsync } from './utils';
 
 const router = express.Router();
 
@@ -9,11 +10,10 @@ router.get('/quest/:id', function (req, res) {
         .then(comments => res.json(comments));
 });
 
-router.post('/quest/:id', function (req, res) {
-    models.Comment.create(req.body)
-        .then(comment => comment.setQuest(req.params.id))
-        .then(() => res.status(201).send({'error': null}))
-        .catch(err => res.status(500).send({'error': err}));
-});
+router.post('/quest/:id', catchAsync(201, async req => {
+    let comment = await models.Comment.create(req.body);
+    comment.setQuest(req.params.id);
+    return comment;
+}));
 
 export default router;
