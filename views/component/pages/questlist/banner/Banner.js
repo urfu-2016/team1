@@ -11,7 +11,7 @@ export default class Banner extends React.Component {
                 <span>
                     Просто создай себе настроение!
                 </span>
-                <Link to='/createquest'>Create your quest</Link>
+                <Link to='/createquest' data-tid='createquest-link'>Create your quest</Link>
             </div>
         );
     }

@@ -21,7 +21,7 @@ exports.config = {
     bail: 0,
     screenshotPath: './errorShots/',
     baseUrl: 'http://localhost:3000',
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 3,
     framework: 'mocha',
