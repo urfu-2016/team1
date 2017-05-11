@@ -69,7 +69,6 @@
     "express-session": "1.15.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.0",
-    "jsonwebtoken": "7.3.0",
     "mocha": "3.1.0",
     "mocha-classes": "fakefeik/mocha-classes#release",
     "mocha-webpack": "0.7.0",
