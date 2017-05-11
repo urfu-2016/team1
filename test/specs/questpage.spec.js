@@ -30,6 +30,18 @@ class QuestPageTest extends DatabaseTestBase {
         questPage.getComment(1).waitForText('awesome quests');
     }
 
+    @it('should not post empty comment')
+    emptyComment() {
+        const mainPage = new MainPage(browser);
+        mainPage.open();
+
+        const questPage = mainPage.goToQuest(0);
+        questPage.commentInput.setValue('');
+        questPage.commentSubmitButton.click();
+
+        expect(browser.isExisting(questPage.getComment(2).selector)).to.be.false;
+    }
+
     @it('should post comment')
     postComment() {
         const mainPage = new MainPage(browser);

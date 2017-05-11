@@ -29,8 +29,12 @@ export default class QuestionComments extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
+        if(!this._commentInput.value || this._commentInput.value.length === 0)
+            return;
+
         const { PostComment } = this.props.pageActions;
         PostComment(this._commentInput.value, this.props.questId);
+
         this._commentInput.value = '';
     }
 
