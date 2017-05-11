@@ -1,14 +1,18 @@
-import { REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_ERROR } from '../constants/users';
+import { USER_INFO_SUCCESS, USER_INFO_REQUEST } from '../constants/users';
 
 const initialState = {
-    token: null
+    profile: []
 };
 
-export default function RegisterUser(state = initialState, action) {
+export default function GetQuestInfo(state = initialState, action) {
     switch (action.type) {
-        case REGISTER_USER_SUCCESS:
+        case USER_INFO_REQUEST:
             return Object.assign({}, state, {
-                token: action.token
+                profile: action.profile
+            });
+        case USER_INFO_SUCCESS:
+            return Object.assign({}, state, {
+                profile: action.profile
             });
         default:
             return state;

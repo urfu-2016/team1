@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import GetQuests from './allquests';
 import GetQuestInfo from './questinfo';
-import RegisterUser from './users'
+import GetUserInfo from './users';
+import GetAuthorizationInfo from './auth';
 
 export default combineReducers({
     GetQuests,
-    RegisterUser,
-    GetQuestInfo
+    GetUserInfo,
+    GetQuestInfo,
+    GetAuthorizationInfo
 });
