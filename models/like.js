@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function(sequelize, DataTypes) {
-    var Like = sequelize.define('Like', {}, {
+module.exports = function(sequelize) {
+    const Like = sequelize.define('Like', {}, {
         classMethods: {
-            associate: function(models) {
+            associate: function (models) {
                 Like.belongsTo(models.User);
             }
         }

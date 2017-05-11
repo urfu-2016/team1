@@ -1,12 +1,17 @@
 import { expect } from 'chai';
+import { bdd, runTest } from 'mocha-classes';
 
 import MainPage from './pages/MainPage';
 import SignupPage from './pages/SignupPage'
-import models from '../../models';
+import DatabaseTestBase from '../bases/DatabaseTestBase';
 
-describe('Main page', function () {
-    before(function () {
-        let quests = [
+const { describe, before, it } = bdd;
+
+@describe('Main Page')
+class MainPageTest extends DatabaseTestBase {
+    @before
+    setUpDatabase() {
+        this.quests = [
             {title: 'FirstQuest', description: 'no description'},
             {title: 'SecondQuest', description: 'second description'},
             {title: 'ThirdQuest', description: 'really long long long long long long long long long long long long long long long long long long long long long long long long long description'},
@@ -14,24 +19,27 @@ describe('Main page', function () {
             {title: 'FifthQuest', description: 'no description'},
             {title: 'SixthQuest', description: 'no description'},
         ];
-        models.Quest.truncate().then(() => models.Quest.bulkCreate(quests));
-    });
+        this.createQuests(this.quests);
+    }
 
-    it('should have banner', function () {
+    @it('should have banner')
+    testBanner() {
         const mainPage = new MainPage(browser);
         mainPage.open();
         const title = mainPage.getTitle();
 
         expect(title).to.equal('we are effective team');
-    });
+    }
 
-    it('should move to sign in', function () {
+    @it('should move to sign in')
+    testSignIn() {
         const mainPage = new MainPage(browser);
         mainPage.open();
         mainPage.goToSignIn();
-    });
+    }
 
-    it('should go to sign up', function (){
+    @it('should go to sign up')
+    testSignUp() {
         const mainPage = new MainPage(browser);
         mainPage.open();
 
@@ -40,9 +48,10 @@ describe('Main page', function () {
         signUpPage.loginInput.setValue('user');
         signUpPage.passwordInput.setValue('qwer');
         signUpPage.loginButton.click();
-    });
+    }
 
-    it('should correctly search quests', function () {
+    @it('should correctly search quests')
+    testSearch() {
         const mainPage = new MainPage(browser);
         mainPage.open();
         mainPage.refresh();
@@ -58,9 +67,10 @@ describe('Main page', function () {
         mainPage.searchQuests('s');
         mainPage.waitQuests(2);
         mainPage.getQuests(2).every(x => x.title.startsWith('s'));
-    });
+    }
 
-    it('should go to quest page', function () {
+    @it('should go to quest page')
+    testQuestPage() {
         const mainPage = new MainPage(browser);
         mainPage.open();
 
@@ -70,5 +80,7 @@ describe('Main page', function () {
         questPage.waitTitle('Квест FirstQuest');
         questPage.waitDescription('Описание: no description');
         questPage.waitAuthor('Автор: имя автора');
-    });
-});
+    }
+}
+
+runTest(new MainPageTest());

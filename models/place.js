@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-    var Place = sequelize.define('Place',{
+    const Place = sequelize.define('Place', {
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         classMethods: {
-            associate: function(models) {
+            associate: function (models) {
                 Place.hasMany(models.Comment);
             }
         }

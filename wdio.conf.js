@@ -1,5 +1,6 @@
 require("babel-core/register")({
-    presets: ['es2015']
+    presets: ['es2015', 'stage-0'],
+    plugins: ['transform-runtime', 'transform-decorators-legacy']
 });
 
 global.CONNECTION_STRING = 'sqlite://db.sqlite/';
@@ -7,9 +8,9 @@ global.CONNECTION_STRING = 'sqlite://db.sqlite/';
 exports.config = {
     specs: ['./test/specs/**/*.spec.js'],
     exclude: [],
-    maxInstances: 10,
+    maxInstances: 1,
     capabilities: [{
-        maxInstances: 5,
+        maxInstances: 1,
         browserName: 'chrome'
     }],
     host: 'localhost',

@@ -4,6 +4,8 @@ import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR} from '../cons
 import { SET_SPINNER, REMOVE_SPINNER } from '../constants/spinner';
 import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
 import { AUTH_INFO_REQUEST, AUTH_INFO_SUCCESS } from '../constants/auth';
+import { GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_ERROR,
+         POST_COMMENT_REQUEST, POST_COMMENT_SUCCESS, POST_COMMENT_ERROR } from '../constants/comments';
 
 export function GetAllQuests(quests) {
     return (dispatch) => {
@@ -61,7 +63,7 @@ export function GetQuestsByFirstLetters(quests, searchQuery) {
 }
 
 export function GetQuestInfo(id) {
-    return (dispatch) => {
+    return dispatch => {
         dispatch({
             type: QUEST_INFO_REQUEST,
             questInfo: []
@@ -94,7 +96,7 @@ export function getAuthorizationInfo() {
                     type: AUTH_INFO_SUCCESS,
                     user: user
                 });
-            })
+                })
     }
 }
 
@@ -103,7 +105,7 @@ export function getUserInfo(id) {
         dispatch({
             type: USER_INFO_REQUEST,
             profile: []
-        });
+            });
 
         fetch(`/api/users/id/${id}`)
             .then(response => response.json())
@@ -113,5 +115,46 @@ export function getUserInfo(id) {
                     profile: profile
                 });
             })
+    }
+}
+
+export function GetComments(questId) {
+    return dispatch => {
+        dispatch({
+            type: GET_COMMENTS_REQUEST,
+            comments: []
+        });
+
+        fetch(`/api/comments/quest/${questId}`)
+            .then(response => response.json())
+            .then(info => {
+                dispatch({
+                    type: GET_COMMENTS_SUCCESS,
+                    comments: info
+                })
+            });
+    };
+}
+
+export function PostComment(comment, questId) {
+    return dispatch => {
+        dispatch({
+            type: POST_COMMENT_REQUEST,
+            comment: comment
+        });
+
+        fetch(`/api/comments/quest/${questId}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({text: comment})
+        })
+            .then(response => response.json())
+            .then(data => {
+                dispatch({
+                    type: POST_COMMENT_SUCCESS,
+                    error: data.error,
+                    comment: data
+                })
+            });
     }
 }

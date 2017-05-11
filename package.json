@@ -17,10 +17,12 @@
     "lint:js": "eslint --ignore-path .gitignore .",
     "test": "npm-run-all lint test:run selenium:test",
     "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\"",
+    "test:run:single": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\" -g",
 
     "selenium:install": "./node_modules/.bin/selenium-standalone install",
     "selenium:start": "./node_modules/.bin/selenium-standalone start",
     "selenium:test": "./node_modules/.bin/wdio wdio.conf.js",
+    "selenium:test:single": "./node_modules/.bin/wdio wdio.conf.js --mochaOpts.grep",
 
     "prestart": "npm i",
     "start": "NODE_ENV=production npm-run-all prod:*",
@@ -67,9 +69,8 @@
     "express-session": "1.15.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.0",
-    "jsonwebtoken": "7.3.0",
     "mocha": "3.1.0",
-    "mocha-classes": "0.1.2",
+    "mocha-classes": "fakefeik/mocha-classes#release",
     "mocha-webpack": "0.7.0",
     "morgan": "~1.7.0",
     "normalize.css": "5.0.0",
