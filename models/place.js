@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
     const Place = sequelize.define('Place', {
-        name: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        photo: {
+        path: {
             type: DataTypes.STRING,
             allowNull: false
         }

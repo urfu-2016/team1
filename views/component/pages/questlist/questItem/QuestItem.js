@@ -30,8 +30,8 @@ export default class QuestItem extends React.Component {
         const { quests, isFetching, error } = this.props;
 
         let mappedQuestItem = quests.map((item, index) => (
-            <Link to={'/question/' + item.id} key={item.id} className='questitem__item quest' data-tid={`quest-${index}-link`}>
-                <div style={{backgroundImage: 'url('+plug+')'}}>
+            <Link to={'/quest/' + item.id} key={item.id} className='questitem__item quest' data-tid={`quest-${index}-link`}>
+                <div style={{backgroundImage: item.banner ? 'url('+item.banner+')' : 'url('+plug+')'}}>
                     <div className='quest__info'>
                         <h2 className='quest__info_title' data-tid={`quest-${index}-title`}>{item.title}</h2>
                         <p className='quest__info_description' data-tid={`quest-${index}-description`}>{item.description}</p>

@@ -1,5 +1,6 @@
 import PageBase from './PageBase';
 import QuestPage from './QuestPage';
+import CreateQuestPage from './CreateQuestPage';
 
 export default class MainPage extends PageBase {
     constructor(browser) {
@@ -13,8 +14,16 @@ export default class MainPage extends PageBase {
         this.searchBar.setValue(name);
     }
 
-    waitQuests(questsNumber) {
-        while (this.quests.value.length < questsNumber) {
+    refreshUntilQuestsPresent(questsCount) {
+        browser.waitUntil(() => {
+            this.refresh();
+            this.quests = browser.elements('.questitem__item');
+            return this.quests.value.length >= questsCount;
+        }, 20000, `Expected ${questsCount} Quests on MainPage, got ${this.quests.value.length}`, 500);
+    }
+
+    waitQuests(questsCount) {
+        while (this.quests.value.length < questsCount) {
             this.quests = browser.elements('.questitem__item');
         }
     }
@@ -62,5 +71,10 @@ export default class MainPage extends PageBase {
     goToQuest(questIndex) {
         this.browser.click(this.getElementByTestId(`quest-${questIndex}-link`).selector);
         return new QuestPage(this.browser, questIndex);
+    }
+
+    goToCreqteQuest() {
+        this.browser.click(this.getElementByTestId('createquest-link').selector);
+        return new CreateQuestPage(this.browser);
     }
 }

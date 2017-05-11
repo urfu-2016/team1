@@ -2,6 +2,14 @@ export function getQuestsByName(quests, nameStart) {
     return quests.filter(quest => quest.title.toLowerCase().startsWith(nameStart.toLowerCase()));
 }
 
+export function makeMap(keyFn) {
+    return function (arr) {
+        let obj = {};
+        arr.forEach(x => obj[keyFn(x)] = x);
+        return obj;
+    };
+}
+
 export function catchAsync(statusCode, fn) {
     return function (req, res) {
         fn(req, res)

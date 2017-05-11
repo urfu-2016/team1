@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import remoteStatic from 'remote-static';
 import passport from 'passport';
+import cloudinary from 'cloudinary';
+
 import api from './api';
 import session from 'express-session';
 import flash from 'connect-flash';
@@ -20,6 +22,12 @@ import router from './views/router';
 import { initialState } from './views/redux/reducer/initialState';
 
 const app = express();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

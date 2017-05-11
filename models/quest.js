@@ -9,6 +9,10 @@ module.exports = function(sequelize, DataTypes) {
         description: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        banner: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     }, {
         classMethods: {

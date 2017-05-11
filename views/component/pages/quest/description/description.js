@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import questionBanner from '../../../../source/img/plug.jpg';
 
 export default class QuestionDescription extends React.Component {
     static propTypes = {
+        id: React.PropTypes.number,
         description: React.PropTypes.string,
         title: React.PropTypes.string
     };
@@ -15,7 +17,7 @@ export default class QuestionDescription extends React.Component {
                     <div className='question-photo_wrapper'>
                         <img src={questionBanner} alt='Фото квеста' />
                     </div>
-                    <button>Принять участие</button>
+                    <Link to={`/quest/${this.props.id}/start`} className='button'>Принять участие</Link>
                 </div>
                 <div className='question-info'>
                     <h2 className='question-info_title' data-tid='quest-title'>Квест {this.props.title}</h2>

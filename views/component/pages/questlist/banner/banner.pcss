@@ -10,7 +10,7 @@
     }
 
     @media (--mobile-mobile-sm) {
-        display: none;
+        display: block;
     }
 
     & img {
@@ -38,4 +38,24 @@
             margin-top: -82px;
         }
     }
+
+    & a {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        display: block;
+        width: 250px;
+        height: 40px;
+        margin-left: -125px;
+        line-height: 40px;
+        text-align: center;
+        border: 2px solid $yellow;
+        border-radius: 4px;
+        color: $yellow;
+        font-size: 30px;
+        font-family: 'Poiret One', sans-serif;
+        font-weight: 600;
+        text-decoration: none;
+    }
 }
+
