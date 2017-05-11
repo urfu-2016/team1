@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         path: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }
     }, {
         classMethods: {

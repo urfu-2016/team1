@@ -53,7 +53,7 @@ router.post('/create', upload.any(), catchAsync(200, async req => {
         title: place.title,
         description: place.description,
         coordinates: place.coordinates,
-        path: files[place.file].path
+        path: files[place.file] ? files[place.file].path : ''
     })));
 
     await Promise.all(placeModels.map(place => questModel.addPlace(place)));

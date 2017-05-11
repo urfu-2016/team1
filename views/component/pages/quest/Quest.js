@@ -20,16 +20,19 @@ export default class Question extends React.Component {
     };
 
     componentDidMount() {
-        this.props.pageActions.GetQuestInfo(this.props.params.id);
+        const { GetQuestInfo, GetTasks } = this.props.pageActions;
+        GetQuestInfo(this.props.params.id);
+        GetTasks(this.props.params.id);
     }
 
     render() {
-        const questInfo = this.props.questInfo.questInfo;
+        const { questInfo, questTask } = this.props.questInfo;
+
         return (
             <main>
                 <QuestionBanner />
                 <QuestionDescription id={questInfo.id} description={questInfo.description} title={questInfo.title}/>
-                <QuestionTask />
+                <QuestionTask questTask={questTask} />
                 <QuestionComments questId={this.props.params.id}/>
             </main>
         );
