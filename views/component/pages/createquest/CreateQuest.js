@@ -5,6 +5,10 @@ import { autobind } from 'core-decorators';
 
 import * as pageActions from '../../../redux/action/index';
 
+import TextInput from '../../controls/Text';
+import TextareaInput from '../../controls/Textarea';
+import FileInput from '../../controls/File';
+
 const mapStateToProps = state => ({quests: state.GetQuests});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
@@ -29,45 +33,32 @@ export default class CreateQuest extends React.Component {
 
     render() {
         let newTask = [...Array(this.state.tasks)].map((_, i) => (
-            <div key={i} className='quest-task'>
-                <label className='quest-data__label quest-data__label_required'
-                       htmlFor={`places[${i}][title]`}>Заголовок задачи квеста
-                    <input className='quest-data__input quest-data__input_title'
-                           type='text'
-                           name={`places[${i}][title]`}
-                           id={`places[${i}][title]`}
-                           placeholder={`The best quest number ${i}`}
-                           required='required'
-                           data-tid={`place-${i}-title-input`}
-                           onBlur={(e) => {
-                               e.target.value ? e.target.parentNode.classList.add('quest-data__label_validation--true')
-                                   : e.target.parentNode.classList.remove('quest-data__label_validation--true')}} />
-                </label>
-                <label className='quest-data__label quest-data__input_desc'
-                       htmlFor={`places[${i}][description]`}>Описание задачи квеста
-                    <textarea className='quest-data__textarea quest-data__textarea_desc'
-                              type='text'
-                              id={`places[${i}][description]`}
-                              name={`places[${i}][description]`}
-                              cols='50'
-                              rows='6'
-                              placeholder={`The best description of quest number ${i}`}
-                              data-tid={`place-${i}-description-input`}
-                              onBlur={(e) => {
-                                  e.target.value ? e.target.parentNode.classList.add('quest-data__label_validation--true')
-                                      : e.target.parentNode.classList.remove('quest-data__label_validation--true')}} />
-                </label>
-                <label className='quest-data__label_file'
-                       htmlFor={`places[${i}][photo]`}>Добавить/сделать фото задачи квеста
-                    <input className='quest-data__file'
-                           type='file'
-                           name={`places[${i}][photo]`}
-                           id={`places[${i}][photo]`}
-                           accept='image/*'
-                           data-tid={`place-${i}-banner-input`}
-                           onChange={(e) => {e.target.files.length > 0 ? e.target.parentNode.classList.add('quest-data__label_validation--true')
-                               : e.target.parentNode.classList.remove('quest-data__label_validation--true')}} />
-                </label>
+            <div key={i}>
+                <TextInput
+                    label={'Заголовок задачи квеста'}
+                    id={`place-label-${i}`}
+                    name={`places[${i}][title]`}
+                    tid={`place-${i}-title-input`}
+                    placeholder={`The best quest with number ${i}`}
+                    required={'required'}
+                />
+
+                <TextareaInput
+                    label={'Описание задачи квеста'}
+                    id={`place-input-${i}`}
+                    name={`places[${i}][description]`}
+                    cols={50}
+                    rows={10}
+                    tid={`place-${i}-description-input`}
+                    placeholder={`The best description of the quest with number ${i}`}
+                />
+
+                <FileInput
+                    label={'Добавить/сделать фото задачи квеста'}
+                    id={`place-file-${i}`}
+                    name={`places[${i}][description]`}
+                    tid={`place-${i}-banner-input`}
+                />
                 <input type='hidden' name={`places[${i}][file]`} value={`places[${i}][photo]`}/>
                 <input type='hidden' name={`places[${i}][coordinates]`}/>
             </div>
@@ -75,59 +66,45 @@ export default class CreateQuest extends React.Component {
 
         let addButton = (<button className='quest-data__more' onClick={this.addMoreTasks} data-tid='add-place-button'>Добавить задание</button>);
 
+        const questTitle = {
+            labelClass: 'label',
+            inputClass: 'input',
+            label: 'Название квеста',
+            id: 'title',
+            name: 'quest[title]',
+            tid: 'quest-title-input',
+            placeholder: '"The best quest ever"',
+            required: 'required'
+        };
+
+        const questDesc = {
+            labelClass: 'label',
+            textareaClass: 'textarea',
+            label: 'Название квеста',
+            id: 'description',
+            cols: 50,
+            rows: 10,
+            name: 'quest[description]',
+            tid: 'quest-description-input',
+            placeholder: '"The best quest ever"'
+        };
+
+        const questFile = {
+            label: 'Добавить/сделать фото задачи квеста',
+            id: 'banner',
+            name: 'quest[banner]',
+            tid: 'quest-banner-input'
+        };
+
         return (
             <div className='quest-data-wrap'>
                 <form className='quest-data' onSubmit={this.submitForm}>
                     <div>
                         <h2 className='quest-data__title'>Инфа о квесте</h2>
-                        <label
-                            className='quest-data__label quest-data__label_required'
-                            htmlFor='title'>Название квеста
-                            <input
-                                className='quest-data__input quest-data__input_title'
-                                type='text'
-                                name='quest[title]'
-                                id='title'
-                                placeholder='"The best quest ever"'
-                                data-tid='quest-title-input'
-                                required='required'
-                                onBlur={(e) => {
-                                    e.target.value ? e.target.parentNode.classList.add('quest-data__label_validation--true')
-                                        : e.target.parentNode.classList.remove('quest-data__label_validation--true')}} />
-                        </label>
-                        <label
-                            className='quest-data__label quest-data__label_desc'
-                            htmlFor='description'>Описание квеста
-                            <textarea
-                                className='quest-data__textarea'
-                                type='text'
-                                name='quest[description]'
-                                id='description'
-                                cols='50'
-                                rows='10'
-                                data-tid='quest-description-input'
-                                placeholder='"The best quest ever"'
-                                onBlur={(e) => {
-                                    e.target.value ? e.target.parentNode.classList.add('quest-data__label_validation--true')
-                                        : e.target.parentNode.classList.remove('quest-data__label_validation--true')}} />
-                        </label>
-                        <label
-                            className='quest-data__label quest-data__label_file'
-                            htmlFor='0-banner'>Добавить баннер квеста
-                            <input
-                                className='quest-data__file quest-data__input_file'
-                                type='file'
-                                id='banner'
-                                name='quest[banner]'
-                                data-tid='quest-banner-input'
-                                accept='image/*'
-                                onChange={(e) => {e.target.files.length > 0 ? e.target.parentNode.classList.add('quest-data__label_validation--true')
-                                    : e.target.parentNode.classList.remove('quest-data__label_validation--true')}}/>
-                        </label>
-                        <input
-                            type='hidden'
-                            name={`quest[file]`}
-                            value={`quest[banner]`}/>
+                        <TextInput {...questTitle} />
+                        <TextareaInput {...questDesc} />
+                        <FileInput {...questFile}/>
+                        <input type='hidden' name={`quest[file]`} value={`quest[banner]`}/>
                     </div>
 
                     <div>
