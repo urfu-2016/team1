@@ -5,7 +5,10 @@ export default class PageBase {
 
         this.signInLink = this.getElementByTestId('header-signin-link');
         this.signUpLink = this.getElementByTestId('header-signup-link');
-        this.signedText = this.getElementByTestId('header-signedin');
+        this.username = this.getElementByTestId('logged-in-user-username');
+        this.profileLink = this.getElementByTestId('user-profile-link');
+        this.logoutLink = this.getElementByTestId('logout-link');
+        this.userDropdown = this.getElementByTestId('user-dropdown');
 
         this.footerText = browser.element('.footer__copyright');
     }
@@ -20,6 +23,10 @@ export default class PageBase {
 
     refresh() {
         this.browser.refresh();
+    }
+
+    click(element) {
+        this.browser.click(element.selector);
     }
 
     getTitle() {

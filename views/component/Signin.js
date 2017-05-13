@@ -17,8 +17,8 @@ export default class Signin extends React.Component {
                     </div>
                     <h2>Либо войдите используя соцсети</h2>
                     <div className='soc-auth'>
-                        <a className='soc-auth_vk' href='/api/auth/vk'/>
-                        <a className='soc-auth_fb' href='/api/auth/fb'/>
+                        <a className='soc-auth_vk' href='/api/auth/vk' data-tid='vk-login-link'/>
+                        <a className='soc-auth_fb' href='/api/auth/fb' data-tid='fb-login-link'/>
                     </div>
                 </form>
             </div>

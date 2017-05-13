@@ -32,15 +32,15 @@ export default class Header extends React.Component {
 
         const registeredBlock = (
             <div className='header__registered registered' data-tid='header-signedin'>
-                <label htmlFor='reg-id' className='registered__wrap'>
-                    <span>{user.username}</span>
+                <label htmlFor='reg-id' className='registered__wrap' data-tid='user-dropdown'>
+                    <span data-tid='logged-in-user-username'>{user.username}</span>
                     <img src={user.photo}/>
                     ⯆
                 </label>
                 <input type='checkbox' id='reg-id' className='options-id'/>
                 <div className='registered__options'>
-                    <a className='registered__options_option' href={`/profile/${user.id}`}>Мой профиль</a>
-                    <a className='registered__options_option' href='/api/auth/log-out'>Выйти</a>
+                    <a className='registered__options_option' href={`/profile/${user.id}`} data-tid='user-profile-link'>Мой профиль</a>
+                    <a className='registered__options_option' href='/api/auth/log-out' data-tid='logout-link'>Выйти</a>
                 </div>
             </div>
         );

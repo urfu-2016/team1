@@ -69,12 +69,12 @@ export default class MainPage extends PageBase {
     }
 
     goToQuest(questIndex) {
-        this.browser.click(this.getElementByTestId(`quest-${questIndex}-link`).selector);
+        this.click(this.getElementByTestId(`quest-${questIndex}-link`));
         return new QuestPage(this.browser, questIndex);
     }
 
     goToCreqteQuest() {
-        this.browser.click(this.getElementByTestId('createquest-link').selector);
+        this.click(this.getElementByTestId('createquest-link'));
         return new CreateQuestPage(this.browser);
     }
 }

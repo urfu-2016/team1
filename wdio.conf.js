@@ -27,6 +27,7 @@ exports.config = {
     framework: 'mocha',
     reporters: ['dot'],
     mochaOpts: {
-        ui: 'bdd'
+        ui: 'bdd',
+        timeout: 30000
     },
 };
