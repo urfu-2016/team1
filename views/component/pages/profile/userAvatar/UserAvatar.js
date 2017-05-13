@@ -1,19 +1,19 @@
 import React from 'react';
-import { autobind } from 'core-decorators';
 
 export default class UserAvatar extends React.Component {
     static propTypes = {
-        photo: React.PropTypes.string.isRequired
+        photo: React.PropTypes.string,
+        fbId: React.PropTypes.string
     };
 
     render() {
-        const { photo } = this.props;
+        const { photo, fbId } = this.props;
+        let size;
+        fbId ? size = 320 : size = 400;
 
         return (
             <div className='userAvatar'>
-                <div className='userAvatar_photo-wrapper'>
-                    <img src={photo} alt='user-photo'/>
-                </div>
+                <img src={photo} alt='user-photo' width={size} height={size}/>
             </div>
         );
     }

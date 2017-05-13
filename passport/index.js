@@ -13,7 +13,7 @@ passport.use('fb', new AuthFBStrategy({
             'displayName',
             'photos',
             'picture.width(50).height(50).as(photo)',
-            'picture.width(400).height(400).as(fullPhoto)'
+            'picture.width(300).height(300).as(fullPhoto)'
         ]
     },
 
@@ -45,7 +45,6 @@ passport.use('vk', new AuthVKStrategy({
     },
 
     function (accessToken, refreshToken, profile, done) {
-        console.info(profile);
         models.User.findOrCreate({
             where: {vkId: profile.id.toString()},
             defaults: {
