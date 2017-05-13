@@ -8,7 +8,7 @@ import DatabaseTestBase from '../bases/DatabaseTestBase';
 
 const { describe, before, it } = bdd;
 
-@describe('Create Quest Page')
+@describe('Login Test')
 class LoginTest extends DatabaseTestBase {
     @before
     setUpDatabase() {
