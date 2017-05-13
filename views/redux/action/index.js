@@ -1,6 +1,6 @@
 import { ALL_QUESTS_REQUEST, ALL_QUESTS_SUCCESS, ALL_QUESTS_ERROR } from '../constants/allquests';
 import { SOME_QUESTS_REQUEST, SOME_QUESTS_SUCCESS, SOME_QUESTS_ERROR} from '../constants/somequests';
-import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR} from '../constants/questinfo';
+import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR, TASKS_REQUEST, TASKS_SUCCESS, TASKS_ERROR} from '../constants/questinfo';
 import { SET_SPINNER, REMOVE_SPINNER } from '../constants/spinner';
 import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
 import { AUTH_INFO_REQUEST, AUTH_INFO_SUCCESS } from '../constants/auth';
@@ -80,8 +80,31 @@ export function GetQuestInfo(id) {
     }
 }
 
-export function getAuthorizationInfo() {
-    return dispatch => {
+export function GetTasks(id) {
+    return (dispatch) => {
+        dispatch({
+            type: TASKS_REQUEST,
+            questTask: []
+        });
+
+        fetch(`/api/quests/place/id/${id}`)
+            .then(response => response.json())
+            .then(tasks => {
+                dispatch({
+                    type: TASKS_SUCCESS,
+                    questTask: tasks
+                });
+            })
+            .catch(err => {
+                dispatch({
+                    type: TASKS_ERROR,
+                    error: true
+                })
+            });
+    }
+}
+
+export function getAuthorizationInfo() {    return dispatch => {
         dispatch({
             type: AUTH_INFO_REQUEST,
             user: []

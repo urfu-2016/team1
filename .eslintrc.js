@@ -29,6 +29,7 @@ module.exports = {
     "react/prop-types": "error",
     "react/jsx-indent": 0,
     "react/self-closing-comp": "off",
-    "react/jsx-space-before-closing": "off"
+    "react/jsx-space-before-closing": "off",
+    "react/jsx-indent-props": "off"
   }
 };

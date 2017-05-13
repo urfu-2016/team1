@@ -1,32 +1,6 @@
-label, input, textarea {
-    display: block;
-    outline: none;
-}
+.custom {
 
-.quest-data {
-    width: 1360px;
-    margin: 0 auto;
-    padding: 40px 30px;
-    overflow: hidden;
-
-    @media (--all) {
-        width: auto;
-    }
-
-    &-wrap {
-        background-color: rgba(50, 55, 57, .9);
-    }
-
-    &__title {
-        font-size: 28px;
-        font-weight: 600;
-        text-transform: uppercase;
-        text-align: center;
-        color: $blueviolet;
-        text-shadow: 0 0 10px rgba(0, 0, 0, .9);
-    }
-
-    & label {
+    &-label {
         width: 500px;
         margin: 20px 10px 10px;
         font-size: 20px;
@@ -35,7 +9,7 @@ label, input, textarea {
         text-shadow: 0 0 10px rgba(0, 0, 0, .9);
     }
 
-    &__textarea, &__input {
+    &-textarea, &-input {
         width: 100%;
         padding: 10px;
         margin-top: 10px;
@@ -75,7 +49,11 @@ label, input, textarea {
         }
     }
 
-    &__label {
+    &-textarea {
+        resize: none;
+    }
+
+    &-label {
         position: relative;
 
         &_required {
@@ -119,7 +97,7 @@ label, input, textarea {
         }
     }
 
-    &__file {
+    &-file {
         position: relative;
         height: auto;
         margin-top: 20px;
@@ -147,7 +125,7 @@ label, input, textarea {
         }
     }
 
-    &__more, &__submit {
+    &-more, &-submit {
         width: 170px;
         height: 40px;
         margin-top: 40px;
@@ -172,7 +150,7 @@ label, input, textarea {
         }
     }
 
-    &__more {
+    &-more {
         position: relative;
         width: 200px;
         text-align: left;
