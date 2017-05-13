@@ -1,12 +1,14 @@
+import { checkTextInput } from './utils';
+
 export default function TextareaInput(props) {
 
     return (
         <label
             className={`custom-label ${props.labelClass}`}
-            htmlFor={props.id}
-            >{props.label}
+            htmlFor={props.id}>
+            {props.label}
             <textarea
-                className={`custom-input ${props.textareaClass}`}
+                className={`custom-textarea ${props.textareaClass}`}
                 type='text'
                 name={props.name}
                 id={props.id}
@@ -15,9 +17,7 @@ export default function TextareaInput(props) {
                 placeholder={props.placeholder}
                 data-tid={props.tid}
                 required={props.required}
-                onBlur={(e) => {
-                    e.target.value ? e.target.parentNode.classList.add('custom-label_validation--true')
-                        : e.target.parentNode.classList.remove('custom-label_validation--true')}} />
+                onBlur={checkTextInput} />
         </label>
     );
 };

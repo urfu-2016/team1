@@ -46,14 +46,14 @@ router.post('/create', upload.any(), catchAsync(200, async req => {
     let questModel = await models.Quest.create({
         title: quest.title,
         description: quest.description,
-        banner: files[quest.file].path
+        banner: files[quest.file] ? files[quest.file].path : 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg'
     });
 
     let placeModels = await Promise.all(places.map(place => models.Place.create({
         title: place.title,
         description: place.description,
         coordinates: place.coordinates,
-        path: files[place.file] ? files[place.file].path : ''
+        path: files[place.file] ? files[place.file].path : 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg'
     })));
 
     await Promise.all(placeModels.map(place => questModel.addPlace(place)));

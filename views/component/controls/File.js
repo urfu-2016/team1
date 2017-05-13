@@ -1,10 +1,12 @@
+import { checkFileInput } from './utils';
+
 export default function FileInput(props) {
 
     return (
         <label
             className={`custom-label ${props.labelClass}`}
-            htmlFor={props.id}
-        >{props.label}
+            htmlFor={props.id}>
+            {props.label}
             <input
                 className={`custom-file ${props.inputClass}`}
                 type='file'
@@ -12,8 +14,7 @@ export default function FileInput(props) {
                 name={props.name}
                 id={props.id}
                 data-tid={props.tid}
-                onChange={(e) => {e.target.files.length > 0 ? e.target.parentNode.classList.add('custom-label_validation--true')
-                    : e.target.parentNode.classList.remove('custom-label_validation--true')}} />
+                onChange={checkFileInput} />
         </label>
     );
 };
