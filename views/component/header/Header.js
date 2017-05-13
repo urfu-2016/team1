@@ -25,8 +25,11 @@ export default class Header extends React.Component {
 
         const registrationBlock = (
             <div className='header__registration registration'>
-                <Link to='/signin' className='registration__item registration__item_signin' data-tid='header-signin-link'>Sign in</Link>
-                <Link to='/signup' className='registration__item registration__item_signup' data-tid='header-signup-link'>Sign up</Link>
+                <span className='registration__item registration__item_signin'>Войдите используя ваши социальные сети:</span>
+                <div className='soc-auth'>
+                    <a href='/api/auth/vk' className='soc-auth_link'><div className='soc-auth_vk'/></a>
+                    <a href='/api/auth/fb' className='soc-auth_link'><div className='soc-auth_fb'/></a>
+                </div>
             </div>
         );
 

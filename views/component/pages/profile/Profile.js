@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import UserInformation from './userInformation/UserInformation';
+import UserAvatar from './userAvatar/UserAvatar';
+
 import * as pageActions from '../../../redux/action/index';
 
 const mapStateToProps = state => ({profile: state.GetUserInfo});
@@ -24,6 +27,8 @@ export default class Profile extends React.Component {
         const authMethod = profile.fbId ? 'fb' : 'vk';
         return (
             <main>
+                <UserAvatar photo={profile.fullPhoto}/>
+                {profile.fullPhoto}
                 {profile.vkId}
                 {profile.username}
                 {profile.fbId}
