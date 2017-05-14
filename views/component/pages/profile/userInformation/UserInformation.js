@@ -11,7 +11,7 @@ export default class UserInformation extends React.Component {
     render() {
         const {username, socId, socName, authorQuests} = this.props;
         let mappedAuthorQuests = authorQuests ? [].slice.call(authorQuests).map((quest, index) => (
-            <a className='userInformation__link' href={`/quest/${quest.id}`}>{index + 1} {quest.title}</a>)) : '';
+            <a className='userInformation__link' href={`/quest/${quest.id}`} data-tid={`user-created-quest-${index}`}>{index + 1} {quest.title}</a>)) : '';
 
         return (
             <div className='userInformation'>

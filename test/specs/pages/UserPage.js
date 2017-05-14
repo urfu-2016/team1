@@ -6,4 +6,8 @@ export default class UserPage extends PageBase {
 
         this.username = this.getElementByTestId('username-text');
     }
+
+    getUserQuest(index) {
+        return this.getElementByTestId(`user-created-quest-${index}`);
+    }
 }

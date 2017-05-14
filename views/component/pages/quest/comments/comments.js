@@ -6,7 +6,7 @@ import { autobind } from 'core-decorators';
 import * as pageActions from '../../../../redux/action/index';
 import checkTextInput from '../../../controls/utils';
 
-const mapStateToProps = state => ({comments: state.GetComments, user: state.GetAuthorizationInfo});
+const mapStateToProps = state => ({comments: state.GetComments, user: state.userAuthorization});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -36,7 +36,7 @@ export default class QuestionComments extends React.Component {
         if (!this._commentInput.value || this._commentInput.value.length === 0)
             return;
 
-        const user = this.props.user.user;
+        const user = this.props.user;
         const {PostComment} = this.props.pageActions;
         PostComment(this._commentInput.value, this.props.questId, user.id);
 
@@ -44,8 +44,9 @@ export default class QuestionComments extends React.Component {
     }
 
     render() {
-        const user = this.props.user.user;
+        const user = this.props.user;
 
+        console.log(user);
         let comments = this.props.comments.comments.map((comment, i) => (
             <div>
                 <div className='comment-username' data-tid={`comment-${i}-username`}>{comment.username}</div>
