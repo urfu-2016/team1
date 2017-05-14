@@ -29,14 +29,22 @@ export default class QuestionDescription extends React.Component {
         const user = this.props.user.user;
 
         const participantButton = <Link to={`/quest/${this.props.id}/start`} className='button'>Принять участие</Link>;
-        const changeQuestButton = <Link to={`/quest/edit/${this.props.id}`} className='button'>Редактировать
-            квест</Link>;
-        const deleteQuestButton = <a href='/' onClick={() => {
-            this.props.pageActions.DeleteQuest(this.props.questId, this.props.author
-                , user.id)
-        }} className='button'>Удалить квест</a>;
-        const notAuthorized = <div className='questionDescription__auth'>Авторизуйтесь, чтобы принять участие в
-            квесте</div>;
+        const changeQuestButton = <Link to={`/quest/edit/${this.props.id}`} className='button' data-tid='quest-edit-link'>Редактировать квест</Link>;
+
+        const deleteQuestButton = (
+            <a href='/' onClick={() => {this.props.pageActions.DeleteQuest(this.props.questId, this.props.author, user.id)}}
+                className='button'
+                data-tid='quest-delete-link'>
+                Удалить квест
+            </a>
+        );
+
+        const notAuthorized = (
+            <div className='questionDescription__auth' data-tid='need-authorization'>
+                Авторизуйтесь, чтобы принять участие вквесте
+            </div>
+        );
+
         const isAuthor = parseInt(this.props.author) === parseInt(user.id);
 
         return (
@@ -53,8 +61,9 @@ export default class QuestionDescription extends React.Component {
                     <h2 className='question-info_title' data-tid='quest-title'>Квест {this.props.title}</h2>
                     <div className='question-info_text'>
                         <span data-tid='quest-description'>Описание: {this.props.description}</span>
-                        <span data-tid='quest-author'>Автор: <Link className='question-info_text__link'
-                                                                   to={`/profile/${this.props.author}`}>Автор квеста</Link></span>
+                        <span data-tid='quest-author'>
+                            Автор: <Link className='question-info_text__link' to={`/profile/${this.props.author}`}>Автор квеста</Link>
+                        </span>
                     </div>
                 </div>
             </div>
