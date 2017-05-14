@@ -58,7 +58,10 @@ export default class QuestionDescription extends React.Component {
                     <div className='question-info_text'>
                         <span data-tid='quest-description'>Описание: {this.props.description}</span>
                         <span data-tid='quest-author'>
-                            Автор: <Link className='question-info_text__link' to={`/profile/${this.props.author}`}>Автор квеста</Link>
+                            Автор:
+                            <Link className='question-info_text__link' to={`/profile/${this.props.author}`} data-tid='quest-author-link'>
+                                Автор квеста
+                            </Link>
                         </span>
                     </div>
                 </div>

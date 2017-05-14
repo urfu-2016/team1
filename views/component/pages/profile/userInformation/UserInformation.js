@@ -15,7 +15,7 @@ export default class UserInformation extends React.Component {
 
         return (
             <div className='userInformation'>
-                <p className='userInformation__name'>{username}</p>
+                <p className='userInformation__name' data-tid='username-text'>{username}</p>
                 <a className='userInformation__link' href={socId}>Посмотреть профиль {socName}</a>
                 <div className='userInformation__questInfo'>
                     <div className='userInformation__questInfo_created'>

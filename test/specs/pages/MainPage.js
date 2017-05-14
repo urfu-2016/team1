@@ -22,8 +22,15 @@ export default class MainPage extends PageBase {
         }, 20000, `Expected ${questsCount} Quests on MainPage, got ${this.quests.value.length}`, 500);
     }
 
+    waitNoQuests() {
+        browser.waitUntil(() => {
+            this.quests = browser.elements('.questitem__item');
+            return this.quests.value.length === 0;
+        }, 20000, `Expected no Quests on MainPage, got ${this.quests.value.length}`, 500);
+    }
+
     waitQuests(questsCount) {
-        while (this.quests.value.length < questsCount) {
+        while (this.quests.value.length > questsCount) {
             this.quests = browser.elements('.questitem__item');
         }
     }

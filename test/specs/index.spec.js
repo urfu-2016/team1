@@ -50,7 +50,6 @@ class MainPageTest extends BrowserTestBase {
         questPage.refresh();
         questPage.waitTitle('Квест FirstQuest');
         questPage.waitDescription('Описание: no description');
-        questPage.waitAuthor('Автор: имя автора');
     }
 }
 

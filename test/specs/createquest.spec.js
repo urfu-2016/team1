@@ -4,6 +4,7 @@ import { bdd, runTest } from 'mocha-classes';
 
 import models from '../../models';
 import BrowserTestBase from '../bases/BrowserTestBase';
+import UserPage from './pages/UserPage';
 
 const { describe, before, it } = bdd;
 
@@ -35,6 +36,18 @@ class CreateQuestTest extends BrowserTestBase {
         const quest = this.mainPage.getQuest(0);
         expect(quest.title).to.equal('QUEST 1');
         expect(quest.description).to.equal('Description');
+
+        let questPage = this.mainPage.goToQuest(0);
+        questPage.questAuthorLink.click();
+        const userPage = new UserPage(browser);
+        userPage.username.waitForText('Test User');
+
+        this.mainPage.open();
+        questPage = this.mainPage.goToQuest(0);
+        questPage.questDeleteLink.click();
+
+        this.mainPage.open();
+        this.mainPage.waitNoQuests();
     }
 }
 
