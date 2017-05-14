@@ -15,7 +15,7 @@ const store = configureStore(preloadedState);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router routes={router} history={browserHistory} />
+        <Router onUpdate={() => window.scrollTo(0, 0)} routes={router} history={browserHistory} />
     </Provider>,
     document.getElementById('root')
 );

@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
         banner: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        author: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     }, {
         classMethods: {

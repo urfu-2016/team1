@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
+        fullPhoto: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         isAdmin: {
             type: DataTypes.BOOLEAN,
             allowNull: false

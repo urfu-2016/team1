@@ -1,6 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import UserInformation from './userInformation/UserInformation';
+import UserAvatar from './userAvatar/UserAvatar';
 
 import * as pageActions from '../../../redux/action/index';
 
@@ -21,15 +24,15 @@ export default class Profile extends React.Component {
 
     render() {
         const profile = this.props.profile.profile;
-        const authMethod = profile.fbId ? 'fb' : 'vk';
+        const socId = profile.fbId ? `https://www.facebook.com/profile.php?id=${profile.fbId}` : `https://vk.com/id${profile.vkId}`;
+        const socName = profile.fbId ? 'в Facebook' : 'Вконтакте';
         return (
-            <main>
-                {profile.vkId}
-                {profile.username}
-                {profile.fbId}
-                {profile.photo}
-                {authMethod}
-            </main>
+            <div className='profile-wrapper'>
+                <div className='profile'>
+                    <UserAvatar photo={profile.fullPhoto} fbId={profile.fbId}/>
+                    <UserInformation username={profile.username} socId={socId} socName={socName}/>
+                </div>
+            </div>
         );
     }
 }

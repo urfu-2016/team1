@@ -6,6 +6,7 @@ import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
 import { AUTH_INFO_REQUEST, AUTH_INFO_SUCCESS } from '../constants/auth';
 import { GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_ERROR,
          POST_COMMENT_REQUEST, POST_COMMENT_SUCCESS, POST_COMMENT_ERROR } from '../constants/comments';
+import { QUEST_DELETE_REQUEST, QUEST_DELETE_SUCCESS, QUEST_DELETE_ERROR } from '../constants/questinfo';
 
 export function GetAllQuests(quests) {
     return (dispatch) => {
@@ -179,5 +180,38 @@ export function PostComment(comment, questId) {
                     comment: data
                 })
             });
+    }
+}
+
+export function DeleteQuest(questId, author, user) {
+    return dispatch => {
+        dispatch({
+            type: QUEST_DELETE_REQUEST,
+            isDeleted: null
+        });
+
+        if (parseInt(author) === parseInt(user)) {
+            fetch(`/api/quests/delete/${questId}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify({author: author}),
+                credentials: 'include'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    dispatch({
+                        type: QUEST_DELETE_SUCCESS,
+                        isDeleted: true
+                    })
+                })
+        } else {
+            dispatch({
+                type: QUEST_DELETE_ERROR,
+                isDeleted: false
+            })
+        }
     }
 }

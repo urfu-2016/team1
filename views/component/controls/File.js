@@ -14,7 +14,8 @@ export default function FileInput(props) {
                 name={props.name}
                 id={props.id}
                 data-tid={props.tid}
-                onChange={checkFileInput} />
+                onChange={checkFileInput}
+                value={props.value}/>
         </label>
     );
 };
@@ -25,5 +26,6 @@ FileInput.propTypes = {
     label: React.PropTypes.string,
     id: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
-    tid: React.PropTypes.string
+    tid: React.PropTypes.string,
+    value: React.PropTypes.string
 };

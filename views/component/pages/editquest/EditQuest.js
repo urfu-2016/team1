@@ -9,17 +9,27 @@ import TextInput from '../../controls/Text';
 import TextareaInput from '../../controls/Textarea';
 import FileInput from '../../controls/File';
 
-const mapStateToProps = state => ({quests: state.GetQuests});
+const mapStateToProps = state => ({questInfo: state.GetQuestInfo});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class CreateQuest extends React.Component {
-    state = {tasks: 1};
+    state = {tasks: parseInt(this.props.questInfo.questTask.length)};
+    static propTypes = {
+        params: React.PropTypes.object.isRequired,
+        pageActions: React.PropTypes.object.isRequired,
+        questInfo: React.PropTypes.object.isRequired
+    };
+
+    componentDidMount() {
+        const {GetQuestInfo} = this.props.pageActions;
+        GetQuestInfo(this.props.params.id);
+    }
 
     @autobind
     submitForm(e) {
         e.preventDefault();
-        fetch('/api/quests/create', {
+        fetch(`/api/quests/edit/${this.props.params.id}`, {
             method: 'POST',
             body: new FormData(e.target),
             credentials: 'include'
@@ -33,6 +43,8 @@ export default class CreateQuest extends React.Component {
     }
 
     render() {
+        const { questInfo } = this.props;
+        console.info(questInfo);
         let newTask = [...Array(this.state.tasks)].map((_, i) => (
             <div key={i}>
                 <TextInput
@@ -42,6 +54,7 @@ export default class CreateQuest extends React.Component {
                     tid={`place-${i}-title-input`}
                     placeholder={`The best quest with number ${i}`}
                     required={'required'}
+                    value={questInfo.questTask[i] ? questInfo.questTask[i].title : ''}
                 />
 
                 <TextareaInput
@@ -52,6 +65,7 @@ export default class CreateQuest extends React.Component {
                     rows={10}
                     tid={`place-${i}-description-input`}
                     placeholder={`The best description of the quest with number ${i}`}
+                    value={questInfo.questTask[i] ? questInfo.questTask[i].description : ''}
                 />
 
                 <FileInput
@@ -75,7 +89,8 @@ export default class CreateQuest extends React.Component {
             name: 'quest[title]',
             tid: 'quest-title-input',
             placeholder: '"The best quest ever"',
-            required: 'required'
+            required: 'required',
+            value: questInfo.questInfo.title
         };
 
         const questDesc = {
@@ -87,7 +102,8 @@ export default class CreateQuest extends React.Component {
             rows: 10,
             name: 'quest[description]',
             tid: 'quest-description-input',
-            placeholder: '"The best quest ever"'
+            placeholder: '"The best quest ever"',
+            value: questInfo.questInfo.description
         };
 
         const questFile = {
@@ -113,7 +129,7 @@ export default class CreateQuest extends React.Component {
                         {this.state.tasks >= 10 ? null : addButton}
                     </div>
 
-                    <button type='submit' className='quest-data__submit' data-tid='create-quest-button'>Создать</button>
+                    <button type='submit' className='quest-data__submit' data-tid='create-quest-button'>Отредактировать квест</button>
                 </form>
             </div>
         );
