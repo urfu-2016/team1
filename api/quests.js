@@ -46,8 +46,32 @@ router.post('/create', upload.any(), catchAsync(200, async req => {
     let questModel = await models.Quest.create({
         title: quest.title,
         description: quest.description,
-        banner: files[quest.file] ? files[quest.file].path : 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg'
+        banner: files[quest.file] ? files[quest.file].path : 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg',
+        author: req.user.id
     });
+
+    let placeModels = await Promise.all(places.map(place => models.Place.create({
+        title: place.title,
+        description: place.description,
+        coordinates: place.coordinates,
+        path: files[place.file] ? files[place.file].path : 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg'
+    })));
+
+    await Promise.all(placeModels.map(place => questModel.addPlace(place)));
+}));
+
+router.post('/edit/:id', upload.any(), catchAsync(200, async req => {
+    let quest = req.body.quest;
+    let places = req.body.places;
+
+    let files = await Promise.all(req.files.map(uploadFile)).then(makeMap(x => x.name));
+
+    let questModel = await models.Quest.update({
+        title: quest.title,
+        description: quest.description,
+        banner: files[quest.file] ? files[quest.file].path : 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg',
+        author: req.user.id
+    }, {where: {id : req.params.id}});
 
     let placeModels = await Promise.all(places.map(place => models.Place.create({
         title: place.title,

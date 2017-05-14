@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import * as pageActions from '../../../redux/action/index';
 import QuestionBanner from './banner/banner';
@@ -20,19 +20,20 @@ export default class Question extends React.Component {
     };
 
     componentDidMount() {
-        const { GetQuestInfo, GetTasks } = this.props.pageActions;
+        const {GetQuestInfo, GetTasks} = this.props.pageActions;
         GetQuestInfo(this.props.params.id);
         GetTasks(this.props.params.id);
     }
 
     render() {
-        const { questInfo, questTask } = this.props.questInfo;
+        const {questInfo, questTask} = this.props.questInfo;
 
         return (
             <main>
                 <QuestionBanner />
-                <QuestionDescription id={questInfo.id} description={questInfo.description} title={questInfo.title}/>
-                <QuestionTask questTask={questTask} />
+                <QuestionDescription id={questInfo.id} description={questInfo.description} title={questInfo.title}
+                                     banner={questInfo.banner} author={questInfo.author}/>
+                <QuestionTask questTask={questTask}/>
                 <QuestionComments questId={this.props.params.id}/>
             </main>
         );

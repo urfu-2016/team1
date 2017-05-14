@@ -17,7 +17,8 @@ export default function TextareaInput(props) {
                 placeholder={props.placeholder}
                 data-tid={props.tid}
                 required={props.required}
-                onBlur={checkTextInput} />
+                onBlur={checkTextInput}
+                defaultValue={props.value ? props.value : ''}/>
         </label>
     );
 };
@@ -32,5 +33,6 @@ TextareaInput.propTypes = {
     name: React.PropTypes.string.isRequired,
     placeholder: React.PropTypes.string,
     tid: React.PropTypes.string,
-    required: React.PropTypes.string
+    required: React.PropTypes.string,
+    value: React.PropTypes.string
 };

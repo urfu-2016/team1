@@ -22,7 +22,7 @@
 
         & .button {
             display: inline-block;
-            margin top: 10px;
+            margin-top: 10px;
             padding: 5px 15px;
             background: $graydark;
             border: 3px solid $yellow;
@@ -32,6 +32,7 @@
             font-family: 'Poiret One';
             font-weight: 400;
             cursor: pointer;
+            margin-right: 5px;
         }
     }
 
@@ -54,6 +55,29 @@
             & span {
                 margin-bottom: 15px;
             }
+
+            &__link {
+                text-decoration: none;
+                border-bottom: 1px solid transparent;
+                font-size: 20px;
+                transition: all .3s ease-in;
+                color: $blueviolet;
+
+                @media (--mobile-sm) {
+                    display: block;
+                    margin: 0;
+                }
+
+                &:hover {
+                    border-bottom: 1px solid $yellow;
+                    color: $yellow;
+                }
+            }
         }
+    }
+
+    &__auth {
+        color: $yellow;
+        margin-top: 10px;
     }
 }

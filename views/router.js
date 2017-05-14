@@ -6,6 +6,7 @@ import Quest from './component/pages/quest/Quest';
 import Profile from './component/pages/profile/Profile';
 import CreateQuest from './component/pages/createquest/CreateQuest';
 import PlayQuest from './component/pages/playquest/PlayQuest';
+import EditQuest from './component/pages/editquest/EditQuest';
 
 export default (
     <Route path='/' component={App} >
@@ -15,5 +16,6 @@ export default (
         <Route path='/quest/:id/start' components={PlayQuest}/>
         <Route path='/createquest' components={CreateQuest}/>
         <Route path='/profile/:id' component={Profile}/>
+        <Route path='/quest/edit/:id' component={EditQuest}/>
     </Route>
 );

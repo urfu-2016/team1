@@ -31,25 +31,6 @@ class MainPageTest extends DatabaseTestBase {
         expect(title).to.equal('we are effective team');
     }
 
-    @it('should move to sign in')
-    testSignIn() {
-        const mainPage = new MainPage(browser);
-        mainPage.open();
-        mainPage.goToSignIn();
-    }
-
-    @it('should go to sign up')
-    testSignUp() {
-        const mainPage = new MainPage(browser);
-        mainPage.open();
-
-        mainPage.goToSignUp();
-        const signUpPage = new SignupPage(browser);
-        signUpPage.loginInput.setValue('user');
-        signUpPage.passwordInput.setValue('qwer');
-        signUpPage.loginButton.click();
-    }
-
     @it('should correctly search quests')
     testSearch() {
         const mainPage = new MainPage(browser);
