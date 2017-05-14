@@ -8,6 +8,7 @@ export default class MainPage extends PageBase {
 
         this.searchBar = browser.element('.questionlist-search__input');
         this.quests = browser.elements('.questitem__item');
+        this.createQuestLink = this.getElementByTestId('createquest-link');
     }
 
     searchQuests(name) {
@@ -81,7 +82,7 @@ export default class MainPage extends PageBase {
     }
 
     goToCreqteQuest() {
-        this.click(this.getElementByTestId('createquest-link'));
+        this.click(this.createQuestLink);
         return new CreateQuestPage(this.browser);
     }
 }

@@ -18,6 +18,7 @@ class CreateQuestTest extends BrowserTestBase {
 
     @it('should create quest')
     testCreateQuest() {
+        this.mainPage.waitAbsent(this.mainPage.createQuestLink);
         this.loginUsingFacebook();
 
         const createQuestPage = this.mainPage.goToCreqteQuest();
