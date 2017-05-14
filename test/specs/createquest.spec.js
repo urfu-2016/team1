@@ -3,14 +3,12 @@ import { expect } from 'chai';
 import { bdd, runTest } from 'mocha-classes';
 
 import models from '../../models';
-import MainPage from './pages/MainPage';
-import FacebookLoginPage from './pages/FacebookLoginPage';
-import DatabaseTestBase from '../bases/DatabaseTestBase';
+import BrowserTestBase from '../bases/BrowserTestBase';
 
 const { describe, before, it } = bdd;
 
 @describe('Create Quest Page')
-class CreateQuestTest extends DatabaseTestBase {
+class CreateQuestTest extends BrowserTestBase {
     @before
     setUpDatabase() {
         models.Quest.truncate();
@@ -18,13 +16,9 @@ class CreateQuestTest extends DatabaseTestBase {
 
     @it('should create quest')
     testCreateQuest() {
-        let mainPage = new MainPage(browser);
-        mainPage.open();
-        mainPage.goToFacebookLoginPage();
-        const facebookLoginPage = new FacebookLoginPage(browser);
-        mainPage = facebookLoginPage.login();
+        this.loginUsingFacebook();
 
-        const createQuestPage = mainPage.goToCreqteQuest();
+        const createQuestPage = this.mainPage.goToCreqteQuest();
         createQuestPage.questTitleInput.setValue('Quest 1');
         createQuestPage.questDescriptionInput.setValue('Description');
         createQuestPage.questBannerInput.chooseFile(path.resolve(__dirname, 'files', 'plug.jpg'));
@@ -36,9 +30,9 @@ class CreateQuestTest extends DatabaseTestBase {
 
         createQuestPage.createQuestButton.click();
 
-        mainPage.open();
-        mainPage.refreshUntilQuestsPresent(1);
-        const quest = mainPage.getQuest(0);
+        this.mainPage.open();
+        this.mainPage.refreshUntilQuestsPresent(1);
+        const quest = this.mainPage.getQuest(0);
         expect(quest.title).to.equal('QUEST 1');
         expect(quest.description).to.equal('Description');
     }

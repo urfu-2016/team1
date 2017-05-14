@@ -2,14 +2,12 @@ import { expect } from 'chai';
 import { bdd, runTest } from 'mocha-classes';
 
 import models from '../../models';
-import MainPage from './pages/MainPage';
-import FacebookLoginPage from './pages/FacebookLoginPage';
-import DatabaseTestBase from '../bases/DatabaseTestBase';
+import BrowserTestBase from '../bases/BrowserTestBase';
 
 const { describe, before, it } = bdd;
 
 @describe('Login Test')
-class LoginTest extends DatabaseTestBase {
+class LoginTest extends BrowserTestBase {
     @before
     setUpDatabase() {
         models.Quest.truncate();
@@ -17,20 +15,16 @@ class LoginTest extends DatabaseTestBase {
 
     @it('should login with facebook')
     testLogin() {
-        let mainPage = new MainPage(browser);
-        mainPage.open();
-        mainPage.goToFacebookLoginPage();
-        const facebookLoginPage = new FacebookLoginPage(browser);
-        mainPage = facebookLoginPage.login();
-        mainPage.username.waitForText('Test User');
+        this.loginUsingFacebook();
+        this.mainPage.username.waitForText('Test User');
 
-        mainPage.userDropdown.click();
-        mainPage.profileLink.click();
+        this.mainPage.userDropdown.click();
+        this.mainPage.profileLink.click();
 
-        mainPage.userDropdown.click();
-        mainPage.logoutLink.click();
+        this.mainPage.userDropdown.click();
+        this.mainPage.logoutLink.click();
 
-        mainPage.fbLoginLink.waitForVisible();
+        this.mainPage.fbLoginLink.waitForVisible();
     }
 }
 
