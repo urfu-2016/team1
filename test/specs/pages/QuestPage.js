@@ -22,6 +22,9 @@ export default class QuestPage extends PageBase {
     }
 
     getComment(index) {
-        return this.getElementByTestId(`comment-${index}-text`);
+        return {
+            username: this.getElementByTestId(`comment-${index}-username`),
+            text: this.getElementByTestId(`comment-${index}-text`)
+        };
     }
 }

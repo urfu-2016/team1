@@ -170,7 +170,7 @@ export function GetComments(questId) {
     };
 }
 
-export function PostComment(comment, questId) {
+export function PostComment(comment, questId, userId) {
     return dispatch => {
         dispatch({
             type: POST_COMMENT_REQUEST,
@@ -180,7 +180,7 @@ export function PostComment(comment, questId) {
         fetch(`/api/comments/quest/${questId}`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({text: comment})
+            body: JSON.stringify({text: comment, userId: userId})
         })
             .then(response => response.json())
             .then(data => {
