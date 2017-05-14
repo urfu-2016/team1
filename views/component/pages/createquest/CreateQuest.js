@@ -8,6 +8,9 @@ import * as pageActions from '../../../redux/action/index';
 import TextInput from '../../controls/Text';
 import TextareaInput from '../../controls/Textarea';
 import FileInput from '../../controls/File';
+import { checkFileInput, checkTextInput, checkInputForNumber } from '../../controls/utils';
+
+import QuestMap from '../../questmap/QuestMap';
 
 const mapStateToProps = state => ({quests: state.GetQuests});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
@@ -32,9 +35,27 @@ export default class CreateQuest extends React.Component {
         this.setState(prevState => ({tasks: ++prevState.tasks}));
     }
 
+    @autobind
+    getCoordinates(e) {
+        let inputs = e.target.parentNode.childNodes;
+        let latInput = inputs[0].querySelector('input');
+        let lngInput = inputs[1].querySelector('input');
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                latInput.value = position.coords.latitude;
+                latInput.parentNode.classList.add('custom-label_validation--true');
+                lngInput.value = position.coords.longitude;
+                lngInput.parentNode.classList.add('custom-label_validation--true');
+            });
+        } else {
+           console.log('Sorry bro! But your browser doesn\'t support Geolocation')
+        }
+    }
+
     render() {
         let newTask = [...Array(this.state.tasks)].map((_, i) => (
-            <div key={i}>
+            <div key={i} className={`quest-data__item quest-data__item_number--${i}`}>
                 <TextInput
                     label={'Заголовок задачи квеста'}
                     id={`place-label-${i}`}
@@ -42,6 +63,7 @@ export default class CreateQuest extends React.Component {
                     tid={`place-${i}-title-input`}
                     placeholder={`The best quest with number ${i}`}
                     required={'required'}
+                    blueValidation={checkTextInput}
                 />
 
                 <TextareaInput
@@ -52,14 +74,40 @@ export default class CreateQuest extends React.Component {
                     rows={10}
                     tid={`place-${i}-description-input`}
                     placeholder={`The best description of the quest with number ${i}`}
+                    validation={checkTextInput}
                 />
 
                 <FileInput
                     label={'Добавить/сделать фото задачи квеста'}
                     id={`place-file-${i}`}
-                    name={`places[${i}][description]`}
+                    name={`places[${i}][photo]`}
                     tid={`place-${i}-banner-input`}
+                    validation={checkFileInput}
                 />
+
+                <div className={`coordinates coordinates_number--${i}`}>
+                    <TextInput
+                        label={`Широта квеста ${i}`}
+                        id={`place-lat-${i}`}
+                        name={`places[${i}][lat]`}
+                        tid={`place-${i}-lat-input`}
+                        placeholder={`Пример: 56.8401607`}
+                        required={'required'}
+                        changeValidation={checkInputForNumber}
+                    />
+                    <TextInput
+                        label={`Долгота квеста ${i}`}
+                        id={`place-lng-${i}`}
+                        name={`places[${i}][lng]`}
+                        tid={`place-${i}-lng-input`}
+                        placeholder={`Пример: 60.6589985`}
+                        required={'required'}
+                        changeValidation={checkInputForNumber}
+                    />
+
+                    <div className='quest-data__coordinates' onClick={this.getCoordinates}>Подставить координаты</div>
+                </div>
+
                 <input type='hidden' name={`places[${i}][file]`} value={`places[${i}][photo]`}/>
                 <input type='hidden' name={`places[${i}][coordinates]`}/>
             </div>
@@ -75,7 +123,8 @@ export default class CreateQuest extends React.Component {
             name: 'quest[title]',
             tid: 'quest-title-input',
             placeholder: '"The best quest ever"',
-            required: 'required'
+            required: 'required',
+            blueValidation: checkTextInput
         };
 
         const questDesc = {
@@ -87,14 +136,16 @@ export default class CreateQuest extends React.Component {
             rows: 10,
             name: 'quest[description]',
             tid: 'quest-description-input',
-            placeholder: '"The best quest ever"'
+            placeholder: '"The best quest ever"',
+            validation: checkTextInput
         };
 
         const questFile = {
             label: 'Добавить/сделать фото задачи квеста',
             id: 'banner',
             name: 'quest[banner]',
-            tid: 'quest-banner-input'
+            tid: 'quest-banner-input',
+            validation: checkFileInput
         };
 
         return (
@@ -115,6 +166,10 @@ export default class CreateQuest extends React.Component {
 
                     <button type='submit' className='quest-data__submit' data-tid='create-quest-button'>Создать</button>
                 </form>
+
+                <div className='map'>
+                    <QuestMap />
+                </div>
             </div>
         );
     }

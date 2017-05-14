@@ -1,5 +1,3 @@
-import { checkTextInput } from './utils';
-
 export default function TextareaInput(props) {
 
     return (
@@ -17,8 +15,8 @@ export default function TextareaInput(props) {
                 placeholder={props.placeholder}
                 data-tid={props.tid}
                 required={props.required}
-                onBlur={checkTextInput}
-                defaultValue={props.value ? props.value : ''}/>
+                defaultValue={props.value ? props.value : ''}
+                onBlur={props.validation} />
         </label>
     );
 };
@@ -34,5 +32,6 @@ TextareaInput.propTypes = {
     placeholder: React.PropTypes.string,
     tid: React.PropTypes.string,
     required: React.PropTypes.string,
-    value: React.PropTypes.string
+    value: React.PropTypes.string,
+    validation: React.PropTypes.func
 };

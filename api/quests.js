@@ -5,6 +5,8 @@ import multer from 'multer';
 import models from '../models';
 import { getQuestsByName, makeMap, catchAsync } from './utils';
 
+const IMAGE_PLUG = 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg';
+
 const upload = multer({dest: '.tmp/img/'});
 const router = express.Router();
 
@@ -46,7 +48,7 @@ router.post('/create', upload.any(), catchAsync(200, async req => {
     let questModel = await models.Quest.create({
         title: quest.title,
         description: quest.description,
-        banner: files[quest.file] ? files[quest.file].path : 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg',
+        banner: files[quest.file] ? files[quest.file].path : IMAGE_PLUG,
         author: req.user.id
     });
 
@@ -54,7 +56,7 @@ router.post('/create', upload.any(), catchAsync(200, async req => {
         title: place.title,
         description: place.description,
         coordinates: place.coordinates,
-        path: files[place.file] ? files[place.file].path : 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg'
+        path: files[place.file] ? files[place.file].path : IMAGE_PLUG
     })));
 
     await Promise.all(placeModels.map(place => questModel.addPlace(place)));

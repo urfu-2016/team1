@@ -1,5 +1,3 @@
-import { checkFileInput } from './utils';
-
 export default function FileInput(props) {
 
     return (
@@ -14,8 +12,8 @@ export default function FileInput(props) {
                 name={props.name}
                 id={props.id}
                 data-tid={props.tid}
-                onChange={checkFileInput}
-                value={props.value}/>
+                value={props.value}
+                onChange={props.validation} />
         </label>
     );
 };
@@ -27,5 +25,6 @@ FileInput.propTypes = {
     id: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
     tid: React.PropTypes.string,
-    value: React.PropTypes.string
+    value: React.PropTypes.string,
+    validation: React.PropTypes.func
 };
