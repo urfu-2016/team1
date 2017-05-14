@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import * as pageActions from '../../../../redux/action/index';
 
-const mapStateToProps = state => ({user: state.GetAuthorizationInfo});
+const mapStateToProps = state => ({user: state.userAuthorization});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -21,12 +21,8 @@ export default class QuestionDescription extends React.Component {
         questId: React.PropTypes.string
     };
 
-    componentDidMount() {
-        this.props.pageActions.getAuthorizationInfo();
-    }
-
     render() {
-        const user = this.props.user.user;
+        const user = this.props.user;
 
         const participantButton = <Link to={`/quest/${this.props.id}/start`} className='button'>Принять участие</Link>;
         const changeQuestButton = <Link to={`/quest/edit/${this.props.id}`} className='button' data-tid='quest-edit-link'>Редактировать квест</Link>;

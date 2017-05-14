@@ -6,22 +6,31 @@ import { bindActionCreators } from 'redux';
 import * as pageActions from '../../redux/action/index';
 import Logo from '../logo/Logo';
 
-const mapStateToProps = state => ({user: state.GetAuthorizationInfo});
+const mapStateToProps = state => ({user: state.userAuthorization});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Header extends React.Component {
     static propTypes = {
         user: React.PropTypes.object.isRequired,
-        pageActions: React.PropTypes.object.isRequired
+        pageActions: React.PropTypes.object.isRequired,
+        isMounted: React.PropTypes
     };
 
-    componentDidMount() {
-        this.props.pageActions.getAuthorizationInfo();
+    constructor(props) {
+        super(props);
+        this.state = {isMounted: false};
+    }
+
+    static componentDidMount() {
+        setState({isMounted: true})
     }
 
     render() {
-        const user = this.props.user.user;
+        if (!this.state.isMounted) {
+            return null;
+        }
+        const user = this.props.user;
 
         const registrationBlock = (
             <div className='header__registration registration'>
@@ -58,7 +67,7 @@ export default class Header extends React.Component {
                     <div className='header__logo'>
                         <Logo />
                     </div>
-                    {user.hasOwnProperty('username') ? registeredBlock : registrationBlock}
+                    {user.username ? registeredBlock : registrationBlock}
                 </div>
             </header>
         );

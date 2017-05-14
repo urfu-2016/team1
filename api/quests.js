@@ -85,7 +85,6 @@ router.post('/edit/:id', upload.any(), catchAsync(200, async req => {
 
 router.post('/delete/:id', function (req, res) {
     const author = req.body.author;
-    console.info(req.user);
     if (parseInt(author) === parseInt(req.user.id)) {
         models.Quest.destroy({where: {id: req.params.id}})
             .then((rowDeleted) => {
@@ -95,5 +94,14 @@ router.post('/delete/:id', function (req, res) {
             });
     }
 });
+
+router.get('/author/:id', catchAsync(200, async req => {
+    return await models.Quest.findAll({where: {author: req.params.id}})
+}));
+
+router.get('/progress/:id', catchAsync(200, async req => {
+    const currentUser = await models.User.findById(req.params.id);
+    return await currentUser.getQuests();
+}));
 
 export default router;

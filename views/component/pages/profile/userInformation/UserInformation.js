@@ -4,11 +4,14 @@ export default class UserInformation extends React.Component {
     static propTypes = {
         username: React.PropTypes.string,
         socId: React.PropTypes.string.isRequired,
-        socName: React.PropTypes.string.isRequired
+        socName: React.PropTypes.string.isRequired,
+        authorQuests: React.PropTypes.object.isRequired
     };
 
     render() {
-        const { username, socId, socName } = this.props;
+        const {username, socId, socName, authorQuests} = this.props;
+        let mappedAuthorQuests = authorQuests ? [].slice.call(authorQuests).map((quest, index) => (
+            <a className='userInformation__link' href={`/quest/${quest.id}`}>{index + 1} {quest.title}</a>)) : '';
 
         return (
             <div className='userInformation'>
@@ -17,6 +20,7 @@ export default class UserInformation extends React.Component {
                 <div className='userInformation__questInfo'>
                     <div className='userInformation__questInfo_created'>
                         <h4>Автор квестов:</h4>
+                        {mappedAuthorQuests}
                     </div>
                     <div className='userInformation__questInfo_participant'>
                         <h4>Участник квестов:</h4>
