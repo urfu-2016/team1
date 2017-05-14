@@ -6,7 +6,17 @@ import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
 import { AUTH_INFO_REQUEST, AUTH_INFO_SUCCESS } from '../constants/auth';
 import { GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_COMMENTS_ERROR,
          POST_COMMENT_REQUEST, POST_COMMENT_SUCCESS, POST_COMMENT_ERROR } from '../constants/comments';
-import { QUEST_DELETE_REQUEST, QUEST_DELETE_SUCCESS, QUEST_DELETE_ERROR } from '../constants/questinfo';
+import {
+    QUEST_DELETE_REQUEST,
+    QUEST_DELETE_SUCCESS,
+    QUEST_DELETE_ERROR,
+    SUCCESS_QUESTS_BY_AUTHOR,
+    ERROR_QUESTS_BY_AUTHOR,
+    REQUEST_QUESTS_BY_AUTHOR,
+    QUESTS_IN_PROGRESS_REQUEST,
+    QUESTS_IN_PROGRESS_SUCCESS,
+    QUESTS_IN_PROGRESS_ERROR
+} from '../constants/questinfo';
 
 export function GetAllQuests(quests) {
     return (dispatch) => {
@@ -213,5 +223,57 @@ export function DeleteQuest(questId, author, user) {
                 isDeleted: false
             })
         }
+    }
+}
+
+export function GetQuestsByAuthorId(id) {
+    return dispatch => {
+        dispatch({
+            type: REQUEST_QUESTS_BY_AUTHOR,
+            quests: []
+        });
+
+        fetch(`/api/quests/author/${id}`)
+            .then(response => {
+                return response.json()
+            })
+            .then(quests => {
+                dispatch({
+                    type: SUCCESS_QUESTS_BY_AUTHOR,
+                    quests: quests
+                });
+            })
+            .catch(error => {
+                 dispatch({
+                     type: ERROR_QUESTS_BY_AUTHOR,
+                     error: error
+                 })
+            })
+    }
+}
+
+export function GetUserQuestsInProgress(id) {
+    return dispatch => {
+        dispatch({
+            type: QUESTS_IN_PROGRESS_REQUEST,
+            questsInProgress: []
+        });
+
+        fetch(`/api/quests/author/${id}`)
+            .then(response => {
+                return response.json()
+            })
+            .then(quests => {
+                dispatch({
+                    type: QUESTS_IN_PROGRESS_SUCCESS,
+                    questsInProgress: quests
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: QUESTS_IN_PROGRESS_ERROR,
+                    questsInProgress: error
+                })
+            })
     }
 }

@@ -1,12 +1,8 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-    const QuestUser = sequelize.define('QuestUser', {
-        owner: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
-        }
-    }, {
+    const QuestUser = sequelize.define('QuestUser', {},
+        {
         classMethods: {
             associate: function (models) {
                 models.Quest.belongsToMany(models.User, {through: 'QuestUser'});

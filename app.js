@@ -64,14 +64,14 @@ app.get('*', (req, res) => {
             );
 
             const preloadedState = store.getState();
-            res.send(renderFullPage(appHtml, preloadedState));
+            res.send(renderFullPage(appHtml, req.user, preloadedState));
         } else {
             res.status(404).send('Not Found')
         }
     })
 });
 
-function renderFullPage(html, preloadedState) {
+function renderFullPage(html, user, preloadedState) {
     return `
     <!doctype html>
     <html>
@@ -88,6 +88,7 @@ function renderFullPage(html, preloadedState) {
           // WARNING: See the following for security issues around embedding JSON in HTML:
           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+          window.__USER__ = ${JSON.stringify(user)}
         </script>
         <script src="/index.js"></script>
       </body>
