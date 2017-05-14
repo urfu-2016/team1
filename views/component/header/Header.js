@@ -27,8 +27,12 @@ export default class Header extends React.Component {
             <div className='header__registration registration'>
                 <span className='registration__item registration__item_signin'>Войти:</span>
                 <div className='soc-auth'>
-                    <a href='/api/auth/vk' className='soc-auth_link'><div className='soc-auth_vk'/></a>
-                    <a href='/api/auth/fb' className='soc-auth_link'><div className='soc-auth_fb'/></a>
+                    <a href='/api/auth/vk' className='soc-auth_link' data-tid='vk-login-link'>
+                        <div className='soc-auth_vk'/>
+                    </a>
+                    <a href='/api/auth/fb' className='soc-auth_link' data-tid='fb-login-link'>
+                        <div className='soc-auth_fb'/>
+                    </a>
                 </div>
             </div>
         );

@@ -4,6 +4,7 @@ import { bdd, runTest } from 'mocha-classes';
 
 import models from '../../models';
 import MainPage from './pages/MainPage';
+import FacebookLoginPage from './pages/FacebookLoginPage';
 import DatabaseTestBase from '../bases/DatabaseTestBase';
 
 const { describe, before, it } = bdd;
@@ -17,8 +18,11 @@ class CreateQuestTest extends DatabaseTestBase {
 
     @it('should create quest')
     testCreateQuest() {
-        const mainPage = new MainPage(browser);
+        let mainPage = new MainPage(browser);
         mainPage.open();
+        mainPage.goToFacebookLoginPage();
+        const facebookLoginPage = new FacebookLoginPage(browser);
+        mainPage = facebookLoginPage.login();
 
         const createQuestPage = mainPage.goToCreqteQuest();
         createQuestPage.questTitleInput.setValue('Quest 1');

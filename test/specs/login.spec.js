@@ -3,7 +3,7 @@ import { bdd, runTest } from 'mocha-classes';
 
 import models from '../../models';
 import MainPage from './pages/MainPage';
-import SignInPage from './pages/SignInPage';
+import FacebookLoginPage from './pages/FacebookLoginPage';
 import DatabaseTestBase from '../bases/DatabaseTestBase';
 
 const { describe, before, it } = bdd;
@@ -19,10 +19,8 @@ class LoginTest extends DatabaseTestBase {
     testLogin() {
         let mainPage = new MainPage(browser);
         mainPage.open();
-        mainPage.goToSignIn();
-
-        const signInPage = new SignInPage(browser);
-        const facebookLoginPage = signInPage.goToFacebookLoginPage();
+        mainPage.goToFacebookLoginPage();
+        const facebookLoginPage = new FacebookLoginPage(browser);
         mainPage = facebookLoginPage.login();
         mainPage.username.waitForText('Test User');
 
@@ -32,7 +30,7 @@ class LoginTest extends DatabaseTestBase {
         mainPage.userDropdown.click();
         mainPage.logoutLink.click();
 
-        mainPage.signInLink.waitForVisible();
+        mainPage.fbLoginLink.waitForVisible();
     }
 }
 

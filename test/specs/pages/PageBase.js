@@ -3,14 +3,12 @@ export default class PageBase {
         this.browser = browser;
         this.route = route;
 
-        this.signInLink = this.getElementByTestId('header-signin-link');
-        this.signUpLink = this.getElementByTestId('header-signup-link');
+        this.vkLoginLink = this.getElementByTestId('vk-login-link');
+        this.fbLoginLink = this.getElementByTestId('fb-login-link');
         this.username = this.getElementByTestId('logged-in-user-username');
         this.profileLink = this.getElementByTestId('user-profile-link');
         this.logoutLink = this.getElementByTestId('logout-link');
         this.userDropdown = this.getElementByTestId('user-dropdown');
-
-        this.footerText = browser.element('.footer__copyright');
     }
 
     open() {
@@ -30,20 +28,11 @@ export default class PageBase {
     }
 
     getTitle() {
-        return browser.getTitle();
+        return this.browser.getTitle();
     }
 
-    getFooterText() {
-        return this.footerText;
-    }
-
-    goToSignIn() {
-        this.signInLink.waitForVisible();
-        this.browser.click(this.signInLink.selector);
-    }
-
-    goToSignUp() {
-        this.signUpLink.waitForVisible();
-        this.browser.click(this.signUpLink.selector);
+    goToFacebookLoginPage() {
+        this.fbLoginLink.waitForVisible();
+        this.browser.click(this.fbLoginLink.selector);
     }
 }

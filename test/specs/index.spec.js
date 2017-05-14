@@ -31,7 +31,7 @@ class MainPageTest extends DatabaseTestBase {
         expect(title).to.equal('we are effective team');
     }
 
-    @it('should correctly search quests')
+    @it.skip('should correctly search quests')
     testSearch() {
         const mainPage = new MainPage(browser);
         mainPage.open();
