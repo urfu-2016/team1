@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import * as pageActions from '../../../../redux/action/index';
 
@@ -17,7 +17,8 @@ export default class QuestionDescription extends React.Component {
         user: React.PropTypes.object.isRequired,
         pageActions: React.PropTypes.object.isRequired,
         banner: React.PropTypes.string,
-        author: React.PropTypes.string
+        author: React.PropTypes.string,
+        questId: React.PropTypes.string
     };
 
     componentDidMount() {
@@ -30,11 +31,13 @@ export default class QuestionDescription extends React.Component {
         const participantButton = <Link to={`/quest/${this.props.id}/start`} className='button'>Принять участие</Link>;
         const changeQuestButton = <Link to={`/quest/edit/${this.props.id}`} className='button'>Редактировать
             квест</Link>;
-        const deleteQuestButton = <Link to={`/quest/delete/${this.props.id}`} className='button'>Удалить квест</Link>;
+        const deleteQuestButton = <a href='/' onClick={() => {
+            this.props.pageActions.DeleteQuest(this.props.questId, this.props.author
+                , user.id)
+        }} className='button'>Удалить квест</a>;
         const notAuthorized = <div className='questionDescription__auth'>Авторизуйтесь, чтобы принять участие в
             квесте</div>;
         const isAuthor = parseInt(this.props.author) === parseInt(user.id);
-        console.info(user.id);
 
         return (
             <div className='questionDescription'>

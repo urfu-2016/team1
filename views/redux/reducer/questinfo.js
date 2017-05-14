@@ -1,9 +1,18 @@
-import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR, TASKS_REQUEST, TASKS_SUCCESS, TASKS_ERROR} from '../constants/questinfo';
+import {
+    QUEST_INFO_REQUEST,
+    QUEST_INFO_SUCCESS,
+    QUEST_INFO_ERROR,
+    TASKS_REQUEST,
+    TASKS_SUCCESS,
+    TASKS_ERROR,
+    QUEST_DELETE_SUCCESS,
+    QUEST_DELETE_REQUEST
+} from '../constants/questinfo';
 
 const initialState = {
     questInfo: [],
-    questTask: []
-
+    questTask: [],
+    questDelete: false
 };
 
 export default function GetQuestInfo(state = initialState, action) {
@@ -23,6 +32,10 @@ export default function GetQuestInfo(state = initialState, action) {
         case TASKS_SUCCESS:
             return Object.assign({}, state, {
                 questTask: action.questTask
+            });
+        case QUEST_DELETE_SUCCESS:
+            return Object.assign({}, state, {
+                questDelete: true
             });
         default:
             return state;

@@ -8,8 +8,7 @@ export default class UserAvatar extends React.Component {
 
     render() {
         const { photo, fbId } = this.props;
-        let size;
-        fbId ? size = 320 : size = 400;
+        let size = fbId ? 320 : 400;
 
         return (
             <div className='userAvatar'>

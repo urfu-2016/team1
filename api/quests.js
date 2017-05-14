@@ -83,4 +83,17 @@ router.post('/edit/:id', upload.any(), catchAsync(200, async req => {
     await Promise.all(placeModels.map(place => questModel.addPlace(place)));
 }));
 
+router.post('/delete/:id', function (req, res) {
+    const author = req.body.author;
+    console.info(req.user);
+    if (parseInt(author) === parseInt(req.user.id)) {
+        models.Quest.destroy({where: {id: req.params.id}})
+            .then((rowDeleted) => {
+                if (rowDeleted === 1) {
+                    res.send(true);
+                }
+            });
+    }
+});
+
 export default router;
