@@ -20,3 +20,7 @@ export function catchAsync(statusCode, fn) {
             });
     }
 }
+
+export function normalize(entity) {
+    return JSON.parse(JSON.stringify(entity));
+}

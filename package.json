@@ -16,8 +16,8 @@
     "lint:style": "stylelint views/**/*.pcss",
     "lint:js": "eslint --ignore-path .gitignore .",
     "test": "npm-run-all lint test:run selenium:test",
-    "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\"",
-    "test:run:single": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\" -g",
+    "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\" --timeout 10000",
+    "test:run:single": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\" --timeout 10000 -g",
 
     "selenium:install": "./node_modules/.bin/selenium-standalone install",
     "selenium:start": "./node_modules/.bin/selenium-standalone start",

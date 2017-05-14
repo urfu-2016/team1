@@ -1,14 +1,12 @@
 import { expect } from 'chai';
 import { bdd, runTest } from 'mocha-classes';
 
-import MainPage from './pages/MainPage';
-import SignupPage from './pages/SignupPage'
-import DatabaseTestBase from '../bases/DatabaseTestBase';
+import BrowserTestBase from '../bases/BrowserTestBase';
 
 const { describe, before, it } = bdd;
 
 @describe('Main Page')
-class MainPageTest extends DatabaseTestBase {
+class MainPageTest extends BrowserTestBase {
     @before
     setUpDatabase() {
         this.quests = [
@@ -24,43 +22,34 @@ class MainPageTest extends DatabaseTestBase {
 
     @it('should have banner')
     testBanner() {
-        const mainPage = new MainPage(browser);
-        mainPage.open();
-        const title = mainPage.getTitle();
-
+        const title = this.mainPage.getTitle();
         expect(title).to.equal('we are effective team');
     }
 
     @it.skip('should correctly search quests')
     testSearch() {
-        const mainPage = new MainPage(browser);
-        mainPage.open();
-        mainPage.refresh();
+        this.mainPage.refresh();
 
-        mainPage.waitQuests(6);
-        mainPage.waitQuestTitle(0, 'FirstQuest');
-        mainPage.waitQuestDescription(0, 'no description');
+        this.mainPage.waitQuests(6);
+        this.mainPage.waitQuestTitle(0, 'FirstQuest');
+        this.mainPage.waitQuestDescription(0, 'no description');
 
-        mainPage.searchQuests('f');
-        mainPage.waitQuests(3);
-        mainPage.getQuests(3).every(x => x.title.startsWith('f'));
+        this.mainPage.searchQuests('f');
+        this.mainPage.waitQuests(3);
+        this.mainPage.getQuests(3).every(x => x.title.startsWith('f'));
 
-        mainPage.searchQuests('s');
-        mainPage.waitQuests(2);
-        mainPage.getQuests(2).every(x => x.title.startsWith('s'));
+        this.mainPage.searchQuests('s');
+        this.mainPage.waitQuests(2);
+        this.mainPage.getQuests(2).every(x => x.title.startsWith('s'));
     }
 
     @it('should go to quest page')
     testQuestPage() {
-        const mainPage = new MainPage(browser);
-        mainPage.open();
-
-        mainPage.waitQuests(1);
-        const questPage = mainPage.goToQuest(0);
+        this.mainPage.waitQuests(1);
+        const questPage = this.mainPage.goToQuest(0);
         questPage.refresh();
         questPage.waitTitle('Квест FirstQuest');
         questPage.waitDescription('Описание: no description');
-        questPage.waitAuthor('Автор: имя автора');
     }
 }
 

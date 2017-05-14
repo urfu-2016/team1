@@ -19,6 +19,12 @@ export default class PageBase {
         return this.browser.element(`[data-tid="${testId}"]`);
     }
 
+    waitAbsent(element) {
+        browser.waitUntil(() => {
+            return !browser.isExisting(element.selector);
+        }, 10000, `Expected ${element.selector} to be absent`, 500);
+    }
+
     refresh() {
         this.browser.refresh();
     }

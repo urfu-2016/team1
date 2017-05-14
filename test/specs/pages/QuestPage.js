@@ -7,7 +7,8 @@ export default class QuestPage extends PageBase {
         this.browser = browser;
         this.questTitle = this.getElementByTestId('quest-title');
         this.questDescription = this.getElementByTestId('quest-description');
-        this.questAuthor = this.getElementByTestId('quest-author');
+        this.questAuthorLink = this.getElementByTestId('quest-author-link');
+        this.questDeleteLink = this.getElementByTestId('quest-delete-link');
         this.commentInput = this.getElementByTestId('comment-text-input');
         this.commentSubmitButton = this.getElementByTestId('comment-submit-button');
     }
@@ -20,11 +21,10 @@ export default class QuestPage extends PageBase {
         this.questDescription.waitForText(description);
     }
 
-    waitAuthor(author) {
-        this.questAuthor.waitForText(author);
-    }
-
     getComment(index) {
-        return this.getElementByTestId(`comment-${index}-text`);
+        return {
+            username: this.getElementByTestId(`comment-${index}-username`),
+            text: this.getElementByTestId(`comment-${index}-text`)
+        };
     }
 }

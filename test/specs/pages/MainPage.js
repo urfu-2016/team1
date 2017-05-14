@@ -8,6 +8,7 @@ export default class MainPage extends PageBase {
 
         this.searchBar = browser.element('.questionlist-search__input');
         this.quests = browser.elements('.questitem__item');
+        this.createQuestLink = this.getElementByTestId('createquest-link');
     }
 
     searchQuests(name) {
@@ -20,6 +21,13 @@ export default class MainPage extends PageBase {
             this.quests = browser.elements('.questitem__item');
             return this.quests.value.length >= questsCount;
         }, 20000, `Expected ${questsCount} Quests on MainPage, got ${this.quests.value.length}`, 500);
+    }
+
+    waitNoQuests() {
+        browser.waitUntil(() => {
+            this.quests = browser.elements('.questitem__item');
+            return this.quests.value.length === 0;
+        }, 20000, `Expected no Quests on MainPage, got ${this.quests.value.length}`, 500);
     }
 
     waitQuests(questsCount) {
@@ -74,7 +82,7 @@ export default class MainPage extends PageBase {
     }
 
     goToCreqteQuest() {
-        this.click(this.getElementByTestId('createquest-link'));
+        this.click(this.createQuestLink);
         return new CreateQuestPage(this.browser);
     }
 }

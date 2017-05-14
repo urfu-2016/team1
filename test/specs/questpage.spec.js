@@ -1,14 +1,13 @@
 import { expect } from 'chai';
 import { bdd, runTest } from 'mocha-classes';
 
-import MainPage from './pages/MainPage';
-import DatabaseTestBase from '../bases/DatabaseTestBase';
+import BrowserTestBase from '../bases/BrowserTestBase';
 
-const { describe, before, it } = bdd;
+const { describe, beforeEach, it } = bdd;
 
 @describe('Quest Page')
-class QuestPageTest extends DatabaseTestBase {
-    @before
+class QuestPageTest extends BrowserTestBase {
+    @beforeEach
     setUpDatabase() {
         this.quest = {title: 'FirstQuest', description: 'no description'};
         this.comments = [
@@ -22,35 +21,39 @@ class QuestPageTest extends DatabaseTestBase {
 
     @it('should have comments')
     testComments() {
-        const mainPage = new MainPage(browser);
-        mainPage.open();
+        const questPage = this.mainPage.goToQuest(0);
+        questPage.getComment(0).text.waitForText('cool quest');
+        questPage.getComment(1).text.waitForText('awesome quests');
+    }
 
-        const questPage = mainPage.goToQuest(0);
-        questPage.getComment(0).waitForText('cool quest');
-        questPage.getComment(1).waitForText('awesome quests');
+    @it('should hide comments if not logged in')
+    testNotLoggedInComments() {
+        const questPage = this.mainPage.goToQuest(0);
+        questPage.waitAbsent(questPage.commentInput);
+        questPage.waitAbsent(questPage.commentSubmitButton);
     }
 
     @it('should not post empty comment')
     emptyComment() {
-        const mainPage = new MainPage(browser);
-        mainPage.open();
+        this.loginUsingFacebook();
 
-        const questPage = mainPage.goToQuest(0);
+        const questPage = this.mainPage.goToQuest(0);
         questPage.commentInput.setValue('');
         questPage.commentSubmitButton.click();
 
-        expect(browser.isExisting(questPage.getComment(2).selector)).to.be.false;
+        questPage.waitAbsent(questPage.getComment(2).text);
     }
 
     @it('should post comment')
     postComment() {
-        const mainPage = new MainPage(browser);
-        mainPage.open();
+        this.loginUsingFacebook();
 
-        const questPage = mainPage.goToQuest(0);
+        const questPage = this.mainPage.goToQuest(0);
         questPage.commentInput.setValue('added comment');
         questPage.commentSubmitButton.click();
-        questPage.getComment(2).waitForText('added comment');
+        let comment = questPage.getComment(2);
+        comment.text.waitForText('added comment');
+        comment.username.waitForText('Test User');
     }
 }
 
