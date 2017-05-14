@@ -24,7 +24,8 @@ router.post('/quest/:id', catchAsync(201, async req => {
     comment.setUser(req.body.userId);
     comment = normalize(comment);
     let user = await models.User.findById(req.body.userId);
-    comment.username = user.username;
+    if (user)
+        comment.username = user.username;
     return comment;
 }));
 

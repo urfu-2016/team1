@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { bdd, runTest } from 'mocha-classes';
 
 import models from '../../models';
+import MainPage from './pages/MainPage';
 import BrowserTestBase from '../bases/BrowserTestBase';
 
 const { describe, before, it } = bdd;
@@ -16,6 +17,7 @@ class LoginTest extends BrowserTestBase {
     @it('should login with facebook')
     testLogin() {
         this.loginUsingFacebook();
+        this.mainPage = new MainPage(browser);
         this.mainPage.username.waitForText('Test User');
 
         this.mainPage.userDropdown.click();

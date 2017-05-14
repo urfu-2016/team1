@@ -3,11 +3,11 @@ import { bdd, runTest } from 'mocha-classes';
 
 import BrowserTestBase from '../bases/BrowserTestBase';
 
-const { describe, before, it } = bdd;
+const { describe, beforeEach, it } = bdd;
 
 @describe('Quest Page')
 class QuestPageTest extends BrowserTestBase {
-    @before
+    @beforeEach
     setUpDatabase() {
         this.quest = {title: 'FirstQuest', description: 'no description'};
         this.comments = [
@@ -41,7 +41,7 @@ class QuestPageTest extends BrowserTestBase {
         questPage.commentInput.setValue('');
         questPage.commentSubmitButton.click();
 
-        this.waitAbsent(questPage.getComment(2).text);
+        questPage.waitAbsent(questPage.getComment(2).text);
     }
 
     @it('should post comment')

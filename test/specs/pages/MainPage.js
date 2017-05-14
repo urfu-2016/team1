@@ -30,7 +30,7 @@ export default class MainPage extends PageBase {
     }
 
     waitQuests(questsCount) {
-        while (this.quests.value.length > questsCount) {
+        while (this.quests.value.length < questsCount) {
             this.quests = browser.elements('.questitem__item');
         }
     }
