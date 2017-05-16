@@ -36,15 +36,15 @@ export default class QuestionDescription extends React.Component {
         );
 
         const notAuthorized = (
-            <div className='questionDescription__auth' data-tid='need-authorization'>
-                Авторизуйтесь, чтобы принять участие вквесте
+            <div className='question-description__auth' data-tid='need-authorization'>
+                Авторизуйтесь, чтобы принять участие в квесте
             </div>
         );
 
         const isAuthor = parseInt(this.props.author) === parseInt(user.id);
 
         return (
-            <div className='questionDescription'>
+            <div className='question-description'>
                 <div className='question-photo'>
                     <div className='question-photo_wrapper'>
                         <img src={this.props.banner} alt='Фото квеста'/>
