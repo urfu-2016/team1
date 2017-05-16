@@ -22,7 +22,7 @@ export default class Question extends React.Component {
     componentDidMount() {
         const { GetQuestInfo, GetTasks } = this.props.pageActions;
         GetQuestInfo(this.props.params.id);
-        GetTasks(this.props.params.id);
+        GetTasks(this.props.params.id, false);
     }
 
     render() {

@@ -10,8 +10,6 @@ import TextareaInput from '../../controls/Textarea';
 import FileInput from '../../controls/File';
 import { checkFileInput, checkTextInput, checkInputForNumber } from '../../controls/utils';
 
-import QuestMap from '../../questmap/QuestMap';
-
 const mapStateToProps = state => ({quests: state.GetQuests});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
@@ -42,12 +40,15 @@ export default class CreateQuest extends React.Component {
         let lngInput = inputs[1].querySelector('input');
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
+            navigator.geolocation.getCurrentPosition((position) => {
                 latInput.value = position.coords.latitude;
                 latInput.parentNode.classList.add('custom-label_validation--true');
                 lngInput.value = position.coords.longitude;
                 lngInput.parentNode.classList.add('custom-label_validation--true');
-            });
+            }, (err) => {
+                console.log(err);
+            },
+                {timeout: 30000, enableHighAccuracy: true, maximumAge: 75000});
         } else {
            console.log('Sorry bro! But your browser doesn\'t support Geolocation')
         }
@@ -166,10 +167,6 @@ export default class CreateQuest extends React.Component {
 
                     <button type='submit' className='quest-data__submit' data-tid='create-quest-button'>Создать</button>
                 </form>
-
-                <div className='map'>
-                    <QuestMap />
-                </div>
             </div>
         );
     }

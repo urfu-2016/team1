@@ -44,7 +44,6 @@ export default class CreateQuest extends React.Component {
 
     render() {
         const { questInfo } = this.props;
-        console.info(questInfo);
         let newTask = [...Array(this.state.tasks)].map((_, i) => (
             <div key={i}>
                 <TextInput

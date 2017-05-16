@@ -55,7 +55,8 @@ router.post('/create', upload.any(), catchAsync(200, async req => {
     let placeModels = await Promise.all(places.map(place => models.Place.create({
         title: place.title,
         description: place.description,
-        coordinates: place.coordinates,
+        lat: place.lat,
+        lng: place.lng,
         path: files[place.file] ? files[place.file].path : IMAGE_PLUG
     })));
 
@@ -105,5 +106,46 @@ router.get('/progress/:id', catchAsync(200, async req => {
     const currentUser = await models.User.findById(req.params.id);
     return await currentUser.getQuests();
 }));
+
+router.post('/pass/id/:id', catchAsync(201, async req => {
+    let placeID = req.body.placeID;
+    let questID = req.body.questID;
+    let trueLat = req.body.trueCord.lat;
+    let trueLng = req.body.trueCord.lng;
+    let newLat = req.body.newCord.lat;
+    let newLng = req.body.newCord.lng;
+
+    let lat = ((trueLat + 0.0001 > newLat) && (trueLat - 0.0001 < newLat));
+    let lng = ((trueLng + 0.0001 > newLng) && (trueLng - 0.0001 < newLng));
+
+    if (lat && lng) {
+        let photo = await models.Photo.create({
+            url: '',
+            success: true,
+            UserId: req.user.id,
+            QuestId: questID,
+            PlaceId: placeID
+        });
+
+        return {success: true, placeID: placeID};
+    }
+
+    return {success: false, placeID: placeID};
+
+}));
+
+router.get('/passed/id/:id', (req, res)=> {
+    const id = req.params.id;
+
+    let photo = models.Photo.findAll({
+        where: {
+            $and: [
+                {UserId: req.user.id},
+                {QuestId: id}
+            ]
+        }
+    })
+        .then(photo => res.json(photo));
+});
 
 export default router;

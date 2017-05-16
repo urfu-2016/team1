@@ -15,8 +15,6 @@ export default class QuestionTask extends React.Component {
             );
         });
 
-        console.log(tasks);
-
         return (
             <div className='question-task'>
                 <div className='question-task__container'>
