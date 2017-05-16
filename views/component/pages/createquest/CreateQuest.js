@@ -10,12 +10,16 @@ import TextareaInput from '../../controls/Textarea';
 import FileInput from '../../controls/File';
 import { checkFileInput, checkTextInput, checkInputForNumber } from '../../controls/utils';
 
-const mapStateToProps = state => ({quests: state.GetQuests});
+const mapStateToProps = state => ({quests: state.GetQuests, user: state.userAuthorization});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class CreateQuest extends React.Component {
     state = {tasks: 1};
+
+    static propTypes = {
+        user: React.PropTypes.object.isRequired,
+    };
 
     @autobind
     submitForm(e) {
@@ -25,6 +29,7 @@ export default class CreateQuest extends React.Component {
             body: new FormData(e.target),
             credentials: 'include'
         });
+        document.querySelector('.createModal').style.display = 'flex';
     }
 
     @autobind
@@ -55,6 +60,14 @@ export default class CreateQuest extends React.Component {
     }
 
     render() {
+        const user = this.props.user;
+
+        if (!user.hasOwnProperty('username')) {
+            return (<div className='create-not-authorized'>
+                <h2>Чтобы создавать квесты, вы должны быть авторизованы</h2>
+            </div>)
+        }
+
         let newTask = [...Array(this.state.tasks)].map((_, i) => (
             <div key={i} className={`quest-data__item quest-data__item_number--${i}`}>
                 <TextInput
@@ -151,6 +164,12 @@ export default class CreateQuest extends React.Component {
 
         return (
             <div className='quest-data-wrap'>
+                <div className='createModal'>
+                    <div className='createModal_message'>
+                        <h2>Квест успешно создан</h2>
+                        <a href='/'>Перейти на главную</a>
+                    </div>
+                </div>
                 <form className='quest-data' onSubmit={this.submitForm}>
                     <div>
                         <h2 className='quest-data__title'>Инфа о квесте</h2>

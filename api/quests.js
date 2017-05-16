@@ -42,6 +42,7 @@ function uploadFile(file) {
 router.post('/create', upload.any(), catchAsync(200, async req => {
     let quest = req.body.quest;
     let places = req.body.places;
+    console.info(req);
 
     let files = await Promise.all(req.files.map(uploadFile)).then(makeMap(x => x.name));
 
@@ -86,16 +87,19 @@ router.post('/edit/:id', upload.any(), catchAsync(200, async req => {
     await Promise.all(placeModels.map(place => questModel.addPlace(place)));
 }));
 
-router.post('/delete/:id', function (req, res) {
-    const author = req.body.author;
-    if (parseInt(author) === parseInt(req.user.id)) {
-        models.Quest.destroy({where: {id: req.params.id}})
-            .then((rowDeleted) => {
-                if (rowDeleted === 1) {
-                    res.send(true);
-                }
-            });
-    }
+router.get('/delete/:id', function (req, res) {
+    models.Quest.findById(req.params.id)
+        .then(quest => {
+            if (parseInt(quest.author) === parseInt(req.user.id)) {
+                models.Quest.destroy({where: {id: req.params.id}})
+                    .then((rowDeleted) => {
+                        if (rowDeleted === 1) {
+                            res.send(true);
+                        }
+                    });
+            }
+        })
+        .catch(error => res.send(error));
 });
 
 router.get('/author/:id', catchAsync(200, async req => {

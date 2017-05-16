@@ -9,7 +9,7 @@ import TextInput from '../../controls/Text';
 import TextareaInput from '../../controls/Textarea';
 import FileInput from '../../controls/File';
 
-const mapStateToProps = state => ({questInfo: state.GetQuestInfo});
+const mapStateToProps = state => ({questInfo: state.GetQuestInfo, user: state.userAuthorization});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -18,12 +18,18 @@ export default class CreateQuest extends React.Component {
     static propTypes = {
         params: React.PropTypes.object.isRequired,
         pageActions: React.PropTypes.object.isRequired,
-        questInfo: React.PropTypes.object.isRequired
+        questInfo: React.PropTypes.object.isRequired,
+        user: React.PropTypes.object.isRequired
     };
 
     componentDidMount() {
         const {GetQuestInfo} = this.props.pageActions;
         GetQuestInfo(this.props.params.id);
+        [].slice.call(document.querySelectorAll('.quest-data label')).forEach(element => {
+                console.log(element);
+                element.classList.add('custom-label_validation--true')
+            }
+        )
     }
 
     @autobind
@@ -34,6 +40,7 @@ export default class CreateQuest extends React.Component {
             body: new FormData(e.target),
             credentials: 'include'
         });
+        document.querySelector('.createModal').style.display = 'flex';
     }
 
     @autobind
@@ -43,7 +50,21 @@ export default class CreateQuest extends React.Component {
     }
 
     render() {
+        const user = this.props.user;
+
+        if (!user.hasOwnProperty('username')) {
+            return (<div className='create-not-authorized'>
+                <h2>Чтобы редактировать квесты, вы должны быть авторизованы</h2>
+            </div>)
+        }
+
         const { questInfo } = this.props;
+
+        if (parseInt(user.id) !== parseInt(questInfo.author)) {
+            return (<div className='create-not-authorized'>
+                <h2>Вы не автор этого квеста</h2>
+            </div>)
+        }
         let newTask = [...Array(this.state.tasks)].map((_, i) => (
             <div key={i}>
                 <TextInput
@@ -106,7 +127,7 @@ export default class CreateQuest extends React.Component {
         };
 
         const questFile = {
-            label: 'Добавить/сделать фото задачи квеста',
+            label: 'Изменить фото задачи квеста',
             id: 'banner',
             name: 'quest[banner]',
             tid: 'quest-banner-input'
@@ -114,6 +135,12 @@ export default class CreateQuest extends React.Component {
 
         return (
             <div className='quest-data-wrap'>
+                <div className='createModal'>
+                    <div className='createModal_message'>
+                        <h2>Квест успешно отредактирован</h2>
+                        <a href='/'>Перейти на главную</a>
+                    </div>
+                </div>
                 <form className='quest-data' onSubmit={this.submitForm}>
                     <div>
                         <h2 className='quest-data__title'>Инфа о квесте</h2>

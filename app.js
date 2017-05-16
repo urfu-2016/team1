@@ -55,6 +55,7 @@ app.get('*', (req, res) => {
         } else if (redirect) {
             res.redirect(redirect.pathname + redirect.search)
         } else if (props) {
+            initialState.userAuthorization = req.user;
             const store = createStore(reducer, initialState);
 
             const appHtml = renderToString(
@@ -64,14 +65,14 @@ app.get('*', (req, res) => {
             );
 
             const preloadedState = store.getState();
-            res.send(renderFullPage(appHtml, req.user, preloadedState));
+            res.send(renderFullPage(appHtml, preloadedState));
         } else {
             res.status(404).send('Not Found')
         }
     })
 });
 
-function renderFullPage(html, user, preloadedState) {
+function renderFullPage(html, preloadedState) {
     return `
     <!doctype html>
     <html>
@@ -88,7 +89,6 @@ function renderFullPage(html, user, preloadedState) {
           // WARNING: See the following for security issues around embedding JSON in HTML:
           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
-          window.__USER__ = ${JSON.stringify(user)}
         </script>
         <script src="/index.js"></script>
       </body>

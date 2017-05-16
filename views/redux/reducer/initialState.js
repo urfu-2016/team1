@@ -3,5 +3,5 @@ export const initialState = {
     quests: [],
     success: false,
     error: false,
-    user: []
+    userAuthorization: []
 };

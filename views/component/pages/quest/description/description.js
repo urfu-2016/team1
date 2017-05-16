@@ -28,11 +28,15 @@ export default class QuestionDescription extends React.Component {
         const changeQuestButton = <Link to={`/quest/edit/${this.props.id}`} className='button' data-tid='quest-edit-link'>Редактировать квест</Link>;
 
         const deleteQuestButton = (
-            <a href='/' onClick={() => {this.props.pageActions.DeleteQuest(this.props.questId, this.props.author, user.id)}}
+            <button
+                onClick={() => {
+                    this.props.pageActions.DeleteQuest(this.props.questId);
+                    document.querySelector('.createModal').style.display = 'flex';
+                }}
                 className='button'
                 data-tid='quest-delete-link'>
                 Удалить квест
-            </a>
+            </button>
         );
 
         const notAuthorized = (
