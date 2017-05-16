@@ -10,7 +10,11 @@ import TextareaInput from '../../controls/Textarea';
 import FileInput from '../../controls/File';
 import { checkFileInput, checkTextInput, checkInputForNumber } from '../../controls/utils';
 
-const mapStateToProps = state => ({quests: state.GetQuests, user: state.userAuthorization});
+const mapStateToProps = state => ({
+    quests: state.GetQuests,
+    user: state.userAuthorization,
+    questInfo: state.GetQuestInfo
+});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -19,17 +23,14 @@ export default class CreateQuest extends React.Component {
 
     static propTypes = {
         user: React.PropTypes.object.isRequired,
+        pageActions: React.PropTypes.object.isRequired,
+        questInfo: React.PropTypes.object
     };
 
     @autobind
     submitForm(e) {
         e.preventDefault();
-        fetch('/api/quests/create', {
-            method: 'POST',
-            body: new FormData(e.target),
-            credentials: 'include'
-        });
-        document.querySelector('.createModal').style.display = 'flex';
+        this.props.pageActions.CreateQuest(e.target);
     }
 
     @autobind
@@ -162,14 +163,20 @@ export default class CreateQuest extends React.Component {
             validation: checkFileInput
         };
 
+        const { error, questCreated } = this.props.questInfo;
+
+        let modal = (
+            <div className='createModal'>
+                <div className='createModal_message'>
+                    <h2>{error && error.error ? error.error : 'Квест успешно создан'}</h2>
+                    <a href='/'>Перейти на главную</a>
+                </div>
+            </div>
+        );
+
         return (
             <div className='quest-data-wrap'>
-                <div className='createModal'>
-                    <div className='createModal_message'>
-                        <h2>Квест успешно создан</h2>
-                        <a href='/'>Перейти на главную</a>
-                    </div>
-                </div>
+                {(error || questCreated) ? modal : null}
                 <form className='quest-data' onSubmit={this.submitForm}>
                     <div>
                         <h2 className='quest-data__title'>Инфа о квесте</h2>

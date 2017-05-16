@@ -30,12 +30,6 @@ export default class Question extends React.Component {
 
         return (
             <main>
-                <div className='createModal'>
-                    <div className='createModal_message'>
-                        <h2>Квест успешно удален</h2>
-                        <a href='/'>Перейти на главную</a>
-                    </div>
-                </div>
                 <QuestionBanner />
                 <QuestionDescription id={questInfo.id} description={questInfo.description} title={questInfo.title}
                                      banner={questInfo.banner} author={questInfo.author} questId={this.props.params.id}/>

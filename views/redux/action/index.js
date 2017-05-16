@@ -23,6 +23,12 @@ import {
     POST_COMMENT_REQUEST, POST_COMMENT_SUCCESS, POST_COMMENT_ERROR
 } from '../constants/comments';
 import {
+    QUEST_CREATE_REQUEST,
+    QUEST_CREATE_SUCCESS,
+    QUEST_CREATE_ERROR,
+    QUEST_EDIT_REQUEST,
+    QUEST_EDIT_SUCCESS,
+    QUEST_EDIT_ERROR,
     QUEST_DELETE_REQUEST,
     QUEST_DELETE_SUCCESS,
     QUEST_DELETE_ERROR,
@@ -227,6 +233,76 @@ export function PostComment(comment, questId, userId) {
     }
 }
 
+export function CreateQuest(form) {
+    return dispatch => {
+        dispatch({
+            type: QUEST_CREATE_REQUEST,
+            isCreated: false,
+            error: null
+        });
+
+        fetch('/api/quests/create', {
+            method: 'POST',
+            body: new FormData(form),
+            credentials: 'include'
+        })
+            .then(response => {
+                let json = response.json();
+                if (response.status !== 500)
+                    return json;
+                return json.then(Promise.reject.bind(Promise));
+            })
+            .then(data => {
+                dispatch({
+                    type: QUEST_CREATE_SUCCESS,
+                    isCreated: true
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: QUEST_CREATE_ERROR,
+                    isCreated: false,
+                    error: error
+                });
+            });
+    }
+}
+
+export function EditQuest(id, form) {
+    return dispatch => {
+        dispatch({
+            type: QUEST_EDIT_REQUEST,
+            isCreated: false,
+            error: null
+        });
+
+        fetch(`/api/quests/edit/${id}`, {
+            method: 'POST',
+            body: new FormData(form),
+            credentials: 'include'
+        })
+            .then(response => {
+                let json = response.json();
+                if (response.status !== 500)
+                    return json;
+                return json.then(Promise.reject.bind(Promise));
+            })
+            .then(data => {
+                dispatch({
+                    type: QUEST_EDIT_SUCCESS,
+                    isEdited: true
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: QUEST_EDIT_ERROR,
+                    isEdited: false,
+                    error: error
+                });
+            });
+    }
+}
+
 export function DeleteQuest(questId) {
     return dispatch => {
         dispatch({
@@ -234,10 +310,13 @@ export function DeleteQuest(questId) {
             isDeleted: null
         });
 
-        fetch(`/api/quests/delete/${questId}`, {
-            credentials: 'include'
-        })
-            .then(response => response.json())
+        fetch(`/api/quests/delete/${questId}`, {credentials: 'include'})
+            .then(response => {
+                let json = response.json();
+                if (response.status !== 500)
+                    return json;
+                return json.then(Promise.reject.bind(Promise));
+            })
             .then(data => {
                 dispatch({
                     type: QUEST_DELETE_SUCCESS,
@@ -247,7 +326,8 @@ export function DeleteQuest(questId) {
             .catch(error => {
                 dispatch({
                     type: QUEST_DELETE_ERROR,
-                    isDeleted: false
+                    isDeleted: false,
+                    error: error
                 })
             })
     }

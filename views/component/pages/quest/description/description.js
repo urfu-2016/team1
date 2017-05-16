@@ -2,10 +2,15 @@ import React from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { autobind } from 'core-decorators';
 
 import * as pageActions from '../../../../redux/action/index';
 
-const mapStateToProps = state => ({user: state.userAuthorization});
+const mapStateToProps = state => ({
+    user: state.userAuthorization,
+    questInfo: state.GetQuestInfo
+});
+
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -18,8 +23,14 @@ export default class QuestionDescription extends React.Component {
         pageActions: React.PropTypes.object.isRequired,
         banner: React.PropTypes.string,
         author: React.PropTypes.string,
-        questId: React.PropTypes.string
+        questId: React.PropTypes.string,
+        questInfo: React.PropTypes.object
     };
+
+    @autobind
+    deleteQuest() {
+        this.props.pageActions.DeleteQuest(this.props.questId);
+    }
 
     render() {
         const user = this.props.user;
@@ -29,10 +40,7 @@ export default class QuestionDescription extends React.Component {
 
         const deleteQuestButton = (
             <button
-                onClick={() => {
-                    this.props.pageActions.DeleteQuest(this.props.questId);
-                    document.querySelector('.createModal').style.display = 'flex';
-                }}
+                onClick={this.deleteQuest}
                 className='button'
                 data-tid='quest-delete-link'>
                 Удалить квест
@@ -47,8 +55,20 @@ export default class QuestionDescription extends React.Component {
 
         const isAuthor = parseInt(this.props.author) === parseInt(user.id);
 
+        const { error, questDeleted } = this.props.questInfo;
+
+        let modal = (
+            <div className='createModal'>
+                <div className='createModal_message'>
+                    <h2>{error && error.error ? error.error : 'Квест успешно удален'}</h2>
+                    <a href='/'>Перейти на главную</a>
+                </div>
+            </div>
+        );
+
         return (
             <div className='question-description'>
+                {(error || questDeleted) ? modal : null}
                 <div className='question-photo'>
                     <div className='question-photo_wrapper'>
                         <img src={this.props.banner} alt='Фото квеста'/>

@@ -5,8 +5,15 @@ import {
     TASKS_REQUEST,
     TASKS_SUCCESS,
     TASKS_ERROR,
+    QUEST_CREATE_REQUEST,
+    QUEST_CREATE_SUCCESS,
+    QUEST_CREATE_ERROR,
+    QUEST_EDIT_REQUEST,
+    QUEST_EDIT_SUCCESS,
+    QUEST_EDIT_ERROR,
     QUEST_DELETE_SUCCESS,
     QUEST_DELETE_REQUEST,
+    QUEST_DELETE_ERROR,
     REQUEST_QUESTS_BY_AUTHOR,
     SUCCESS_QUESTS_BY_AUTHOR,
     ERROR_QUESTS_BY_AUTHOR,
@@ -20,9 +27,12 @@ import {
 const initialState = {
     questInfo: [],
     questTask: [],
-    questDelete: false,
     quests: [],
-    questsInProgress: []
+    questsInProgress: [],
+    questCreated: false,
+    questEdited: false,
+    questDeleted: false,
+    error: null
 };
 
 export default function GetQuestInfo(state = initialState, action) {
@@ -43,9 +53,35 @@ export default function GetQuestInfo(state = initialState, action) {
             return Object.assign({}, state, {
                 questTask: action.questTask
             });
+        case QUEST_CREATE_SUCCESS:
+            return Object.assign({}, state, {
+                questCreated: true,
+                error: null
+            });
+        case QUEST_CREATE_ERROR:
+            return Object.assign({}, state, {
+                questCreated: false,
+                error: action.error
+            });
+        case QUEST_EDIT_SUCCESS:
+            return Object.assign({}, state, {
+                questEdited: true,
+                error: null
+            });
+        case QUEST_EDIT_ERROR:
+            return Object.assign({}, state, {
+                questEdited: false,
+                error: action.error
+            });
         case QUEST_DELETE_SUCCESS:
             return Object.assign({}, state, {
-                questDelete: true
+                questDeleted: true,
+                error: null
+            });
+        case QUEST_DELETE_ERROR:
+            return Object.assign({}, state, {
+                error: action.error,
+                questDeleted: false
             });
         case REQUEST_QUESTS_BY_AUTHOR:
             return Object.assign({}, state, {

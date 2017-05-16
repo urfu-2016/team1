@@ -89,7 +89,6 @@ router.post('/edit/:id', upload.any(), catchAsync(200, async req => {
 
 router.get('/delete/:id', catchAsync(200, async req => {
     let quest = await models.Quest.findById(req.params.id);
-
     if (parseInt(quest.author) === parseInt(req.user.id)) {
         let rowsDeleted = await models.Quest.destroy({where: {id: req.params.id}});
         if (rowsDeleted !== 1) {

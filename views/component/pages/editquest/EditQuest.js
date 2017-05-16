@@ -35,12 +35,7 @@ export default class CreateQuest extends React.Component {
     @autobind
     submitForm(e) {
         e.preventDefault();
-        fetch(`/api/quests/edit/${this.props.params.id}`, {
-            method: 'POST',
-            body: new FormData(e.target),
-            credentials: 'include'
-        });
-        document.querySelector('.createModal').style.display = 'flex';
+        this.props.pageActions.EditQuest(this.props.params.id, e.target);
     }
 
     @autobind
@@ -138,14 +133,20 @@ export default class CreateQuest extends React.Component {
             tid: 'quest-banner-input'
         };
 
+        const { error, questEdited } = this.props.questInfo;
+
+        let modal = (
+            <div className='createModal'>
+                <div className='createModal_message'>
+                    <h2>{error && error.error ? error.error : 'Квест успешно отредактирован'}</h2>
+                    <a href='/'>Перейти на главную</a>
+                </div>
+            </div>
+        );
+        
         return (
             <div className='quest-data-wrap'>
-                <div className='createModal'>
-                    <div className='createModal_message'>
-                        <h2>Квест успешно отредактирован</h2>
-                        <a href='/'>Перейти на главную</a>
-                    </div>
-                </div>
+                {(error || questEdited) ? modal : null}
                 <form className='quest-data' onSubmit={this.submitForm}>
                     <div>
                         <h2 className='quest-data__title'>Инфа о квесте</h2>
