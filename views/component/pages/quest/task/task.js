@@ -1,29 +1,16 @@
 import React from 'react';
-import Slider from 'react-slick';
-
-import questionBanner from '../../../../source/img/plug.jpg';
 
 export default class QuestionTask extends React.Component {
     render() {
 
         const questTask = this.props.questTask;
 
-        const settings = {
-            className: 'center',
-            centerMode: true,
-            infinite: true,
-            centerPadding: '0px',
-            slidesToShow: 3,
-            speed: 1000
-        };
-
         let tasks = questTask.map((task) => {
             return (
-                <div key={task.id} className='question-task__item'>
-                    <div style={{backgroundImage: `url(${task.path})`}}>
-                        <h3>{task.title}</h3>
-                        <p>{task.description}</p>
-                    </div>
+                <div className='question-task__item'>
+                    <h3 className='question-task__title'>{task.title}</h3>
+                    <p className='question-task__description'>{task.description}</p>
+                    <img className='question-task__img' src={task.path} alt='Фотография места'/>
                 </div>
             );
         });
@@ -32,11 +19,11 @@ export default class QuestionTask extends React.Component {
 
         return (
             <div className='question-task'>
-                <Slider {...settings}>
+                <div className='question-task__container'>
                     {
                         tasks.length > 0 ? tasks : <div></div>
                     }
-                </Slider>
+                </div>
             </div>
         );
     }

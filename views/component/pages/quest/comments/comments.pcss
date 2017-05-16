@@ -4,22 +4,24 @@
 }
 
 .comments-label {
+    padding: 10px 0;
     margin-top: 0;
+    margin-bottom: 0;
 }
 
-.comment {
-    position: relative;
-    margin: 0 20px 10px 10px;
-    overflow: hidden;
-    display: flex;
+.comments {
     color: $yellow;
-}
 
-.comment-username {
-    position: relative;
-    color: $yellow;
-    font-size: 1.2em;
-    margin-left: 10px;
+    &__container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 10px 0;
+    }
+
+    &__form {
+        padding: 10px 0;
+    }
 }
 
 .comment-break {
@@ -27,4 +29,13 @@
     color: $yellow;
     background-color: $yellow;
     height: 1px;
+}
+
+.comment {
+    padding: 10px;
+
+    &-username {
+        padding-left: 10px;
+        padding-top: 10px;
+    }
 }

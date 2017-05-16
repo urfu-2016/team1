@@ -79,9 +79,11 @@ export default class QuestionComments extends React.Component {
 
         return (
             <div className='comments'>
-                <div className='custom-label comments-label'>Комментарии</div>
-                {comments}
-                {user.hasOwnProperty('username') ? commentForm : null}
+                <div className='comments__container'>
+                    <div className='custom-label comments-label'>Комментарии</div>
+                    {comments}
+                    {user.hasOwnProperty('username') ? commentForm : null}
+                </div>
             </div>
         );
     }

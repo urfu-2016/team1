@@ -1,15 +1,15 @@
-.questionDescription {
+.question-description {
     position: relative;
     overflow: hidden;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
     background: $graydark;
     border-bottom: 2px solid $yellow;
+    padding: 10px;
 
     & .question-photo {
-        margin: 30px 0;
-        width: 40%;
-
+        max-width: 500px;
         &_wrapper {
             width: 100%;
             overflow: hidden;
@@ -37,11 +37,12 @@
     }
 
     & .question-info {
-        width: 40%;
+        flex-basis: 400px;
+        padding: 10px 20px;
 
         &_title {
-            margin-top: 30px;
-            margin-bottom: 30px;
+            margin-top: 10px;
+            margin-bottom: 10px;
             font-size: 30px;
             color: $yellow;
         }
@@ -79,5 +80,6 @@
     &__auth {
         color: $yellow;
         margin-top: 10px;
+        padding: 0 20px;
     }
 }

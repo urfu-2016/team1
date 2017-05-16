@@ -1,85 +1,52 @@
 .question-task {
-    position: relative;
-    padding: 30px 0;
+    display: flex;
+    justify-content: space-around;
     background: $graydark;
     border-bottom: 2px solid $yellow;
     overflow: hidden;
     white-space: nowrap;
 
+    &__container {
+        width: 100%;
+        max-width: 500px;
+    }
+
     &__item {
-        display: inline-block;
-        width: 430px;
-        height: 224px;
-        padding: 0 20px;
+        padding: 10px;
+        margin: 20px 0;
         box-sizing: border-box;
-        overflow: hidden;
+        border: 2px solid $yellow;
+        border-radius: 6px;
+        position: relative;
+    }
 
-        & > div {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 2px solid $yellow;
-            box-shadow: 0 0 10px #000;
-            border-radius: 6px;
-            background-size: cover;
-            background-position: center;
-            white-space: normal;
+    &__title {
+        font-size: 18px;
+        color: #ffd520;
+    }
 
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.6);
-                transition: all .2s ease-in-out;
-            }
+    &__description {
+        font-size: 14px;
+        color: #ffd520;
+        margin-bottom: 10px;
+    }
 
-            & h3 {
-                font-size: 16px;
-            }
-        }
+    &__img {
+        width: 100%;
+        height: auto;
+    }
+
+    &__photo {
+        height: 300px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 2px solid $yellow;
+        background-size: cover;
+        background-position: center;
+        white-space: normal;
     }
 }
 
-.slick {
-
-    &-slide {
-        transition: all .3s ease-in-out;
-    }
-
-    &-center {
-        transform: scale(1.14);
-
-        & > div {
-
-            &::after {
-                background-color: transparent;
-            }
-        }
-    }
-
-    &-arrow {
-        position: absolute;
-        top: 50%;
-        margin-top: -40px;
-        width: 40px;
-        height: 80px;
-        border: none;
-        outline: none;
-        background-color: #ccc;
-        color: transparent;
-        z-index: 1000;
-    }
-
-    &-prev {
-        left: 40px;
-    }
-
-    &-next {
-        right: 40px;
-    }
+.slick-custom__dots {
+    color: #ffd520;
 }
