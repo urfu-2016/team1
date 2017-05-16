@@ -60,7 +60,7 @@ export default class QuestionDescription extends React.Component {
                         <span data-tid='quest-author'>
                             Автор:
                             <Link className='question-info_text__link' to={`/profile/${this.props.author}`} data-tid='quest-author-link'>
-                                Автор квеста
+                                 Автор квеста
                             </Link>
                         </span>
                     </div>
