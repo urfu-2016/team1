@@ -6,7 +6,7 @@ import { autobind } from 'core-decorators';
 import * as pageActions from '../../../../redux/action/index';
 import checkTextInput from '../../../controls/utils';
 
-const mapStateToProps = state => ({comments: state.GetComments, user: state.userAuthorization});
+const mapStateToProps = state => ({comments: state.GetComments});
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
 
 @connect(mapStateToProps, mapDispatchToProps)
