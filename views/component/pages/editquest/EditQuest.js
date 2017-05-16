@@ -53,18 +53,23 @@ export default class CreateQuest extends React.Component {
         const user = this.props.user;
 
         if (!user.hasOwnProperty('username')) {
-            return (<div className='create-not-authorized'>
-                <h2>Чтобы редактировать квесты, вы должны быть авторизованы</h2>
-            </div>)
+            return (
+                <div className='create-not-authorized'>
+                    <h2>Чтобы редактировать квесты, вы должны быть авторизованы</h2>
+                </div>
+            )
         }
 
         const { questInfo } = this.props;
 
-        if (parseInt(user.id) !== parseInt(questInfo.author)) {
-            return (<div className='create-not-authorized'>
-                <h2>Вы не автор этого квеста</h2>
-            </div>)
+        if (parseInt(user.id) !== parseInt(questInfo.questInfo.author)) {
+            return (
+                <div className='create-not-authorized'>
+                    <h2>Вы не автор этого квеста</h2>
+                </div>
+            )
         }
+
         let newTask = [...Array(this.state.tasks)].map((_, i) => (
             <div key={i}>
                 <TextInput

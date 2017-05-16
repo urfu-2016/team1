@@ -87,20 +87,16 @@ router.post('/edit/:id', upload.any(), catchAsync(200, async req => {
     await Promise.all(placeModels.map(place => questModel.addPlace(place)));
 }));
 
-router.get('/delete/:id', function (req, res) {
-    models.Quest.findById(req.params.id)
-        .then(quest => {
-            if (parseInt(quest.author) === parseInt(req.user.id)) {
-                models.Quest.destroy({where: {id: req.params.id}})
-                    .then((rowDeleted) => {
-                        if (rowDeleted === 1) {
-                            res.send(true);
-                        }
-                    });
-            }
-        })
-        .catch(error => res.send(error));
-});
+router.get('/delete/:id', catchAsync(200, async req => {
+    let quest = await models.Quest.findById(req.params.id);
+
+    if (parseInt(quest.author) === parseInt(req.user.id)) {
+        let rowsDeleted = await models.Quest.destroy({where: {id: req.params.id}});
+        if (rowsDeleted !== 1) {
+            throw new Error(`Expected 1 row to be deleted, got ${rowsDeleted}`);
+        }
+    }
+}));
 
 router.get('/author/:id', catchAsync(200, async req => {
     return await models.Quest.findAll({where: {author: req.params.id}})
