@@ -32,18 +32,21 @@ const initialState = {
     questCreated: false,
     questEdited: false,
     questDeleted: false,
-    error: null
+    error: null,
+    questFetching: true
 };
 
 export default function GetQuestInfo(state = initialState, action) {
     switch (action.type) {
         case QUEST_INFO_REQUEST:
             return Object.assign({}, state, {
-                questInfo: action.questInfo
+                questInfo: action.questInfo,
+                questFetching: true
             });
         case QUEST_INFO_SUCCESS:
             return Object.assign({}, state, {
-                questInfo: action.questInfo
+                questInfo: action.questInfo,
+                questFetching: false
             });
         case TASKS_REQUEST:
             return Object.assign({}, state, {

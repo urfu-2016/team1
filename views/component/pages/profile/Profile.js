@@ -26,15 +26,31 @@ export default class Profile extends React.Component {
 
     render() {
         const profile = this.props.profile.profile;
+        const profileFetching = this.props.profile.profileFetching;
+
+        if (profile === null) {
+            return (
+                <div className='error-message-page'>
+                    {profileFetching ? '' : null}
+                    <h2>Пользователь с таким id пока что не зарегистрирован</h2>
+                </div>
+            )
+        }
+
         const quests = this.props.quest.quests;
         const socId = profile.fbId ? `https://www.facebook.com/profile.php?id=${profile.fbId}` : `https://vk.com/id${profile.vkId}`;
         const socName = profile.fbId ? 'в Facebook' : 'Вконтакте';
+
+        const profileBlock = (
+            <div className='profile'>
+                <UserAvatar photo={profile.fullPhoto} fbId={profile.fbId}/>
+                <UserInformation username={profile.username} socId={socId} socName={socName} authorQuests={quests}/>
+            </div>
+        );
+
         return (
             <div className='profile-wrapper'>
-                <div className='profile'>
-                    <UserAvatar photo={profile.fullPhoto} fbId={profile.fbId}/>
-                    <UserInformation username={profile.username} socId={socId} socName={socName} authorQuests={quests}/>
-                </div>
+                {profileFetching ? '' : profileBlock}
             </div>
         );
     }

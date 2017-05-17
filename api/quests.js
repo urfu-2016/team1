@@ -3,7 +3,7 @@ import cloudinary from 'cloudinary';
 import multer from 'multer';
 
 import models from '../models';
-import { getQuestsByName, makeMap, catchAsync } from './utils';
+import { getQuestsByName, makeMap, catchAsync, normalize } from './utils';
 
 const IMAGE_PLUG = 'http://diskaunter44.ru/image/cache/catalog/photo/1783890_0-500x500.jpg';
 
@@ -15,11 +15,21 @@ router.get('/', function (req, res) {
         .then(quests => res.json(quests));
 });
 
-router.get('/id/:id', function (req, res) {
-    const id = req.params.id;
-    models.Quest.findById(id)
-        .then(quest => res.json(quest));
-});
+router.get('/id/:id', catchAsync(200, async (req, res) => {
+    let quest = await models.Quest.findById(req.params.id);
+
+    try {
+        let places = await quest.getPlaces();
+        quest = normalize(quest);
+        places = normalize(places);
+        places.forEach(item => delete item.QuestPlace);
+        quest.places = places;
+    } catch (err) {
+        quest = null;
+    }
+
+    return quest;
+}));
 
 router.get('/place/id/:id', function (req, res) {
     const id = req.params.id;
