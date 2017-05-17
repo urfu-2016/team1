@@ -25,7 +25,7 @@ router.get('/id/:id', catchAsync(200, async (req, res) => {
         places.forEach(item => delete item.QuestPlace);
         quest.places = places;
     } catch (err) {
-        res.status(404).send('Not found');
+        quest = null;
     }
 
     return quest;

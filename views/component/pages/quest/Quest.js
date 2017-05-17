@@ -29,7 +29,6 @@ export default class Question extends React.Component {
         const {questInfo, questTask, questFetching} = this.props.questInfo;
 
         if (questInfo === null) {
-            console.info(questFetching);
             return (
                 <div className='error-message-page'>
                     {questFetching ? '' : null}
