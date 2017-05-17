@@ -1,62 +1,30 @@
 .banner {
-    position: relative;
-    height: 600px;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.4);
-    transition: height .2s ease-in-out;
-    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 50vh;
+    background: url('source/img/main_banner.jpg') center/cover no-repeat;
+    font-family: 'Poiret One', sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    color: $yellow;
 
-    @media (--tablet) {
-        height: 300px;
-    }
-
-    @media (--mobile-mobile-sm) {
-        display: block;
-    }
-
-    & img {
-        position: relative;
-        top: -100px;
-        width: 100%;
-        z-index: -1;
-    }
-
-    & span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 700px;
-        margin-left: -250px;
-        font-size: 70px;
-        font-family: 'Poiret One', sans-serif;
-        font-weight: 700;
-        color: $yellow;
-        text-align: right;
-
-        @media (--tablet) {
-            right: 40px;
-            left: auto;
-            margin-top: -82px;
-        }
-    }
-
-    & a {
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        display: block;
-        width: 250px;
-        height: 40px;
-        margin-left: -125px;
-        line-height: 40px;
+    &__slogan {
+        flex: none;
         text-align: center;
+        max-width: 500px;
+    }
+
+    &__create-quest {
+        flex: none;
+        font-size: .5em;
+        padding: .2em .3em;
         border: 2px solid $yellow;
         border-radius: 4px;
         color: $yellow;
-        font-size: 30px;
-        font-family: 'Poiret One', sans-serif;
-        font-weight: 600;
         text-decoration: none;
+        margin: 20px 0;
     }
 }
 
