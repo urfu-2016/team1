@@ -143,7 +143,7 @@ export default class CreateQuest extends React.Component {
                 </div>
             </div>
         );
-        
+
         return (
             <div className='quest-data-wrap'>
                 {(error || questEdited) ? modal : null}
@@ -161,7 +161,7 @@ export default class CreateQuest extends React.Component {
                         {this.state.tasks >= 10 ? null : addButton}
                     </div>
 
-                    <button type='submit' className='quest-data__submit' data-tid='create-quest-button'>Отредактировать квест</button>
+                    <button type='submit' className='quest-data__submit' data-tid='create-quest-button'>Отредактировать</button>
                 </form>
             </div>
         );
