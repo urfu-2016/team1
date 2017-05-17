@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(CONNECTION_STRING || process.env.CONNECTION_STRING);
+const sequelize = new Sequelize(global.CONNECTION_STRING || process.env.CONNECTION_STRING);
 
 const models = {
     Comment: require('./comment')(sequelize, Sequelize.DataTypes),
