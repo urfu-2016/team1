@@ -27,6 +27,9 @@ import {
     QUEST_DELETE_REQUEST,
     QUEST_DELETE_SUCCESS,
     QUEST_DELETE_ERROR,
+    QUEST_START_REQUEST,
+    QUEST_START_SUCCESS,
+    QUEST_START_ERROR,
     SUCCESS_QUESTS_BY_AUTHOR,
     ERROR_QUESTS_BY_AUTHOR,
     REQUEST_QUESTS_BY_AUTHOR,
@@ -322,6 +325,31 @@ export function DeleteQuest(questId) {
                 dispatch({
                     type: QUEST_DELETE_ERROR,
                     isDeleted: false,
+                    error: error
+                })
+            })
+    }
+}
+
+export function StartQuest(id) {
+    return dispatch => {
+        dispatch({
+            type: QUEST_START_REQUEST
+        });
+
+        fetch(`/api/quests/start/${id}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include'
+        })
+            .then(start => {
+                dispatch({
+                    type: QUEST_START_SUCCESS
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: QUEST_START_ERROR,
                     error: error
                 })
             })

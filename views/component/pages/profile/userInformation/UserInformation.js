@@ -5,13 +5,19 @@ export default class UserInformation extends React.Component {
         username: React.PropTypes.string,
         socId: React.PropTypes.string.isRequired,
         socName: React.PropTypes.string.isRequired,
-        authorQuests: React.PropTypes.object.isRequired
+        authorQuests: React.PropTypes.object.isRequired,
+        questsInProgress: React.PropTypes.object.isRequired
     };
 
     render() {
-        const {username, socId, socName, authorQuests} = this.props;
+        const {username, socId, socName, authorQuests, questsInProgress} = this.props;
         let mappedAuthorQuests = authorQuests ? [].slice.call(authorQuests).map((quest, index) => (
-            <a className='userInformation__link' href={`/quest/${quest.id}`} data-tid={`user-created-quest-${index}`}>{index + 1} {quest.title}</a>)) : '';
+            <a className='userInformation__link' href={`/quest/${quest.id}`}
+               data-tid={`user-created-quest-${index}`}>{index + 1} {quest.title}</a>)) : '';
+
+        let mappedCurrentQuests = questsInProgress ? [].slice.call(questsInProgress).map((quest, index) => (
+            <a className='userInformation__link' href={`/quest/${quest.id}`}
+               data-tid={`user-playinng-quest-${index}`}>{index + 1} {quest.title}</a>)) : '';
 
         return (
             <div className='userInformation'>
@@ -24,6 +30,7 @@ export default class UserInformation extends React.Component {
                     </div>
                     <div className='userInformation__questInfo_participant'>
                         <h4>Участник квестов:</h4>
+                        {mappedCurrentQuests}
                     </div>
                 </div>
             </div>

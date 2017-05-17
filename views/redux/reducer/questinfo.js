@@ -21,7 +21,10 @@ import {
     QUESTS_IN_PROGRESS_SUCCESS,
     QUESTS_IN_PROGRESS_ERROR,
     PASS_TASK_SUCCESS,
-    FINED_SUCCESS_TASKS
+    FINED_SUCCESS_TASKS,
+    QUEST_START_REQUEST,
+    QUEST_START_SUCCESS,
+    QUEST_START_ERROR
 } from '../constants/questinfo';
 
 const initialState = {
@@ -33,7 +36,8 @@ const initialState = {
     questEdited: false,
     questDeleted: false,
     error: null,
-    questFetching: true
+    questFetching: true,
+    questStarted: false
 };
 
 export default function GetQuestInfo(state = initialState, action) {
@@ -80,6 +84,14 @@ export default function GetQuestInfo(state = initialState, action) {
             return Object.assign({}, state, {
                 questDeleted: true,
                 error: null
+            });
+        case QUEST_START_REQUEST:
+            return Object.assign({}, state, {
+                questStarted: false
+            });
+        case QUEST_START_SUCCESS:
+            return Object.assign({}, state, {
+                questStarted: true
             });
         case QUEST_DELETE_ERROR:
             return Object.assign({}, state, {

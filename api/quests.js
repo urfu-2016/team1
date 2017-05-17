@@ -158,4 +158,11 @@ router.get('/passed/id/:id', (req, res)=> {
         .then(photo => res.json(photo));
 });
 
+router.post('/start/:id', catchAsync(201, async req => {
+    let user = await models.User.findById(req.user.id);
+    let quest = await models.Quest.findById(req.params.id);
+
+    await user.addQuest(quest);
+}));
+
 export default router;

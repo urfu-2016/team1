@@ -32,10 +32,15 @@ export default class QuestionDescription extends React.Component {
         this.props.pageActions.DeleteQuest(this.props.questId);
     }
 
+    @autobind()
+    startQuest() {
+        this.props.pageActions.StartQuest(this.props.questId);
+    }
+
     render() {
         const user = this.props.user;
 
-        const participantButton = <Link to={`/quest/${this.props.id}/start`} className='button'>Принять участие</Link>;
+        const participantButton = <Link to={`/quest/${this.props.id}/start`} onClick={this.startQuest} className='button'>Принять участие</Link>;
         const changeQuestButton = <Link to={`/quest/edit/${this.props.id}`} className='button' data-tid='quest-edit-link'>Редактировать квест</Link>;
 
         const deleteQuestButton = (
