@@ -20,11 +20,10 @@ export default class Banner extends React.Component {
         const user = this.props.user;
         return (
             <div className='banner'>
-                <img src={banner} alt='banner'/>
-                <span>
+                <span className='banner__slogan'>
                     Просто создай себе настроение!
                 </span>
-                {user.hasOwnProperty('username') ? <Link to='/createquest' data-tid='createquest-link'>Create your quest</Link> : ''}
+                {user.hasOwnProperty('username') ? <Link className='banner__create-quest' to='/createquest' data-tid='createquest-link'>Create your quest</Link> : ''}
             </div>
         );
     }
