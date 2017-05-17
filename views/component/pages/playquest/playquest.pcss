@@ -1,0 +1,111 @@
+.playquest {
+    padding: 40px 30px;
+    background-color: rgba(50, 55, 57, .9);
+
+    & h2 {
+        font-size: 28px;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        color: $blueviolet;
+        text-shadow: 0 0 10px rgba(0, 0, 0, .9);
+    }
+}
+
+.tasks {
+    max-width: 1360px;
+    margin: 0 auto;
+
+    @media (--all) {
+        width: auto;
+    }
+
+    &__item {
+        position: relative;
+        width: 500px;
+        height: 360px;
+        margin: 40px 0;
+        border-radius: 6px;
+        border: 4px solid $blueviolet;
+        box-shadow: 0 0 10px $blueviolet;
+        box-sizing: border-box;
+
+        @media (--mobile-mobile-sm) {
+            width: auto;
+        }
+
+        &-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &_passed {
+
+            &--true {
+                border: 4px solid $turquoise;
+                box-shadow: 0 0 10px $turquoise;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, .6);
+                    z-index: 10;
+                }
+
+                &::before {
+                    content: '✔';
+                    position: absolute;
+                    top: -46px;
+                    right: -30px;
+                    font-size: 90px;
+                    color: $turquoise;
+                    z-index: 20;
+                }
+            }
+        }
+
+        &-check {
+            position: absolute;
+            top: 16px;
+            right: 30px;
+            min-width: 60px;
+            min-height: 60px;
+            border-radius: 50%;
+            padding: 21px 10px;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: 600;
+            background-color: rgba(249, 0, 218, .5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .5), inset 0 2px 4px rgba(255, 255, 255, .4);
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                top: 18px;
+                box-shadow: 0 0 4px rgba(0, 0, 0, .5), inset 0 2px 4px rgba(255, 255, 255, .4);
+            }
+        }
+
+        &-success {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -45px;
+            margin-left: -130px;
+            text-align: center;
+            font-size: 90px;
+            color: $turquoise;
+            font-weight: 600;
+            z-index: 20;
+            transform: rotate(-45deg);
+        }
+    }
+}

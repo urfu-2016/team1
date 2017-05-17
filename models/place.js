@@ -10,13 +10,17 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
-        coordinates: {
+        lat: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        lng: {
             type: DataTypes.STRING,
             allowNull: false
         },
         path: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         }
     }, {
         classMethods: {

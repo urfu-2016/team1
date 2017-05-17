@@ -12,7 +12,9 @@ import {
     ERROR_QUESTS_BY_AUTHOR,
     QUESTS_IN_PROGRESS_REQUEST,
     QUESTS_IN_PROGRESS_SUCCESS,
-    QUESTS_IN_PROGRESS_ERROR
+    QUESTS_IN_PROGRESS_ERROR,
+    PASS_TASK_SUCCESS,
+    FINED_SUCCESS_TASKS
 } from '../constants/questinfo';
 
 const initialState = {
@@ -68,6 +70,35 @@ export default function GetQuestInfo(state = initialState, action) {
         case QUESTS_IN_PROGRESS_ERROR:
             return Object.assign({}, state, {
                 questsInProgress: action.error
+            });
+        case PASS_TASK_SUCCESS:
+            let tasks = state.questTask.map((task) => {
+                if (task.id === action.palceID) {
+                    task.success = action.success;
+
+                    return task;
+                }
+
+                return task;
+            });
+            return Object.assign({}, state, {
+                questTask: tasks
+            });
+        case FINED_SUCCESS_TASKS:
+            let successTasks = action.questTask.map((task) => {
+                action.successTask.forEach((success) => {
+                    if (task.id === success.PlaceId) {
+                        task.success = success.success;
+
+                        return task;
+                    }
+                });
+
+                return task;
+            });
+
+            return Object.assign({}, state, {
+                questTask: successTasks
             });
         default:
             return state;

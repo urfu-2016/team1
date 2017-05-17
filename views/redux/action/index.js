@@ -1,6 +1,7 @@
 import { ALL_QUESTS_REQUEST, ALL_QUESTS_SUCCESS, ALL_QUESTS_ERROR } from '../constants/allquests';
 import { SOME_QUESTS_REQUEST, SOME_QUESTS_SUCCESS, SOME_QUESTS_ERROR} from '../constants/somequests';
-import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR, TASKS_REQUEST, TASKS_SUCCESS, TASKS_ERROR} from '../constants/questinfo';
+import { QUEST_INFO_REQUEST, QUEST_INFO_SUCCESS, QUEST_INFO_ERROR, TASKS_REQUEST, TASKS_SUCCESS,
+        TASKS_ERROR, PASS_TASK_REQUEST, PASS_TASK_SUCCESS, PASS_TASK_ERROR, FINED_SUCCESS_TASKS } from '../constants/questinfo';
 import { SET_SPINNER, REMOVE_SPINNER } from '../constants/spinner';
 import { USER_INFO_REQUEST, USER_INFO_SUCCESS } from '../constants/users';
 import { AUTH_INFO_REQUEST, AUTH_INFO_SUCCESS } from '../constants/auth';
@@ -91,26 +92,43 @@ export function GetQuestInfo(id) {
     }
 }
 
-export function GetTasks(id) {
+export function GetTasks(id, compare) {
     return (dispatch) => {
         dispatch({
             type: TASKS_REQUEST,
             questTask: []
         });
 
-        fetch(`/api/quests/place/id/${id}`)
-            .then(response => response.json())
-            .then(tasks => {
-                dispatch({
-                    type: TASKS_SUCCESS,
-                    questTask: tasks
-                });
-            })
-            .catch(err => {
-                dispatch({
-                    type: TASKS_ERROR,
-                    error: true
+        Promise.all(
+            [
+                fetch(`/api/quests/place/id/${id}`)
+                    .then(response => response.json())
+                    .then(tasks => {
+                        return tasks;
+                    }),
+                fetch(`/api/quests/passed/id/${id}`, {
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: 'include'
                 })
+                    .then(response => response.json())
+                    .then(tasks => {
+                        return tasks;
+                    })
+            ]
+        )
+            .then(tasks => {
+                if (!compare) {
+                    dispatch({
+                        type: TASKS_SUCCESS,
+                        questTask: tasks[0]
+                    });
+                } else {
+                    dispatch({
+                        type: FINED_SUCCESS_TASKS,
+                        questTask: tasks[0],
+                        successTask: tasks[1]
+                    });
+                }
             });
     }
 }
@@ -130,7 +148,7 @@ export function getAuthorizationInfo() {    return dispatch => {
                     type: AUTH_INFO_SUCCESS,
                     user: user
                 });
-                })
+            })
     }
 }
 
@@ -277,3 +295,40 @@ export function GetUserQuestsInProgress(id) {
             })
     }
 }
+
+export function checkCoordinates(placeID, questID, newCord, trueCord) {
+    return dispatch => {
+        dispatch({
+            type: PASS_TASK_REQUEST,
+            isFetching: true
+        });
+
+        fetch(`/api/quests/pass/id/${placeID}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                placeID: placeID,
+                questID: questID,
+                newCord: newCord,
+                trueCord: trueCord}),
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                dispatch({
+                    type: PASS_TASK_SUCCESS,
+                    error: false,
+                    success: data.success,
+                    palceID: data.placeID
+                })
+            })
+            .catch((e) => {
+                dispatch({
+                    type: PASS_TASK_ERROR,
+                    error: true,
+                    message: e.message
+                })
+            });
+    }
+}
+

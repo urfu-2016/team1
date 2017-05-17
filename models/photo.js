@@ -5,6 +5,10 @@ module.exports = function(sequelize, DataTypes) {
         url: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        success: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     }, {
         classMethods: {

@@ -30,6 +30,8 @@ class CreateQuestTest extends BrowserTestBase {
         place.titleInput.setValue('Place 1');
         place.descriptionInput.setValue('Place description');
         place.bannerInput.chooseFile(path.resolve(__dirname, 'files', 'plug.jpg'));
+        place.latitudeInput.setValue('60');
+        place.longitudeInput.setValue('50');
 
         createQuestPage.createQuestButton.click();
 
