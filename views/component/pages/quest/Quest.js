@@ -26,15 +26,30 @@ export default class Question extends React.Component {
     }
 
     render() {
-        const {questInfo, questTask} = this.props.questInfo;
+        const {questInfo, questTask, questFetching} = this.props.questInfo;
 
-        return (
-            <main>
+        if (questInfo === null) {
+            console.info(questFetching);
+            return (
+                <div className='error-message-page'>
+                    {questFetching ? '' : null}
+                    <h2>Такой квест пока что не создан</h2>
+                </div>
+            )
+        }
+        const questBlock = (
+            <div>
                 <QuestionBanner />
                 <QuestionDescription id={questInfo.id} description={questInfo.description} title={questInfo.title}
                                      banner={questInfo.banner} author={questInfo.author} questId={this.props.params.id}/>
                 <QuestionTask questTask={questTask}/>
                 <QuestionComments questId={this.props.params.id}/>
+            </div>
+        );
+
+        return (
+            <main>
+                {questFetching ? '' : questBlock}
             </main>
         );
     }

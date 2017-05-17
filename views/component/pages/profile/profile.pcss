@@ -1,11 +1,16 @@
 @import 'userAvatar/userAvatar.pcss';
 @import 'userInformation/userInformation.pcss';
 
+.error-message-page {
+    color: $yellow;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
 .profile {
     width: auto;
     margin: 0 auto;
     overflow: hidden;
-    border: solid 1px;
     padding: 40px 30px;
     display: flex;
     flex-direction: row;
@@ -17,9 +22,5 @@
     @media (--mobile-mobile-sm) {
         display: flex;
         flex-direction: column;
-    }
-
-    &-wrapper {
-        background-color: rgba(50, 55, 57, .9);
     }
 }
