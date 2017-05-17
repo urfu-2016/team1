@@ -16,7 +16,7 @@ export function catchAsync(statusCode, fn) {
             .then(data => res.status(statusCode).json(data))
             .catch(err => {
                 console.log(err);
-                res.status(500).json({error: err});
+                res.status(500).json({error: err.toString()});
             });
     }
 }

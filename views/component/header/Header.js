@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -14,17 +13,6 @@ export default class Header extends React.Component {
     static propTypes = {
         user: React.PropTypes.object.isRequired,
     };
-
-    constructor(props) {
-        super(props);
-        this.state = {isMounted: false};
-    }
-
-    componentDidMount() {
-        this.setState({isMounted: true});
-        console.log('*');
-        console.log(this.props);
-    }
 
     render() {
         const user = this.props.user;
@@ -65,7 +53,7 @@ export default class Header extends React.Component {
                     <div className='header__logo'>
                         <Logo />
                     </div>
-                    {this.state.isMounted ? (user.username ? registeredBlock : registrationBlock): ''}
+                    {user.username ? registeredBlock : registrationBlock}
                 </div>
             </header>
         );
