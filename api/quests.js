@@ -124,8 +124,10 @@ router.post('/pass/id/:id', catchAsync(201, async req => {
     let newLat = req.body.newCord.lat;
     let newLng = req.body.newCord.lng;
 
-    let lat = ((trueLat + 0.0001 > newLat) && (trueLat - 0.0001 < newLat));
-    let lng = ((trueLng + 0.0001 > newLng) && (trueLng - 0.0001 < newLng));
+    const eps = 0.001;
+
+    let lat = Math.abs(trueLat - newLat) < eps;
+    let lng = Math.abs(trueLng - newLng) < eps;
 
     if (lat && lng) {
         let photo = await models.Photo.create({
@@ -140,7 +142,6 @@ router.post('/pass/id/:id', catchAsync(201, async req => {
     }
 
     return {success: false, placeID: placeID};
-
 }));
 
 router.get('/passed/id/:id', (req, res)=> {
