@@ -26,6 +26,7 @@
 
     "prestart": "npm i",
     "start": "npm-run-all prod:*",
+
     "prod:build": "webpack --config webpack.prodconf.js && webpack --config webpack.serverconf.js",
     "prod:deploy": "surge -p ./public -d team1.surge.sh",
     "prod:run": "node ./bin/server.js"
