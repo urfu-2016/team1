@@ -37,16 +37,16 @@ export default class Profile extends React.Component {
             )
         }
 
+        const quests = this.props.quest.quests;
+        const socId = profile.fbId ? `https://www.facebook.com/profile.php?id=${profile.fbId}` : `https://vk.com/id${profile.vkId}`;
+        const socName = profile.fbId ? 'в Facebook' : 'Вконтакте';
+
         const profileBlock = (
             <div className='profile'>
                 <UserAvatar photo={profile.fullPhoto} fbId={profile.fbId}/>
                 <UserInformation username={profile.username} socId={socId} socName={socName} authorQuests={quests}/>
             </div>
         );
-
-        const quests = this.props.quest.quests;
-        const socId = profile.fbId ? `https://www.facebook.com/profile.php?id=${profile.fbId}` : `https://vk.com/id${profile.vkId}`;
-        const socName = profile.fbId ? 'в Facebook' : 'Вконтакте';
 
         return (
             <div className='profile-wrapper'>
