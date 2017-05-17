@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(global.CONNECTION_STRING || process.env.CONNECTION_STRING);
+const sequelize = new Sequelize(process.env.CONNECTION_STRING || 'sqlite://db.sqlite/');
 
 const models = {
     Comment: require('./comment')(sequelize, Sequelize.DataTypes),
