@@ -15,7 +15,9 @@ export default class CreateQuestPage extends PageBase {
         return {
             titleInput: this.getElementByTestId(`place-${index}-title-input`),
             descriptionInput: this.getElementByTestId(`place-${index}-description-input`),
-            bannerInput: this.getElementByTestId(`place-${index}-banner-input`)
+            bannerInput: this.getElementByTestId(`place-${index}-banner-input`),
+            latitudeInput: this.getElementByTestId(`place-${index}-lat-input`),
+            longitudeInput: this.getElementByTestId(`place-${index}-lng-input`),
         };
     }
 }
