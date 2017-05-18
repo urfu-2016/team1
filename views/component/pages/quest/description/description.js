@@ -11,7 +11,7 @@ import spinner from '../../../../source/img/rolling.svg';
 const Spinner = () => (
     <div className='spinner-container'>
         <div className='question-info_text__title'>Подождите, новый баннер загружается</div>
-        <img src={spinner} alt='loader spinner' className='spinner-container_spinner' />
+        <img src={spinner} alt='loader spinner' className='spinner-container_spinner'/>
     </div>
 );
 
@@ -47,22 +47,28 @@ export default class QuestionDescription extends React.Component {
         this.props.pageActions.DeleteQuest(this.props.questId);
     }
 
-    @autobind()
+    @autobind
     startQuest() {
         this.props.pageActions.StartQuest(this.props.questId);
     }
 
-    @autobind()
+    @autobind
     changeQuestTitle(e) {
-        this.props.pageActions.changeQuestTitle(this.props.questId, document.getElementById('title-input').value);
+        e.preventDefault();
+        if (document.getElementById('title-input').value.length) {
+            this.props.pageActions.changeQuestTitle(this.props.questId, document.getElementById('title-input').value);
+        }
     }
 
-    @autobind()
+    @autobind
     changeQuestDescription(e) {
-        this.props.pageActions.changeQuestDescription(this.props.questId, document.getElementById('description-input').value);
+        e.preventDefault();
+        if (document.getElementById('description-input').value.length) {
+            this.props.pageActions.changeQuestDescription(this.props.questId, document.getElementById('description-input').value);
+        }
     }
 
-    @autobind()
+    @autobind
     changeQuestBanner(e) {
         e.preventDefault()
         this.props.pageActions.changeQuestBanner(this.props.questId, e.target);
@@ -72,8 +78,8 @@ export default class QuestionDescription extends React.Component {
         const user = this.props.user;
         const questsInProgress = this.props.questInfo.questsInProgress;
         const questInProgress = [].slice.call(questsInProgress).some(quest => {
-            console.info(quest);
-            return parseInt(quest.id) === parseInt(this.props.questId);
+                console.info(quest);
+                return parseInt(quest.id) === parseInt(this.props.questId);
             }
         );
 
@@ -144,7 +150,8 @@ export default class QuestionDescription extends React.Component {
                     {isAuthor ? editPhoto : ''}
                     <input type='checkbox' className='question-description_edit hidden' id='banner-edit'/>
                     <form className='question-info_banner__form' onSubmit={this.changeQuestBanner}>
-                        <input className='custom-file question-description__change' type='file' name='banner' accept='image/*'
+                        <input className='custom-file question-description__change' type='file' name='banner'
+                               accept='image/*'
                                id='title-banner'/>
                         <input type='hidden' name={`quest[file]`} value={`banner`}/>
                         <button type='submit' className='button-controls__submit'>Изменить</button>
@@ -154,7 +161,7 @@ export default class QuestionDescription extends React.Component {
                 </div>
                 <div className='question-info'>
                     <h1 className='question-info_title' data-tid='quest-title'>
-                        Квест "{this.props.title}"
+                        Квест "{this.props.changeQuest.changedTitle ? this.props.changeQuest.changedTitle : this.props.title}"
                         {isAuthor ?
                             <label htmlFor='title-edit' className='question-description_edit'>
                                 <img
@@ -170,7 +177,7 @@ export default class QuestionDescription extends React.Component {
                     <div className='question-info_text'>
                         <span className='question-info_text__title'>Описание:</span>
                         <span className='question-info_text__span' data-tid='quest-description'>
-                            {this.props.description}
+                            {this.props.changeQuest.changedDescription ? this.props.changeQuest.changedDescription : this.props.description}
                             {isAuthor ?
                                 <label htmlFor='description-edit' className='question-description_edit'>
                                     <img

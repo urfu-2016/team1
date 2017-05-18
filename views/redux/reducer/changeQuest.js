@@ -4,7 +4,9 @@ const initialState = {
     titleError: false,
     descriptionError: false,
     bannerError: false,
-    bannerFetching: false
+    bannerFetching: false,
+    changedTitle: undefined,
+    changedDescription: undefined
 };
 
 
@@ -16,7 +18,8 @@ export default function changeQuest(state = initialState, action) {
             });
         case 'CHANGE_QUEST_TITLE_SUCCESS':
             return Object.assign({}, state, {
-                isChange: true
+                isChange: true,
+                changedTitle: action.changedTitle
             });
         case 'CHANGE_QUEST_TITLE_ERROR':
             return Object.assign({}, state, {
@@ -25,7 +28,8 @@ export default function changeQuest(state = initialState, action) {
             });
         case 'CHANGE_QUEST_DESCRIPTION_SUCCESS':
             return Object.assign({}, state, {
-                isChange: true
+                isChange: true,
+                changedDescription: action.changedDescription
             });
         case 'CHANGE_QUEST_DESCRIPTION_REQUEST':
             return Object.assign({}, state, {

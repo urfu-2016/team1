@@ -457,11 +457,13 @@ export function changeQuestTitle(id, value) {
             body: JSON.stringify({title: value}),
             credentials: 'include'
         })
-            .then(
-                dispatch({
-                    type: 'CHANGE_QUEST_TITLE_SUCCESS',
-                    isChange: true
-                })
+            .then(() => {
+                    dispatch({
+                        type: 'CHANGE_QUEST_TITLE_SUCCESS',
+                        isChange: true,
+                        changedTitle: value
+                    });
+                }
             )
             .catch(
                 dispatch({
@@ -485,12 +487,13 @@ export function changeQuestDescription(id, value) {
             body: JSON.stringify({description: value}),
             credentials: 'include'
         })
-            .then(
+            .then(answer => {
                 dispatch({
                     type: 'CHANGE_QUEST_DESCRIPTION_SUCCESS',
-                    isChange: true
+                    isChange: true,
+                    changedDescription: value
                 })
-            )
+            })
             .catch(
                 dispatch({
                     type: 'CHANGE_QUEST_DESCRIPTION_ERROR',

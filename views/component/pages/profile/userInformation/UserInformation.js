@@ -17,7 +17,7 @@ export default class UserInformation extends React.Component {
 
         let mappedCurrentQuests = questsInProgress ? [].slice.call(questsInProgress).map((quest, index) => (
             <a className='userInformation__link' href={`/quest/${quest.id}`}
-               data-tid={`user-playinng-quest-${index}`}>{index + 1} {quest.title}</a>)) : '';
+               data-tid={`user-playing-quest-${index}`}>{index + 1} {quest.title}</a>)) : '';
 
         return (
             <div className='userInformation'>
@@ -25,11 +25,11 @@ export default class UserInformation extends React.Component {
                 <a className='userInformation__link' href={socId}>Посмотреть профиль {socName}</a>
                 <div className='userInformation__questInfo'>
                     <div className='userInformation__questInfo_created'>
-                        <h4>Автор квестов:</h4>
+                        <h4 className='userInformation__questInfo_title'>Автор квестов:</h4>
                         {mappedAuthorQuests}
                     </div>
                     <div className='userInformation__questInfo_participant'>
-                        <h4>Участник квестов:</h4>
+                        <h4 className='userInformation__questInfo_title'>Участник квестов:</h4>
                         {mappedCurrentQuests}
                     </div>
                 </div>
