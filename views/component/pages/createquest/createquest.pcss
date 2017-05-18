@@ -57,14 +57,8 @@ label, input, textarea {
 }
 
 .quest-data {
-    width: 1360px;
-    margin: 0 auto;
-    padding: 40px 30px;
+    padding: 20px 25px 20px 0;
     overflow: hidden;
-
-    @media (--all) {
-        width: auto;
-    }
 
     &__title {
         font-size: 28px;
@@ -81,8 +75,6 @@ label, input, textarea {
     }
 
     & label {
-        width: 500px;
-        margin: 20px 10px 10px;
         font-size: 20px;
         font-weight: 600;
         color: $yellow;
@@ -243,5 +235,10 @@ label, input, textarea {
 
     &__coordinates {
         width: 230px;
+    }
+
+    &-wrap {
+        max-width: 500px;
+        margin: auto;
     }
 }
