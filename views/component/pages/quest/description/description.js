@@ -3,7 +3,6 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {autobind} from 'core-decorators';
-import editIcon from '../../../../source/img/edit_icon.svg';
 
 import * as pageActions from '../../../../redux/action/index';
 
