@@ -6,10 +6,18 @@ import {autobind} from 'core-decorators';
 
 import * as pageActions from '../../../../redux/action/index';
 
+import spinner from '../../../../source/img/rolling.svg';
+
+const Spinner = () => (
+    <div className='spinner-container'>
+        <img src={spinner} alt='loader spinner' className='spinner-container_spinner' />
+    </div>
+);
+
 const mapStateToProps = state => ({
     user: state.userAuthorization,
     questInfo: state.GetQuestInfo,
-    isChange: state.changeQuest
+    changeQuest: state.changeQuest
 });
 
 const mapDispatchToProps = dispatch => ({pageActions: bindActionCreators(pageActions, dispatch)});
@@ -25,7 +33,8 @@ export default class QuestionDescription extends React.Component {
         banner: React.PropTypes.string,
         author: React.PropTypes.string,
         questId: React.PropTypes.string,
-        questInfo: React.PropTypes.object
+        questInfo: React.PropTypes.object,
+        changeQuest: React.PropTypes.object
     };
 
     componentDidMount() {
@@ -54,13 +63,18 @@ export default class QuestionDescription extends React.Component {
 
     @autobind()
     changeQuestBanner(e) {
+        e.preventDefault();
         this.props.pageActions.changeQuestBanner(this.props.questId, e.target);
     }
 
     render() {
         const user = this.props.user;
         const questsInProgress = this.props.questInfo.questsInProgress;
-        const questInProgress = [].slice.call(questsInProgress).some(quest => parseInt(quest.id) === parseInt(this.props.questId));
+        const questInProgress = [].slice.call(questsInProgress).some(quest => {
+            console.info(quest);
+            return parseInt(quest.id) === parseInt(this.props.questId);
+            }
+        );
 
 
         const participantButton = <Link to={`/quest/${this.props.id}/start`} onClick={this.startQuest}
@@ -92,7 +106,7 @@ export default class QuestionDescription extends React.Component {
 
         const {error, questDeleted} = this.props.questInfo;
 
-        let modal = (
+        let modalDeleted = (
             <div className='createModal'>
                 <div className='createModal_message'>
                     <h2>{error && error.error ? error.error : 'Квест успешно удален'}</h2>
@@ -101,9 +115,22 @@ export default class QuestionDescription extends React.Component {
             </div>
         );
 
+        console.info(this.props.changeQuest);
+
+        let modalChanged = (
+            <div className='createModal'>
+                <div className='createModal_message'>
+                    <h2>{this.props.changeQuest.bannerFetching ? <Spinner/> : 'Баннер успешно отредактирован'}</h2>
+                    <a href='/'>Перейти на главную</a>
+                    <a href={`/quest/${this.props.questId}`}>Остаться на этой странице</a>
+                </div>
+            </div>
+        );
+
         return (
             <div className='question-description'>
-                {(error || questDeleted) ? modal : null}
+                {(error || questDeleted) ? modalDeleted : null}
+                {(this.props.changeQuest.bannerFetching || this.props.changeQuest.bannerChange) ? modalChanged : null}
                 <div className='question-photo'>
                     <div className='question-photo_wrapper'>
                         <img src={this.props.banner} alt='Фото квеста'/>
@@ -123,7 +150,7 @@ export default class QuestionDescription extends React.Component {
                 </div>
                 <div className='question-info'>
                     <h1 className='question-info_title' data-tid='quest-title'>
-                        Квест {this.props.title}
+                        Квест "{this.props.title}"
                         {isAuthor ?
                             <label htmlFor='title-edit' className='question-description_edit'>
                                 <img

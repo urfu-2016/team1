@@ -19,7 +19,7 @@ export default class QuestionTask extends React.Component {
             <div className='question-task'>
                 <div className='question-task__container'>
                     {
-                        tasks.length > 0 ? tasks : <div></div>
+                        tasks.length > 0 ? tasks : ''
                     }
                 </div>
             </div>

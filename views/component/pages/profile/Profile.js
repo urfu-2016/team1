@@ -44,12 +44,16 @@ export default class Profile extends React.Component {
         const socName = profile.fbId ? 'в Facebook' : 'Вконтакте';
 
         const profileBlock = (
-            <div className='profile'>
-                <UserAvatar photo={profile.fullPhoto} fbId={profile.fbId}/>
-                <UserInformation username={profile.username} socId={socId} socName={socName}
-                                 authorQuests={quests} questsInProgress={questsInProgress}/>
-    </div>
-    )
+                <div className='profile'>
+                    <UserAvatar photo={profile.fullPhoto} fbId={profile.fbId}/>
+                    <UserInformation username={profile.username}
+                                     socId={socId}
+                                     socName={socName}
+                                     authorQuests={quests}
+                                     questsInProgress={questsInProgress}
+                    />
+                </div>
+            )
         ;
 
         return (

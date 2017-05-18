@@ -389,7 +389,7 @@ export function GetUserQuestsInProgress(id) {
             questsInProgress: []
         });
 
-        fetch(`/api/quests/author/${id}`)
+        fetch(`/api/quests/progress/${id}`)
             .then(response => {
                 return response.json()
             })
@@ -463,6 +463,12 @@ export function changeQuestTitle(id, value) {
                     isChange: true
                 })
             )
+            .catch(
+                dispatch({
+                    type: 'CHANGE_QUEST_TITLE_ERROR',
+                    isChange: false
+                })
+            )
     }
 }
 
@@ -483,6 +489,12 @@ export function changeQuestDescription(id, value) {
                 dispatch({
                     type: 'CHANGE_QUEST_DESCRIPTION_SUCCESS',
                     isChange: true
+                })
+            )
+            .catch(
+                dispatch({
+                    type: 'CHANGE_QUEST_DESCRIPTION_ERROR',
+                    isChange: false
                 })
             )
     }
