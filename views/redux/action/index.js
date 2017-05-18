@@ -512,11 +512,17 @@ export function changeQuestBanner(id, form) {
             body: new FormData(form),
             credentials: 'include'
         })
-            .then(
+            .then(response => {
+                let json = response.json();
+                if (response.status !== 500)
+                    return json;
+                return json.then(Promise.reject.bind(Promise));
+            })
+            .then(answer => {
                 dispatch({
                     type: 'CHANGE_QUEST_BANNER_SUCCESS',
                     isChange: true
                 })
-            )
+            })
     }
 }

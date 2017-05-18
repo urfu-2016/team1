@@ -37,7 +37,8 @@ const initialState = {
     questDeleted: false,
     error: null,
     questFetching: true,
-    questStarted: false
+    questStarted: false,
+    showModal: false
 };
 
 export default function GetQuestInfo(state = initialState, action) {
@@ -59,6 +60,12 @@ export default function GetQuestInfo(state = initialState, action) {
         case TASKS_SUCCESS:
             return Object.assign({}, state, {
                 questTask: action.questTask
+            });
+        case QUEST_CREATE_REQUEST:
+            return Object.assign({}, state, {
+                questCreated: true,
+                error: null,
+                showModal: true
             });
         case QUEST_CREATE_SUCCESS:
             return Object.assign({}, state, {

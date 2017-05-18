@@ -10,6 +10,15 @@ import TextareaInput from '../../controls/Textarea';
 import FileInput from '../../controls/File';
 import { checkFileInput, checkTextInput, checkInputForNumber } from '../../controls/utils';
 
+import spinner from '../../../source/img/rolling.svg';
+
+const Spinner = () => (
+    <div className='spinner-container'>
+        <div className='question-info_text__title'>Идет создание квеста</div>
+        <img src={spinner} alt='loader spinner' className='spinner-container_spinner' />
+    </div>
+);
+
 const mapStateToProps = state => ({
     quests: state.GetQuests,
     user: state.userAuthorization,
@@ -163,20 +172,20 @@ export default class CreateQuest extends React.Component {
             validation: checkFileInput
         };
 
-        const { error, questCreated } = this.props.questInfo;
+        const { error, questCreated, showModal } = this.props.questInfo;
 
         let modal = (
             <div className='createModal'>
                 <div className='createModal_message'>
-                    <h2>{error && error.error ? error.error : 'Квест успешно создан'}</h2>
-                    <a href='/'>Перейти на главную</a>
+                    <h2>{error && error.error ? error.error : (questCreated ? <Spinner/> : 'Квест успешно создан')}</h2>
+                    {questCreated ? '' : <a href='/'>Перейти на главную</a>}
                 </div>
             </div>
         );
 
         return (
             <div className='quest-data-wrap'>
-                {(error || questCreated) ? modal : null}
+                {showModal ? modal : null}
                 <form className='quest-data' onSubmit={this.submitForm}>
                     <div>
                         <h2 className='quest-data__title'>Инфа о квесте</h2>

@@ -10,6 +10,7 @@ import spinner from '../../../../source/img/rolling.svg';
 
 const Spinner = () => (
     <div className='spinner-container'>
+        <div className='question-info_text__title'>Подождите, новый баннер загружается</div>
         <img src={spinner} alt='loader spinner' className='spinner-container_spinner' />
     </div>
 );
@@ -63,7 +64,7 @@ export default class QuestionDescription extends React.Component {
 
     @autobind()
     changeQuestBanner(e) {
-        e.preventDefault();
+        e.preventDefault()
         this.props.pageActions.changeQuestBanner(this.props.questId, e.target);
     }
 
@@ -82,9 +83,11 @@ export default class QuestionDescription extends React.Component {
         const changeQuestButton = <Link to={`/quest/edit/${this.props.id}`} className='button'
                                         data-tid='quest-edit-link'>Редактировать квест</Link>;
         const editPhoto = (
-            <label htmlFor='banner-edit' className='question-banner_edit button'>
-                Изменить баннер
-            </label>
+            <div>
+                <label htmlFor='banner-edit' className='question-banner_edit button'>
+                    Изменить баннер
+                </label>
+            </div>
         );
 
         const deleteQuestButton = (
@@ -115,14 +118,17 @@ export default class QuestionDescription extends React.Component {
             </div>
         );
 
-        console.info(this.props.changeQuest);
-
         let modalChanged = (
             <div className='createModal'>
                 <div className='createModal_message'>
                     <h2>{this.props.changeQuest.bannerFetching ? <Spinner/> : 'Баннер успешно отредактирован'}</h2>
-                    <a href='/'>Перейти на главную</a>
-                    <a href={`/quest/${this.props.questId}`}>Остаться на этой странице</a>
+                    {
+                        this.props.changeQuest.bannerFetching ? '' :
+                            <div>
+                                <a href='/'>Перейти на главную</a>
+                                <a href={`/quest/${this.props.questId}`}>Остаться на этой странице</a>
+                            </div>
+                    }
                 </div>
             </div>
         );
@@ -138,10 +144,8 @@ export default class QuestionDescription extends React.Component {
                     {isAuthor ? editPhoto : ''}
                     <input type='checkbox' className='question-description_edit hidden' id='banner-edit'/>
                     <form className='question-info_banner__form' onSubmit={this.changeQuestBanner}>
-                        <label className='question-description_edit' htmlFor='title-banner'>
-                            <input className='custom-file' type='file' name='banner' accept='image/*'
-                                   id='title-banner'/>
-                        </label>
+                        <input className='custom-file question-description__change' type='file' name='banner' accept='image/*'
+                               id='title-banner'/>
                         <input type='hidden' name={`quest[file]`} value={`banner`}/>
                         <button type='submit' className='button-controls__submit'>Изменить</button>
                     </form>

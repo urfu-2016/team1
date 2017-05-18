@@ -194,6 +194,8 @@ router.post('/edit/banner/:id', upload.any(), catchAsync(201, async req => {
         await models.Quest.update({
             banner: files['banner'] ? files['banner']['path'] : IMAGE_PLUG
         }, {where: {id : req.params.id}});
+
+    return true;
 }));
 
 export default router;
