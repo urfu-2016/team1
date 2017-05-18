@@ -27,6 +27,9 @@ import {
     QUEST_DELETE_REQUEST,
     QUEST_DELETE_SUCCESS,
     QUEST_DELETE_ERROR,
+    QUEST_START_REQUEST,
+    QUEST_START_SUCCESS,
+    QUEST_START_ERROR,
     SUCCESS_QUESTS_BY_AUTHOR,
     ERROR_QUESTS_BY_AUTHOR,
     REQUEST_QUESTS_BY_AUTHOR,
@@ -328,6 +331,31 @@ export function DeleteQuest(questId) {
     }
 }
 
+export function StartQuest(id) {
+    return dispatch => {
+        dispatch({
+            type: QUEST_START_REQUEST
+        });
+
+        fetch(`/api/quests/start/${id}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include'
+        })
+            .then(start => {
+                dispatch({
+                    type: QUEST_START_SUCCESS
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: QUEST_START_ERROR,
+                    error: error
+                })
+            })
+    }
+}
+
 export function GetQuestsByAuthorId(id) {
     return dispatch => {
         dispatch({
@@ -361,7 +389,7 @@ export function GetUserQuestsInProgress(id) {
             questsInProgress: []
         });
 
-        fetch(`/api/quests/author/${id}`)
+        fetch(`/api/quests/progress/${id}`)
             .then(response => {
                 return response.json()
             })
@@ -416,3 +444,88 @@ export function checkCoordinates(placeID, questID, newCord, trueCord) {
     }
 }
 
+export function changeQuestTitle(id, value) {
+    return dispatch => {
+        dispatch({
+            type: 'CHANGE_QUEST_TITLE_REQUEST',
+            isChange: false
+        });
+
+        fetch(`/api/quests/edit/title/${id}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({title: value}),
+            credentials: 'include'
+        })
+            .then(() => {
+                    dispatch({
+                        type: 'CHANGE_QUEST_TITLE_SUCCESS',
+                        isChange: true,
+                        changedTitle: value
+                    });
+                }
+            )
+            .catch(
+                dispatch({
+                    type: 'CHANGE_QUEST_TITLE_ERROR',
+                    isChange: false
+                })
+            )
+    }
+}
+
+export function changeQuestDescription(id, value) {
+    return dispatch => {
+        dispatch({
+            type: 'CHANGE_QUEST_DESCRIPTION_REQUEST',
+            isChange: false
+        });
+
+        fetch(`/api/quests/edit/description/${id}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({description: value}),
+            credentials: 'include'
+        })
+            .then(answer => {
+                dispatch({
+                    type: 'CHANGE_QUEST_DESCRIPTION_SUCCESS',
+                    isChange: true,
+                    changedDescription: value
+                })
+            })
+            .catch(
+                dispatch({
+                    type: 'CHANGE_QUEST_DESCRIPTION_ERROR',
+                    isChange: false
+                })
+            )
+    }
+}
+
+export function changeQuestBanner(id, form) {
+    return dispatch => {
+        dispatch({
+            type: 'CHANGE_QUEST_BANNER_REQUEST',
+            isChange: false
+        });
+
+        fetch(`/api/quests/edit/banner/${id}`, {
+            method: 'post',
+            body: new FormData(form),
+            credentials: 'include'
+        })
+            .then(response => {
+                let json = response.json();
+                if (response.status !== 500)
+                    return json;
+                return json.then(Promise.reject.bind(Promise));
+            })
+            .then(answer => {
+                dispatch({
+                    type: 'CHANGE_QUEST_BANNER_SUCCESS',
+                    isChange: true
+                })
+            })
+    }
+}

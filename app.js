@@ -10,6 +10,7 @@ import cloudinary from 'cloudinary';
 import api from './api';
 import session from 'express-session';
 import flash from 'connect-flash';
+import sslRedirect from 'heroku-ssl-redirect';
 
 // server-rendering
 import React from 'react'
@@ -33,6 +34,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(sslRedirect())
+}
 
 app.use('/', process.env.NODE_ENV === 'production'
     ? remoteStatic('https://team1.surge.sh')

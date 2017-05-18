@@ -52,7 +52,6 @@ function uploadFile(file) {
 router.post('/create', upload.any(), catchAsync(200, async req => {
     let quest = req.body.quest;
     let places = req.body.places;
-    console.info(req);
 
     let files = await Promise.all(req.files.map(uploadFile)).then(makeMap(x => x.name));
 
@@ -157,5 +156,46 @@ router.get('/passed/id/:id', (req, res)=> {
     })
         .then(photo => res.json(photo));
 });
+
+router.post('/start/:id', catchAsync(201, async req => {
+    let user = await models.User.findById(req.user.id);
+    let quest = await models.Quest.findById(req.params.id);
+
+    await user.addQuest(quest);
+}));
+
+router.post('/edit/title/:id', catchAsync(201, async req => {
+    let title = req.body.title;
+    let quest = await models.Quest.findById(req.params.id);
+
+    if (parseInt(req.user.id) === parseInt(quest.author)) {
+        await models.Quest.update({
+            title: title
+        }, {where: {id : req.params.id}});
+    }
+}));
+
+router.post('/edit/description/:id', catchAsync(201, async req => {
+    let description = req.body.description;
+    let quest = await models.Quest.findById(req.params.id);
+
+    if (parseInt(req.user.id) === parseInt(quest.author)) {
+        await models.Quest.update({
+            description: description
+        }, {where: {id : req.params.id}});
+    }
+}));
+
+router.post('/edit/banner/:id', upload.any(), catchAsync(201, async req => {
+    let files = await Promise.all(req.files.map(uploadFile)).then(makeMap(x => x.name));
+    let quest = await models.Quest.findById(req.params.id);
+
+    if (parseInt(req.user.id) === parseInt(quest.author))
+        await models.Quest.update({
+            banner: files['banner'] ? files['banner']['path'] : IMAGE_PLUG
+        }, {where: {id : req.params.id}});
+
+    return true;
+}));
 
 export default router;
