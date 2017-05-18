@@ -5,6 +5,7 @@ import GetUserInfo from './users';
 import GetAuthorizationInfo from './auth';
 import userAuthorization from './userAuthorization';
 import { GetComments } from './comments';
+import changeQuest from './changeQuest';
 
 export default combineReducers({
     GetQuests,
@@ -12,5 +13,6 @@ export default combineReducers({
     GetQuestInfo,
     GetAuthorizationInfo,
     GetComments,
-    userAuthorization
+    userAuthorization,
+    changeQuest
 });

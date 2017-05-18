@@ -444,3 +444,67 @@ export function checkCoordinates(placeID, questID, newCord, trueCord) {
     }
 }
 
+export function changeQuestTitle(id, value) {
+    return dispatch => {
+        dispatch({
+            type: 'CHANGE_QUEST_TITLE_REQUEST',
+            isChange: false
+        });
+
+        fetch(`/api/quests/edit/title/${id}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({title: value}),
+            credentials: 'include'
+        })
+            .then(
+                dispatch({
+                    type: 'CHANGE_QUEST_TITLE_SUCCESS',
+                    isChange: true
+                })
+            )
+    }
+}
+
+export function changeQuestDescription(id, value) {
+    return dispatch => {
+        dispatch({
+            type: 'CHANGE_QUEST_DESCRIPTION_REQUEST',
+            isChange: false
+        });
+
+        fetch(`/api/quests/edit/description/${id}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({description: value}),
+            credentials: 'include'
+        })
+            .then(
+                dispatch({
+                    type: 'CHANGE_QUEST_DESCRIPTION_SUCCESS',
+                    isChange: true
+                })
+            )
+    }
+}
+
+export function changeQuestBanner(id, form) {
+    return dispatch => {
+        dispatch({
+            type: 'CHANGE_QUEST_BANNER_REQUEST',
+            isChange: false
+        });
+
+        fetch(`/api/quests/edit/banner/${id}`, {
+            method: 'post',
+            body: new FormData(form),
+            credentials: 'include'
+        })
+            .then(
+                dispatch({
+                    type: 'CHANGE_QUEST_BANNER_SUCCESS',
+                    isChange: true
+                })
+            )
+    }
+}
