@@ -22,6 +22,7 @@ export default class Profile extends React.Component {
     componentDidMount() {
         this.props.pageActions.getUserInfo(this.props.params.id);
         this.props.pageActions.GetQuestsByAuthorId(this.props.params.id);
+        this.props.pageActions.GetUserQuestsInProgress(this.props.params.id);
     }
 
     render() {
@@ -38,15 +39,22 @@ export default class Profile extends React.Component {
         }
 
         const quests = this.props.quest.quests;
+        const questsInProgress = this.props.quest.questsInProgress;
         const socId = profile.fbId ? `https://www.facebook.com/profile.php?id=${profile.fbId}` : `https://vk.com/id${profile.vkId}`;
         const socName = profile.fbId ? 'в Facebook' : 'Вконтакте';
 
         const profileBlock = (
-            <div className='profile'>
-                <UserAvatar photo={profile.fullPhoto} fbId={profile.fbId}/>
-                <UserInformation username={profile.username} socId={socId} socName={socName} authorQuests={quests}/>
-            </div>
-        );
+                <div className='profile'>
+                    <UserAvatar photo={profile.fullPhoto} fbId={profile.fbId}/>
+                    <UserInformation username={profile.username}
+                                     socId={socId}
+                                     socName={socName}
+                                     authorQuests={quests}
+                                     questsInProgress={questsInProgress}
+                    />
+                </div>
+            )
+        ;
 
         return (
             <div className='profile-wrapper'>

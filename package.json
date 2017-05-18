@@ -15,6 +15,7 @@
     "lint": "npm-run-all lint:*",
     "lint:style": "stylelint views/**/*.pcss",
     "lint:js": "eslint --ignore-path .gitignore .",
+
     "test": "npm-run-all lint test:run selenium:test",
     "test:run": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\" --timeout 10000",
     "test:run:single": "mocha-webpack --webpack-config webpack.testconf.js \"test/**/*.test.js\" --timeout 10000 -g",
@@ -26,9 +27,7 @@
 
     "prestart": "npm i",
     "start": "npm-run-all prod:*",
-
     "db:create": "node ./tools/database/create.js",
-
     "prod:build": "webpack --config webpack.prodconf.js && webpack --config webpack.serverconf.js",
     "prod:deploy": "surge -p ./public -d team1.surge.sh",
     "prod:run": "node ./bin/server.js"
@@ -58,8 +57,8 @@
     "busboy": "0.2.14",
     "chai": "3.5.0",
     "chai-http": "3.0.0",
-    "connect-flash": "0.1.1",
     "cloudinary": "1.8.0",
+    "connect-flash": "0.1.1",
     "cookie-parser": "~1.4.3",
     "core-decorators": "0.17.0",
     "css-loader": "^0.26.1",
@@ -71,10 +70,11 @@
     "eslint-loader": "1.6.3",
     "eslint-plugin-react": "6.10.0",
     "express": "~4.14.1",
-    "express-session": "1.15.2",
     "express-fileupload": "0.1.2",
+    "express-session": "1.15.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.0",
+    "heroku-ssl-redirect": "0.0.4",
     "mocha": "3.1.0",
     "mocha-classes": "fakefeik/mocha-classes#release",
     "mocha-webpack": "0.7.0",
