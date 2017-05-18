@@ -19,7 +19,6 @@ export default class Header extends React.Component {
 
         const registrationBlock = (
             <div className='header__registration registration'>
-                <span className='registration__item registration__item_signin'>Войти:</span>
                 <div className='soc-auth'>
                     <a href='/api/auth/vk' className='soc-auth_link' data-tid='vk-login-link'>
                         <div className='soc-auth_vk'/>
@@ -34,7 +33,6 @@ export default class Header extends React.Component {
         const registeredBlock = (
             <div className='header__registered registered' data-tid='header-signedin'>
                 <label htmlFor='reg-id' className='registered__wrap' data-tid='user-dropdown'>
-                    <span data-tid='logged-in-user-username'>{user.username}</span>
                     <img src={user.photo}/>
                     ⯆
                 </label>
